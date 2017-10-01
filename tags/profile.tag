@@ -27,7 +27,5 @@
  	</ul>
 
 	<script>
- 		var self = this;
-
-	</script>
+ </script>
 </profile>

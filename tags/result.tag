@@ -1,6 +1,6 @@
 <result>
 	<actions title="result"></actions>
- 
+
 	<div class="row">
 		<div class="input-field col s6">
 		    <select>
@@ -11,7 +11,7 @@
 		    </select>
 		    <label>Contest</label>
 		</div>
-	  
+
 	  	<div class="input-field col s6">
 		    <select>
 		      <option value="1">this year</option>
@@ -43,17 +43,14 @@
 		    <td class="right-align">{ minutes }</td>
 		  </tr>
 		</tbody>
-	</table>	
+	</table>
 
 	<script>
-	var self = this;
-    this.mixin('Helper');
-
-    this.results = [
+	  this.results = [
     	{ placement: 1, userid: 1, name: "Hege Alette Eilertsen", minutes: 4200 },
     	{ placement: 2, userid: 2, name: "Terje Pedersen", minutes: 2000 },
     	{ placement: 3, userid: 3,  name: "Svanlaug Mæland", minutes: 1000 },
-    	{ placement: 4, userid: 40, name: "Ole Kristian Bonden", minutes: 40 },    	
+    	{ placement: 4, userid: 40, name: "Ole Kristian Bonden", minutes: 40 },
     ];
 
 	this.on('mount', function() {

@@ -10,14 +10,18 @@
   </router>
 
 	<script>
-		this.mixin('Helper');
+		this.auth.on('login', function (user) {
+			console.log("LOGIN CALLED", user);
+			route('log','Excerise Champion');
+		});
 
-		this.event.on('login:after', function () {
-			route('log','Excerise Champion', true);
+		this.auth.on('logout', function () {
+			route('login');
 		});
 
 		this.on('mount', function() {
 		  route.start(true);
+			route(this.auth.user ? 'log' : 'login');
 		});
 	</script>
 </app>

@@ -1,37 +1,54 @@
 <addexercise>
   <form>
   	<div class="input-field">
-		  <textarea name="description" class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
-	  </div>
-  	<input name="mins" placeholder="How many minutes? (required)">
+  	  <textarea ref="description" class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
+    </div>
+  	<input ref="minutes" placeholder="How many minutes? (required)">
     <button onclick={ toggletimer } class="btn waves-effect waves-light { timer.color }">
       <i class="material-icons right">{ timer.icon }</i> { timer.text }
     </button>
   	<button onclick={ add } class="btn waves-effect waves-light">
   		<i class="material-icons right">send</i> Log it
   	</button>
+    <button onclick={ logout } class="btn waves-effect waves-light">
+  		<i class="material-icons right">send</i> Log out
+  	</button>
   </form>
 
   <script>
-  	var self = this;
+    var self = this;
     this.timer = { icon: "play_circle_outline", text: "START" };
-  	this.mixin('Helper');
 
     toggletimer(e) {
       this.timer = { icon: "pause_circle_outline", text: "PAUSE", color: "orange" };
-      this.mins.value = "1";
+      this.refs.minutes.value = "1";
+    }
+
+    logout(e) {
+      this.auth.logout();
     }
 
     add(e) {
-   		self.api.post('/exercise', {
-        	description: this.description.value,
-        	mins: this.mins.value
-   		}).then(function (response) {
-      		self.parent.trigger("exercise:added", response.data);
-	    });
-	
-    	this.description.value = '';
-      this.mins.value = '';
+      var variables = {
+          description: this.refs.description.value,
+          minutes: parseInt(this.refs.minutes.value),
+          user: self.auth.user
+      };
+
+      this.query(`
+        mutation($description: String!, $minutes: Int!, $user: ID) {
+          createLog(description: $description, minutes: $minutes, userId: $user) {
+            id
+            minutes
+            description
+            user {
+              name
+            }
+          }
+        }
+      `, variables).then(response => {
+        	self.event.trigger("exercise:added", response.createLog);
+      });
     }
    </script>
 </addexercise>

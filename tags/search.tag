@@ -13,21 +13,32 @@
 
  	<div class="row">
 	  <ul class="collection">
-	    <li each={ results } class="collection-item avatar">
+	    <li each={ contests } class="collection-item avatar">
 		  <i class="material-icons circle green">add</i>
-		  <span class="title">{ title }</span>
-	      <p>{ description }</p>
+		  <span class="title">{ name }</span>
 	    </li>
 	  </ul>
  	</div>
 
  	<script>
- 		var self = this;
  		//this.search.value = "2016";
- 		this.results = [
- 			{ title: "Contest", description: "NM 2016 konkurranse" },
- 			{ title: "Exerciser 2016", description: "Terje Pedersen" }
- 		];
+
+		this.on("mount", function () {
+			this.query(`{
+allContests {
+    id
+    name
+}}`).then(results => {
+			console.log(results);
+			this.contests = results.allContests;
+			this.update();
+			});
+		});
+
+ 		//this.results = [
+ 		//	{ title: "Contest", description: "NM 2016 konkurranse" },
+ 		//	{ title: "Exerciser 2016", description: "Terje Pedersen" }
+ 		//];
  	</script>
 
 </search>

@@ -23,9 +23,6 @@
   </div>
 
   <script>
-  	var self = this;
-  	this.mixin("Helper");
-
   	add(e) {
   		console.log(e);
   		console.log("public: " + this.public.checked);

@@ -3,9 +3,9 @@
   <addexercise></addexercise>
 
   <ul class="collection">
-    <li each={ exercises } class="collection-item avatar">
+    <li each={ logs } class="collection-item avatar">
       <img src="images/tenorhorn.jpg" alt="" class="circle">
-      <span class="title">{ createdBy.username } - { mins } minutes</span>
+      <span class="title">{ user.name } - { minutes } minutes</span>
       <p>{ description }</p>
       <small>{ hDate(createdAt) }</small>
     </li>
@@ -13,23 +13,27 @@
 
   <script>
     var self = this;
-    this.mixin('Helper');
 
     // listen for self added item
-    this.parent.on("exercise:added", function (item) {
-      self.exercises.unshift(item);
+    this.event.on("exercise:added", function (item) {
+      self.logs.unshift(item);
       self.update();
     });
 
-    this.on("before-mount", function () {
-      // get current items
-      /*
-      this.api.get('/exercise?sort=createdAt desc')
-        .then(function (response) {
-          self.exercises = response.data;
-          self.update();
-        });
-      */
-    });
+    this.on("mount", function () {
+			this.query(`{
+        allLogs(orderBy: createdAt_DESC) {
+          id
+          minutes
+          description
+          user {
+            name
+          }
+        }}`)
+      .then(results => {
+			  this.logs = results.allLogs;
+			  this.update();
+			});
+		});
   </script>
 </log>

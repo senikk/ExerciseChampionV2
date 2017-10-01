@@ -9,7 +9,7 @@
  		</button>
 	  	<button class="col s2 btn waves-effect waves-light">+1</button>
 	  	<button class="col s2 btn waves-effect waves-light">+20</button>
-  </div>  	
+  </div>
   <div class="row">
  		<label>time signature</label><br>
 	  	<button class="col s2 btn waves-effect waves-light">2/4</button>
@@ -17,7 +17,7 @@
 	  	<button class="col s2 btn waves-effect waves-light">4/4</button>
 	  	<button class="col s2 btn waves-effect waves-light">5/4</button>
 	  	<button class="col s2 btn waves-effect waves-light">6/4</button>
-	 	<button class="col s2 btn waves-effect waves-light">3/8</button>	  	
+	 	<button class="col s2 btn waves-effect waves-light">3/8</button>
 	 	<button class="col s2 btn waves-effect waves-light">6/8</button>
 	 	<button class="col s2 btn waves-effect waves-light">9/8</button>
 	  	<button class="col s2 btn waves-effect waves-light">12/8</button>
@@ -49,9 +49,6 @@
   </style>
 
   <script>
-  	var self = this;
-  	this.mixin("Helper");
-
   	this.line = [
   		{ length: 10, beat: "3/4" },
   		{ length: 1, beat: "3/8" },
