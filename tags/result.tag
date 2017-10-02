@@ -38,7 +38,7 @@
 
 		<tbody>
 		  <tr each={ results }>
-		    <td>{ placement }</td>
+		    <td>{ no }</td>
 		    <td><a href="#/profile/{ userid }">{ name }</a></td>
 		    <td class="right-align">{ minutes }</td>
 		  </tr>
@@ -46,17 +46,33 @@
 	</table>
 
 	<script>
-	  this.results = [
-    	{ placement: 1, userid: 1, name: "Hege Alette Eilertsen", minutes: 4200 },
-    	{ placement: 2, userid: 2, name: "Terje Pedersen", minutes: 2000 },
-    	{ placement: 3, userid: 3,  name: "Svanlaug Mæland", minutes: 1000 },
-    	{ placement: 4, userid: 40, name: "Ole Kristian Bonden", minutes: 40 },
-    ];
+//        	{contest: {id: "cj7xsdirerrmz0129ojwu7dtu"}},
 
-	this.on('mount', function() {
-		$(document).ready(function() {
-    		$('select').material_select();
+		this.query(`{
+			allUsers {
+        name
+        logs {
+          minutes
+        }
+			}
+    }`).then(results => {
+			results.allUsers.map((user, i) => {
+				user.no = i + 1;
+				user.minutes = user.logs.map(log => log.minutes).reduce((prev, next) => prev + next);
+				delete user.logs;
+			});
+
+			results.allUsers.sort((a,b) => b.minutes - a.minutes);
+
+			console.log("RESULTS", results);
+			this.results = results.allUsers;
+			this.update();
 		});
-	});
+
+		this.on('mount', function() {
+			$(document).ready(function() {
+	    		$('select').material_select();
+			});
+		});
     </script>
 </result>
