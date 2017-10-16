@@ -24,19 +24,6 @@
 
   <script>
     add() {
-      this.query(`{
-        allAuthors {
-          name
-          logs(filter: {AND: [
-          	{contest: {id: "cj7xsdirerrmz0129ojwu7dtu"}},
-            {createdAt_gte: "2017-09-18"}
-            {createdAt_lte: "2017-09-24"}
-        	]})
-          {
-            minutes
-          }
-        }
-      }`).then(data => console.log(data));
     }
 
   	this.on("mount", function () {

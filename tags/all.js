@@ -47,7 +47,6 @@ riot.tag2('addexercise', '<form> <div class="input-field"> <textarea ref="descri
 
 riot.tag2('app', '<router> <route path="login"><login></login></route> <route path="log"><log></log></route> <route path="search"><search></search></route> <route path="contest"><contest></contest></route> <route path="result"><result></result></route> <route path="metronome"><metronome></metronome></route> <route path="profile"><profile></profile></route> </router>', '', '', function(opts) {
 		this.auth.on('login', function (user) {
-			console.log("LOGIN CALLED", user);
 			route('log','Excerise Champion');
 		});
 
@@ -57,25 +56,13 @@ riot.tag2('app', '<router> <route path="login"><login></login></route> <route pa
 
 		this.on('mount', function() {
 		  route.start(true);
-			route(this.auth.user ? 'log' : 'login');
+			route('result');
+
 		});
 });
 
 riot.tag2('contest', '<actions title="contest"></actions> <button onclick="{add}" class="btn waves-effect waves-light green"> <i class="material-icons right">add</i> NEW </button> <button onclick="{add}" class="btn waves-effect waves-light"> <i class="material-icons right">list</i> LIST </button> <addcontest></addcontest>', '', '', function(opts) {
     this.add = function() {
-      this.query(`{
-        allAuthors {
-          name
-          logs(filter: {AND: [
-          	{contest: {id: "cj7xsdirerrmz0129ojwu7dtu"}},
-            {createdAt_gte: "2017-09-18"}
-            {createdAt_lte: "2017-09-24"}
-        	]})
-          {
-            minutes
-          }
-        }
-      }`).then(data => console.log(data));
     }.bind(this)
 
   	this.on("mount", function () {
@@ -150,35 +137,62 @@ riot.tag2('metronome', '<actions title="metronome"></actions> <div class="row"> 
 riot.tag2('profile', '<actions title="profile"></actions> <ul class="collection with-header"> <li class="collection-header"> <h4>Hege Alette Eilertsen</h4> <i>Joined 6.6.2015</i> </li> <li class="collection-item">Year 2016 <span class="right">3000 minutes</span></li> <li class="collection-item">Week 2 <span class="right">1000 minutes</span></li> <li class="collection-item">Week 1 <span class="right">2000 minutes</span></li> </ul> <ul class="collection with-header"> <li class="collection-header green darken-1">Contests</li> <li class="collection-item"> <div class="chip">Master class</div> <div class="chip">Heimdal NM 2016</div> </li> </ul> <ul class="collection with-header"> <li class="collection-header green darken-1">Instruments</li> <li class="collection-item"> <div class="chip">Bb Cornet</div> </li> </ul>', '', '', function(opts) {
 });
 
-riot.tag2('result', '<actions title="result"></actions> <div class="row"> <div class="input-field col s6"> <select> <option value="1" data-icon="images/tenorhorn.jpg" class="circle">Master class</option> <option value="2" data-icon="images/tenorhorn.jpg" class="circle">Cofee & tea band</option> <option value="3" selected data-icon="images/tenorhorn.jpg" class="circle">School bands</option> <option value="4">NM 2016 Heimdal</option> </select> <label>Contest</label> </div> <div class="input-field col s6"> <select> <option value="1">this year</option> <option value="2">this month</option> <option value="3" selected>this week (53)</option> <option value="4">last week</option> <option value="5">last month</option> <option value="6">last year</option> </select> <label>Period of time</label> </div> </div> </div> <div class="row"> <table class="striped"> <thead> <tr> <th data-field="id">#</th> <th data-field="name">Name</th> <th data-field="price" class="right-align">Minutes</th> </tr> </thead> <tbody> <tr each="{results}"> <td>{no}</td> <td><a href="#/profile/{userid}">{name}</a></td> <td class="right-align">{minutes}</td> </tr> </tbody> </table>', '', '', function(opts) {
+riot.tag2('result', '<actions title="result"></actions> <div class="row"> <div class="input-field col s6"> <select> <option value="1" data-icon="images/tenorhorn.jpg" class="circle">Master class</option> <option value="2" data-icon="images/tenorhorn.jpg" class="circle">Cofee & tea band</option> <option value="3" selected data-icon="images/tenorhorn.jpg" class="circle">School bands</option> <option value="4">NM 2016 Heimdal</option> </select> <label>Contest</label> </div> <div class="input-field col s6"> <select onchange="{changePeriod}"> <option value="year" selected="{this.period == \'year\'}">this year</option> <option value="month" selected="{this.period == \'month\'}">this month</option> <option value="week" selected="{this.period == \'week\'}">this week (53)</option> <option value="lastweek" selected="{this.period == \'lastweek\'}">last week</option> <option value="lastmonth" selected="{this.period == \'lastmonth\'}">last month</option> <option value="lastyear" selected="{this.period == \'lastyear\'}">last year</option> </select> <label>Period of time</label> </div> </div> </div> <div class="row"> <table class="striped"> <thead> <tr> <th data-field="id">#</th> <th data-field="name">Name</th> <th data-field="price" class="right-align">Minutes</th> </tr> </thead> <tbody> <tr each="{results}"> <td>{no}</td> <td><a href="#/profile/{id}">{name}</a></td> <td class="right-align">{minutes}</td> </tr> </tbody> </table>', '', '', function(opts) {
 
+		var period = 'week';
+		console.log("TEST");
 
-		this.query(`{
-			allUsers {
-        name
-        logs {
-          minutes
-        }
-			}
-    }`).then(results => {
-			results.allUsers.map((user, i) => {
-				user.no = i + 1;
-				user.minutes = user.logs.map(log => log.minutes).reduce((prev, next) => prev + next);
-				delete user.logs;
+		this.changePeriod = function(e) {
+			console.log("PERIOD CHANGED", e.target.value);
+
+			this.loadResults();
+
+		}.bind(this)
+
+		this.sumAndSort = function(results) {
+			results.allUsers.map(user => {
+					user.minutes = user.logs.map(log => log.minutes).reduce((prev, next) => prev + next);
+					delete user.logs;
 			});
 
-			results.allUsers.sort((a,b) => b.minutes - a.minutes);
+			results.allUsers.sort((a,b) => b.minutes - a.minutes)
+			results.allUsers.map((user, i) => user.no = i + 1);
 
-			console.log("RESULTS", results);
-			this.results = results.allUsers;
-			this.update();
-		});
+			return results.allUsers;
+		}.bind(this)
+
+		this.loadResults = function() {
+			this.query(`{
+				allUsers {
+					id
+					name
+					logs(filter: {AND: [
+						{createdAt_gte: "2017-10-01"},
+						{createdAt_lte: "2017-10-30"}
+					]}) {
+						minutes
+					}
+				}
+			}`, {
+				contest: '',
+				fromdate: '2017-10-01',
+				todate: '2017-10-30'
+			}).then(results => {
+				console.log(this.results);
+				this.results = this.sumAndSort(results);
+				this.update();
+			});
+		}.bind(this)
 
 		this.on('mount', function() {
+			this.contest = 'cj7xsdirerrmz0129ojwu7dtu';
+			this.loadResults();
+
 			$(document).ready(function() {
 	    		$('select').material_select();
 			});
 		});
+
 });
 
 riot.tag2('search', '<actions title="search"></actions> <div class="row"> <form> <div class="input-field"> <input id="search" type="search" required> <label for="search"><i class="material-icons">search</i></label> <i class="material-icons">close</i> </div> </form> </div> <div class="row"> <ul class="collection"> <li each="{contests}" class="collection-item avatar"> <i class="material-icons circle green">add</i> <span class="title">{name}</span> </li> </ul> </div>', '', '', function(opts) {

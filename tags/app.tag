@@ -11,7 +11,6 @@
 
 	<script>
 		this.auth.on('login', function (user) {
-			console.log("LOGIN CALLED", user);
 			route('log','Excerise Champion');
 		});
 
@@ -21,7 +20,8 @@
 
 		this.on('mount', function() {
 		  route.start(true);
-			route(this.auth.user ? 'log' : 'login');
+			route('result');
+			//route(this.auth.user ? 'log' : 'login');
 		});
 	</script>
 </app>
