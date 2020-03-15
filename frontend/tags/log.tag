@@ -3,8 +3,7 @@
   <addexercise></addexercise>
 
   <ul class="collection">
-    <li each={ logs } class="collection-item avatar">
-      <img src="images/tenorhorn.jpg" alt="" class="circle">
+    <li each={ logs } class="collection-item">
       <span class="title">{ user.name } - { minutes } minutes</span>
       <p>{ description }</p>
       <small>{ hDate(createdAt) }</small>

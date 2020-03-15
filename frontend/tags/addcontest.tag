@@ -13,9 +13,6 @@
           <label for="rules">Contest rules</label>
         </div>
       </div>
-      <div class="row switch">
-        <label>Private<input type="checkbox" name="public"><span class="lever"></span>Public</label>
-      </div>
       <button onclick={ add } class="btn waves-effect waves-light">
         <i class="material-icons right">send</i> Add
       </button>

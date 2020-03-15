@@ -12,9 +12,6 @@
   	<button onclick={ add } class="btn waves-effect waves-light">
   		<i class="material-icons right">send</i> Log it
   	</button>
-    <button onclick={ logout } class="btn waves-effect waves-light">
-  		<i class="material-icons right">send</i> Log out
-  	</button>
   </form>
 
   <script>

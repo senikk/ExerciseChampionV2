@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "GRPC backend for rehearsel logging",
+  "main": "server.js",
+  "author": "Terje Pedersen",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.3",
+    "grpc": "^1.24.2"
+  }
+}

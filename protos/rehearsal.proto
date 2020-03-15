@@ -1,0 +1,126 @@
+syntax = "proto3";
+package rehearsal;
+
+// Rehearsal
+message AddRehearsalRequest {
+    int32 userid = 1;
+    int32 contestid = 2;
+    int32 minutes = 3;
+    string description = 4;
+}
+
+message AddRehearsalResponse {
+    int32 result = 1;
+}
+
+message ListRehearsalRequest {
+    int32 userid = 1; 
+}
+
+message RehearsalEntry {
+    int32 rehearselid = 1;
+    int32 userid = 2;
+    int32 contestid = 3;
+    int32 minutes = 4;
+    string description = 5;
+}
+
+message ListRehearsalResponse {
+    repeated RehearsalEntry rehearsals = 1;
+}
+
+message RemoveRehearsalRequest {
+    int32 userid = 1;
+    int32 rehearselid = 2;
+}
+
+message RemoveRehearsalResponse {}
+
+// Contest
+message AddContestRequest {
+    int32 userid = 1;
+    string name = 2;
+    string rules = 3;
+}
+
+message AddContestResponse {
+    int32 result = 1;
+}
+
+message ContestEntry {
+    int32 contestid = 1;
+    string name = 2;
+}
+
+message ListContestRequest {
+    optional int32 userid = 1;
+}
+
+message ListContestReponse {
+    repeated ContestEntry contests = 1;
+}
+
+message SearchContestRequest {
+    string search = 1;
+}
+
+message JoinContestRequest {
+    int32 userid = 1;
+    int32 contestid = 2;
+}
+
+message JoinContestResponse {}
+
+// Results
+message ListResultRequest {
+    optional int32 contestid = 1;
+    enum Period {
+        THISYEAR = 0;
+        THISMONTH = 1;
+        THISWEEK = 2;
+        LASTYEAR = 3;
+        LASTMONTH = 4;
+        LASTWEEK = 5;
+    };
+    optional Period period = 2 [default = THISYEAR];
+}
+
+message Result {
+    int32 contestid = 1;
+    int32 userid = 2;
+    int32 position = 3;
+    string name = 4;
+    string minutes = 5;
+}
+
+message ListResultReponse {
+    repeated Result results = 1;
+}
+
+message ResultRequest {
+    int32 userid = 1;
+}
+
+message ResultResponse {
+    int32 thisyear = 1;
+    int32 thismonth = 2;
+    int32 thisweek = 3;
+}
+
+service Rehearsal {
+    // Rehearsal
+    rpc AddRehearsal(AddRehearsalRequest) returns (AddRehearsalResponse) {};
+    rpc RemoveRehearsal(RemoveRehearsalRequest) returns (RemoveRehearsalResponse) {};
+    rpc ListRehearsal(ListRehearsalRequest) returns (ListRehearsalResponse) {};
+
+    // Contest
+    rpc AddContest(AddContestRequest) returns (AddContestResponse) {};
+    rpc ListContest(ListContestRequest) returns (ListContestReponse) {};
+    rpc SearchContest(SearchContestRequest) returns (ListContestReponse) {};
+    rpc JoinContest(JoinContestRequest) returns (JoinContestResponse) {};
+    rpc LeaveContest(JoinContestRequest) returns (JoinContestResponse) {};
+
+    // Results
+    rpc ListResult(ListResultRequest) returns (ListResultReponse) {};
+    rpc YourResult(ResultRequest) returns (ResultResponse) {};
+}

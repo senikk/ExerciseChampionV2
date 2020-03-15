@@ -1,14 +1,6 @@
 <contest>
   <actions title="contest"></actions>
 
-  <button onclick={ add } class="btn waves-effect waves-light green">
-    <i class="material-icons right">add</i> NEW
-  </button>
-
-  <button onclick={ add } class="btn waves-effect waves-light">
-    <i class="material-icons right">list</i> LIST
-  </button>
-
   <addcontest></addcontest>
 
   <!--
