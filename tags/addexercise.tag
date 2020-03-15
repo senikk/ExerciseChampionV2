@@ -4,9 +4,11 @@
   	  <textarea ref="description" class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
     </div>
   	<input ref="minutes" placeholder="How many minutes? (required)">
+    <!--
     <button onclick={ toggletimer } class="btn waves-effect waves-light { timer.color }">
       <i class="material-icons right">{ timer.icon }</i> { timer.text }
     </button>
+    -->
   	<button onclick={ add } class="btn waves-effect waves-light">
   		<i class="material-icons right">send</i> Log it
   	</button>

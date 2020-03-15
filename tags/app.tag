@@ -1,7 +1,7 @@
 <app>
 	<router>
 		<route path="login"><login></login></route>
-    <route path="log"><log></log></route>
+    	<route path="log"><log></log></route>
 		<route path="search"><search></search></route>
 		<route path="contest"><contest></contest></route>
 		<route path="result"><result></result></route>
