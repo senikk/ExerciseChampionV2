@@ -11,7 +11,7 @@
 		"@riotjs/compiler": "^4.7.0",
 		"@rollup/plugin-commonjs": "^11.0.2",
 		"@rollup/plugin-node-resolve": "^7.1.1",
-		"axios": "^0.16.2",
+		"axios": "^0.18.1",
 		"babel-preset-es2015-rollup": "^3.0.0",
 		"connect": "^3.6.5",
 		"fetch-polyfill": "^0.8.2",
