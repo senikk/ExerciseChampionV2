@@ -96,6 +96,7 @@
 //			{contest: { id: $contest}},
 
 		loadResults() {
+			/*
 			this.query(`{
 				allUsers {
 					id
@@ -116,6 +117,7 @@
 				this.results = this.sumAndSort(results);
 				this.update();
 			});
+			*/
 		}
 
 		this.on('mount', function() {

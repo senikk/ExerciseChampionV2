@@ -5,6 +5,10 @@
   "main": "server.js",
   "author": "Terje Pedersen",
   "license": "MIT",
+  "scripts": {
+    "proxy": "grpcwebproxy.exe --use_websockets --backend_addr=localhost:9090 --run_tls_server=false --allow_all_origins",
+    "test": "node grpctest.js"
+  },
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
     "grpc": "^1.24.2"

@@ -1,7 +1,5 @@
-//import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import resolve from 'rollup-plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
 
 export default {
   input: 'app.js',
@@ -9,14 +7,34 @@ export default {
     format: 'iife',
     file: 'bundle.js'
   },
-  name: 'ExerciseChampion',
   plugins: [
-    resolve({
-      jsnext: true,
-      main: true,
-      browser: true
+    commonjs({
+      include: 'node_modules/**',
+      namedExports: {
+        'node_modules/rehearsal/rehearsal_grpc_web_pb.js': ['RehearsalClient'],
+        'node_modules/rehearsal/rehearsal_pb.js': [  
+          'AddContestRequest',
+          'AddContestResponse',
+          'AddRehearsalRequest',
+          'AddRehearsalResponse',
+          'JoinContestRequest',
+          'JoinContestResponse',
+          'ListContestReponse',
+          'ListContestRequest',
+          'ListRehearsalRequest',
+          'ListRehearsalResponse',
+          'ListResultReponse',
+          'ListResultRequest',
+          'RemoveRehearsalRequest',
+          'RemoveRehearsalResponse',
+          'ResultRequest',
+          'ResultResponse',
+          'SearchContestRequest'],
+        'grpc-web/index.js': ['AbstractClientBase', 'GrpcWebClientBase']
+      }
     }),
-    commonjs(),
-    babel()
+    resolve({
+      mainFields: ['main', 'browser', 'jsnext:main']
+    })
   ]
 };

@@ -14,7 +14,7 @@ const packageDefinition = protoLoader.loadSync('../protos/rehearsal.proto', {
 
 const rehearsalProto = grpc.loadPackageDefinition(packageDefinition).rehearsal
 
-const client = new rehearsalProto.Rehearsal('localhost:50051', grpc.credentials.createInsecure())
+const client = new rehearsalProto.Rehearsal('localhost:9090', grpc.credentials.createInsecure())
 
 client.SearchContest({
     search: 'NM'

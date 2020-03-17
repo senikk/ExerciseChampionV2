@@ -7,17 +7,20 @@
 		"watch:riot": "riot -w ./tags ./tags/all.js"
 	},
 	"dependencies": {
+		"@babel/core": "^7.8.7",
+		"@riotjs/compiler": "^4.7.0",
+		"@rollup/plugin-commonjs": "^11.0.2",
+		"@rollup/plugin-node-resolve": "^7.1.1",
 		"axios": "^0.16.2",
 		"babel-preset-es2015-rollup": "^3.0.0",
 		"connect": "^3.6.5",
 		"fetch-polyfill": "^0.8.2",
 		"moment": "^2.18.1",
-		"riot": "^3.7.2",
-		"riot-route": "^3.1.2",
-		"rollup-plugin-babel": "^3.0.2",
-		"rollup-plugin-commonjs": "^8.2.1",
-		"rollup-plugin-node-resolve": "^3.0.0",
-		"serve-static": "^1.13.0",
-		"simple-graphql-client": "^0.1.0"
+		"rehearsal": "file:rehearsal",
+		"riot": "^3.13.2",
+		"riot-route": "^3.1.4",
+		"rollup": "^2.0.6",
+		"rollup-plugin-babel": "^4.4.0",
+		"serve-static": "^1.13.0"
 	}
 }

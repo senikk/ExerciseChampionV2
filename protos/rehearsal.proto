@@ -53,7 +53,7 @@ message ContestEntry {
 }
 
 message ListContestRequest {
-    optional int32 userid = 1;
+    int32 userid = 1;
 }
 
 message ListContestReponse {
@@ -73,7 +73,7 @@ message JoinContestResponse {}
 
 // Results
 message ListResultRequest {
-    optional int32 contestid = 1;
+    int32 contestid = 1;
     enum Period {
         THISYEAR = 0;
         THISMONTH = 1;
@@ -82,7 +82,7 @@ message ListResultRequest {
         LASTMONTH = 4;
         LASTWEEK = 5;
     };
-    optional Period period = 2 [default = THISYEAR];
+    Period period = 2;
 }
 
 message Result {

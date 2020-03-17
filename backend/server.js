@@ -15,6 +15,9 @@ const packageDefinition = protoLoader.loadSync(['rehearsal.proto'], {
 const contestProto = grpc.loadPackageDefinition(packageDefinition).rehearsal
 
 function SearchContest(call, cb) {
+  console.log("CALL", call);
+  console.log("CB", cb);  
+
   cb(null, { contests: [
     {
       contestid: 1,
@@ -33,5 +36,5 @@ const rehearsalFunctions = {
 
 const server = new grpc.Server()
 server.addService(contestProto.Rehearsal.service, rehearsalFunctions)
-server.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure())
+server.bind('localhost:9090', grpc.ServerCredentials.createInsecure())
 server.start();
