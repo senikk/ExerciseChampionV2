@@ -1,6 +1,6 @@
 <log>
   <actions title="log"></actions>
-  <addexercise></addexercise>
+  <addrehearsal></addrehearsal>
 
   <ul class="collection">
     <li each={ logs } class="collection-item">
@@ -14,25 +14,21 @@
     var self = this;
 
     // listen for self added item
-    this.event.on("exercise:added", function (item) {
+    this.event.on("rehearsal:added", function (item) {
+      console.log("ADDED", item);
       self.logs.unshift(item);
       self.update();
     });
 
     this.on("mount", function () {
-			this.query(`{
-        allLogs(orderBy: createdAt_DESC) {
-          id
-          minutes
-          description
-          user {
-            name
-          }
-        }}`)
-      .then(results => {
-			  this.logs = results.allLogs;
-			  this.update();
-			});
+      var request = new this.R.ListRehearsalRequest();
+      request.setUserid(1);
+      this.backend.listRehearsal(request, null, (error, result) => {
+        this.logs = result.toObject().rehearsalsList;
+
+        console.log("LOGS", this.logs);
+        this.update();
+      });
 		});
   </script>
 </log>

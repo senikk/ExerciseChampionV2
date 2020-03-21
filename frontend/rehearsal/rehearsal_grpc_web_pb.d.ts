@@ -2,9 +2,8 @@ import * as grpcWeb from 'grpc-web';
 
 import {
   AddContestRequest,
-  AddContestResponse,
   AddRehearsalRequest,
-  AddRehearsalResponse,
+  ContestEntry,
   JoinContestRequest,
   JoinContestResponse,
   ListContestReponse,
@@ -13,23 +12,32 @@ import {
   ListRehearsalResponse,
   ListResultReponse,
   ListResultRequest,
+  LoginRequest,
+  LoginResponse,
+  RehearsalEntry,
   RemoveRehearsalRequest,
   RemoveRehearsalResponse,
   ResultRequest,
-  ResultResponse,
-  SearchContestRequest} from './rehearsal_pb';
+  ResultResponse} from './rehearsal_pb';
 
 export class RehearsalClient {
   constructor (hostname: string,
                credentials?: null | { [index: string]: string; },
                options?: null | { [index: string]: string; });
 
+  login(
+    request: LoginRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: LoginResponse) => void
+  ): grpcWeb.ClientReadableStream<LoginResponse>;
+
   addRehearsal(
     request: AddRehearsalRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: AddRehearsalResponse) => void
-  ): grpcWeb.ClientReadableStream<AddRehearsalResponse>;
+               response: RehearsalEntry) => void
+  ): grpcWeb.ClientReadableStream<RehearsalEntry>;
 
   removeRehearsal(
     request: RemoveRehearsalRequest,
@@ -49,18 +57,11 @@ export class RehearsalClient {
     request: AddContestRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: AddContestResponse) => void
-  ): grpcWeb.ClientReadableStream<AddContestResponse>;
+               response: ContestEntry) => void
+  ): grpcWeb.ClientReadableStream<ContestEntry>;
 
   listContest(
     request: ListContestRequest,
-    metadata: grpcWeb.Metadata | undefined,
-    callback: (err: grpcWeb.Error,
-               response: ListContestReponse) => void
-  ): grpcWeb.ClientReadableStream<ListContestReponse>;
-
-  searchContest(
-    request: SearchContestRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
                response: ListContestReponse) => void
@@ -101,10 +102,15 @@ export class RehearsalPromiseClient {
                credentials?: null | { [index: string]: string; },
                options?: null | { [index: string]: string; });
 
+  login(
+    request: LoginRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<LoginResponse>;
+
   addRehearsal(
     request: AddRehearsalRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<AddRehearsalResponse>;
+  ): Promise<RehearsalEntry>;
 
   removeRehearsal(
     request: RemoveRehearsalRequest,
@@ -119,15 +125,10 @@ export class RehearsalPromiseClient {
   addContest(
     request: AddContestRequest,
     metadata?: grpcWeb.Metadata
-  ): Promise<AddContestResponse>;
+  ): Promise<ContestEntry>;
 
   listContest(
     request: ListContestRequest,
-    metadata?: grpcWeb.Metadata
-  ): Promise<ListContestReponse>;
-
-  searchContest(
-    request: SearchContestRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<ListContestReponse>;
 

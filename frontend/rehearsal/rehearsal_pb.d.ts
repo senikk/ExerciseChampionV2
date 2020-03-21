@@ -1,9 +1,50 @@
 import * as jspb from "google-protobuf"
 
-export class AddRehearsalRequest extends jspb.Message {
+export class LoginRequest extends jspb.Message {
+  getEmail(): string;
+  setEmail(value: string): void;
+
+  getPassword(): string;
+  setPassword(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): LoginRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: LoginRequest): LoginRequest.AsObject;
+  static serializeBinaryToWriter(message: LoginRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): LoginRequest;
+  static deserializeBinaryFromReader(message: LoginRequest, reader: jspb.BinaryReader): LoginRequest;
+}
+
+export namespace LoginRequest {
+  export type AsObject = {
+    email: string,
+    password: string,
+  }
+}
+
+export class LoginResponse extends jspb.Message {
   getUserid(): number;
   setUserid(value: number): void;
 
+  getJwt(): string;
+  setJwt(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): LoginResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: LoginResponse): LoginResponse.AsObject;
+  static serializeBinaryToWriter(message: LoginResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): LoginResponse;
+  static deserializeBinaryFromReader(message: LoginResponse, reader: jspb.BinaryReader): LoginResponse;
+}
+
+export namespace LoginResponse {
+  export type AsObject = {
+    userid: number,
+    jwt: string,
+  }
+}
+
+export class AddRehearsalRequest extends jspb.Message {
   getContestid(): number;
   setContestid(value: number): void;
 
@@ -23,34 +64,21 @@ export class AddRehearsalRequest extends jspb.Message {
 
 export namespace AddRehearsalRequest {
   export type AsObject = {
-    userid: number,
     contestid: number,
     minutes: number,
     description: string,
   }
 }
 
-export class AddRehearsalResponse extends jspb.Message {
-  getResult(): number;
-  setResult(value: number): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): AddRehearsalResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: AddRehearsalResponse): AddRehearsalResponse.AsObject;
-  static serializeBinaryToWriter(message: AddRehearsalResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): AddRehearsalResponse;
-  static deserializeBinaryFromReader(message: AddRehearsalResponse, reader: jspb.BinaryReader): AddRehearsalResponse;
-}
-
-export namespace AddRehearsalResponse {
-  export type AsObject = {
-    result: number,
-  }
-}
-
 export class ListRehearsalRequest extends jspb.Message {
   getUserid(): number;
   setUserid(value: number): void;
+
+  getContestid(): number;
+  setContestid(value: number): void;
+
+  getLimit(): number;
+  setLimit(value: number): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ListRehearsalRequest.AsObject;
@@ -63,12 +91,14 @@ export class ListRehearsalRequest extends jspb.Message {
 export namespace ListRehearsalRequest {
   export type AsObject = {
     userid: number,
+    contestid: number,
+    limit: number,
   }
 }
 
 export class RehearsalEntry extends jspb.Message {
-  getRehearselid(): number;
-  setRehearselid(value: number): void;
+  getId(): number;
+  setId(value: number): void;
 
   getUserid(): number;
   setUserid(value: number): void;
@@ -82,6 +112,14 @@ export class RehearsalEntry extends jspb.Message {
   getDescription(): string;
   setDescription(value: string): void;
 
+  getCreatedat(): string;
+  setCreatedat(value: string): void;
+
+  getUser(): User | undefined;
+  setUser(value?: User): void;
+  hasUser(): boolean;
+  clearUser(): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): RehearsalEntry.AsObject;
   static toObject(includeInstance: boolean, msg: RehearsalEntry): RehearsalEntry.AsObject;
@@ -92,11 +130,31 @@ export class RehearsalEntry extends jspb.Message {
 
 export namespace RehearsalEntry {
   export type AsObject = {
-    rehearselid: number,
+    id: number,
     userid: number,
     contestid: number,
     minutes: number,
     description: string,
+    createdat: string,
+    user?: User.AsObject,
+  }
+}
+
+export class User extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): User.AsObject;
+  static toObject(includeInstance: boolean, msg: User): User.AsObject;
+  static serializeBinaryToWriter(message: User, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): User;
+  static deserializeBinaryFromReader(message: User, reader: jspb.BinaryReader): User;
+}
+
+export namespace User {
+  export type AsObject = {
+    name: string,
   }
 }
 
@@ -121,9 +179,6 @@ export namespace ListRehearsalResponse {
 }
 
 export class RemoveRehearsalRequest extends jspb.Message {
-  getUserid(): number;
-  setUserid(value: number): void;
-
   getRehearselid(): number;
   setRehearselid(value: number): void;
 
@@ -137,7 +192,6 @@ export class RemoveRehearsalRequest extends jspb.Message {
 
 export namespace RemoveRehearsalRequest {
   export type AsObject = {
-    userid: number,
     rehearselid: number,
   }
 }
@@ -157,9 +211,6 @@ export namespace RemoveRehearsalResponse {
 }
 
 export class AddContestRequest extends jspb.Message {
-  getUserid(): number;
-  setUserid(value: number): void;
-
   getName(): string;
   setName(value: string): void;
 
@@ -176,15 +227,16 @@ export class AddContestRequest extends jspb.Message {
 
 export namespace AddContestRequest {
   export type AsObject = {
-    userid: number,
     name: string,
     rules: string,
   }
 }
 
 export class AddContestResponse extends jspb.Message {
-  getResult(): number;
-  setResult(value: number): void;
+  getContest(): ContestEntry | undefined;
+  setContest(value?: ContestEntry): void;
+  hasContest(): boolean;
+  clearContest(): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AddContestResponse.AsObject;
@@ -196,16 +248,24 @@ export class AddContestResponse extends jspb.Message {
 
 export namespace AddContestResponse {
   export type AsObject = {
-    result: number,
+    contest?: ContestEntry.AsObject,
   }
 }
 
 export class ContestEntry extends jspb.Message {
-  getContestid(): number;
-  setContestid(value: number): void;
+  getId(): number;
+  setId(value: number): void;
 
   getName(): string;
   setName(value: string): void;
+
+  getRules(): string;
+  setRules(value: string): void;
+
+  getUser(): User | undefined;
+  setUser(value?: User): void;
+  hasUser(): boolean;
+  clearUser(): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ContestEntry.AsObject;
@@ -217,14 +277,19 @@ export class ContestEntry extends jspb.Message {
 
 export namespace ContestEntry {
   export type AsObject = {
-    contestid: number,
+    id: number,
     name: string,
+    rules: string,
+    user?: User.AsObject,
   }
 }
 
 export class ListContestRequest extends jspb.Message {
-  getUserid(): number;
-  setUserid(value: number): void;
+  getFilter(): string;
+  setFilter(value: string): void;
+
+  getLimit(): number;
+  setLimit(value: number): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ListContestRequest.AsObject;
@@ -236,7 +301,8 @@ export class ListContestRequest extends jspb.Message {
 
 export namespace ListContestRequest {
   export type AsObject = {
-    userid: number,
+    filter: string,
+    limit: number,
   }
 }
 
@@ -260,28 +326,7 @@ export namespace ListContestReponse {
   }
 }
 
-export class SearchContestRequest extends jspb.Message {
-  getSearch(): string;
-  setSearch(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): SearchContestRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: SearchContestRequest): SearchContestRequest.AsObject;
-  static serializeBinaryToWriter(message: SearchContestRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): SearchContestRequest;
-  static deserializeBinaryFromReader(message: SearchContestRequest, reader: jspb.BinaryReader): SearchContestRequest;
-}
-
-export namespace SearchContestRequest {
-  export type AsObject = {
-    search: string,
-  }
-}
-
 export class JoinContestRequest extends jspb.Message {
-  getUserid(): number;
-  setUserid(value: number): void;
-
   getContestid(): number;
   setContestid(value: number): void;
 
@@ -295,7 +340,6 @@ export class JoinContestRequest extends jspb.Message {
 
 export namespace JoinContestRequest {
   export type AsObject = {
-    userid: number,
     contestid: number,
   }
 }
@@ -321,6 +365,9 @@ export class ListResultRequest extends jspb.Message {
   getPeriod(): ListResultRequest.Period;
   setPeriod(value: ListResultRequest.Period): void;
 
+  getLimit(): number;
+  setLimit(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ListResultRequest.AsObject;
   static toObject(includeInstance: boolean, msg: ListResultRequest): ListResultRequest.AsObject;
@@ -333,6 +380,7 @@ export namespace ListResultRequest {
   export type AsObject = {
     contestid: number,
     period: ListResultRequest.Period,
+    limit: number,
   }
 
   export enum Period { 
@@ -355,11 +403,13 @@ export class Result extends jspb.Message {
   getPosition(): number;
   setPosition(value: number): void;
 
-  getName(): string;
-  setName(value: string): void;
-
   getMinutes(): string;
   setMinutes(value: string): void;
+
+  getUser(): User | undefined;
+  setUser(value?: User): void;
+  hasUser(): boolean;
+  clearUser(): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Result.AsObject;
@@ -374,8 +424,8 @@ export namespace Result {
     contestid: number,
     userid: number,
     position: number,
-    name: string,
     minutes: string,
+    user?: User.AsObject,
   }
 }
 

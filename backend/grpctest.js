@@ -14,9 +14,10 @@ const packageDefinition = protoLoader.loadSync('../protos/rehearsal.proto', {
 
 const rehearsalProto = grpc.loadPackageDefinition(packageDefinition).rehearsal
 
-const client = new rehearsalProto.Rehearsal('localhost:9090', grpc.credentials.createInsecure())
+const backend = new rehearsalProto.Rehearsal('localhost:9090', grpc.credentials.createInsecure())
 
-client.SearchContest({
+/*
+backend.SearchContest({
     search: 'NM'
 }, function(error, result) {
   if (error) console.log(error);
@@ -25,3 +26,41 @@ client.SearchContest({
     console.log(contest.name);
   });
 })
+*/
+
+/*
+backend.AddRehearsal({
+  contestid: 1,
+  minutes: 10,
+  description: 'Hmmmm'
+}, function(error, result) {
+  console.log("error", error)
+  console.log("result", result);
+})
+*/
+
+backend.Login({
+  email: 'terje@senikk.com',
+  password: '1234'
+}, (error, result) => {
+  console.log(result);
+
+  var meta = new grpc.Metadata()
+  meta.add('jwt', result.jwt)
+
+  backend.ListContest({
+  }, meta, (error, data) => {
+    console.log("E", error)
+    console.log("D", data)
+  })
+});
+
+/*
+backend.ListRehearsal({
+  contestid: 1,
+  userid: 0,
+  limit: 20
+}, (error, data) => {
+  console.log(data);
+})
+*/

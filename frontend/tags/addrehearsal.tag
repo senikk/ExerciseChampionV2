@@ -1,4 +1,4 @@
-<addexercise>
+<addrehearsal>
   <form>
   	<div class="input-field">
   	  <textarea ref="description" class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
@@ -28,26 +28,16 @@
     }
 
     add(e) {
-      var variables = {
-          description: this.refs.description.value,
-          minutes: parseInt(this.refs.minutes.value),
-          user: self.auth.user
-      };
+      var request = new this.R.AddRehearsalRequest();
+      request.setContestid(1);
+      request.setMinutes(parseInt(this.refs.minutes.value));
+      request.setDescription(this.refs.description.value);
 
-      this.query(`
-        mutation($description: String!, $minutes: Int!, $user: ID) {
-          createLog(description: $description, minutes: $minutes, userId: $user) {
-            id
-            minutes
-            description
-            user {
-              name
-            }
-          }
-        }
-      `, variables).then(response => {
-        	self.event.trigger("exercise:added", response.createLog);
+      this.backend.addRehearsal(request, null, (error, result) => {
+        if (error) console.log("ERROR", error);
+
+        self.event.trigger("rehearsal:added", result.toObject());
       });
     }
    </script>
-</addexercise>
+</addrehearsal>

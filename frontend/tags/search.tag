@@ -24,21 +24,7 @@
  		//this.search.value = "2016";
 
 		this.on("mount", function () {
-			this.query(`{
-allContests {
-    id
-    name
-}}`).then(results => {
-			console.log(results);
-			this.contests = results.allContests;
-			this.update();
-			});
 		});
-
- 		//this.results = [
- 		//	{ title: "Contest", description: "NM 2016 konkurranse" },
- 		//	{ title: "Exerciser 2016", description: "Terje Pedersen" }
- 		//];
  	</script>
 
 </search>

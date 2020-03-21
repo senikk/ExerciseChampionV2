@@ -1,7 +1,6 @@
 import 'fetch-polyfill';
-//import client from 'simple-graphql-client';
 import {RehearsalClient} from 'rehearsal';
-import * as requests from 'rehearsal/rehearsal_pb';
+import * as R from 'rehearsal/rehearsal_pb';
 
 var Auth = function () {
   var self = riot.observable(this);
@@ -22,18 +21,13 @@ var Auth = function () {
 }
 
 var Helper = {
-  api: axios.create({
-    baseURL: 'http://localhost:1337'
-  }),
   event: riot.observable(),
   hDate: function (date) {
     return moment(date).format('DD.MM.YYYY HH:mm');
   },
-  query: null,
-  //query: client('https://api.graph.cool/simple/v1/cizonipn48m0w01718952ewrb'),
   auth: new Auth(),
-  rehearsal: new RehearsalClient("http://localhost:8080"),
-  requests: requests
+  backend: new RehearsalClient("http://localhost:8080"),
+  R: R
 };
 
 riot.mixin(Helper);

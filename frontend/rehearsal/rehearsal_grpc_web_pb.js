@@ -69,14 +69,94 @@ proto.rehearsal.RehearsalPromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.rehearsal.LoginRequest,
+ *   !proto.rehearsal.LoginResponse>}
+ */
+const methodDescriptor_Rehearsal_Login = new grpc.web.MethodDescriptor(
+  '/rehearsal.Rehearsal/Login',
+  grpc.web.MethodType.UNARY,
+  proto.rehearsal.LoginRequest,
+  proto.rehearsal.LoginResponse,
+  /**
+   * @param {!proto.rehearsal.LoginRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.LoginResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.rehearsal.LoginRequest,
+ *   !proto.rehearsal.LoginResponse>}
+ */
+const methodInfo_Rehearsal_Login = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.rehearsal.LoginResponse,
+  /**
+   * @param {!proto.rehearsal.LoginRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.LoginResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.rehearsal.LoginRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.rehearsal.LoginResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.LoginResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.rehearsal.RehearsalClient.prototype.login =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/rehearsal.Rehearsal/Login',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_Login,
+      callback);
+};
+
+
+/**
+ * @param {!proto.rehearsal.LoginRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.rehearsal.LoginResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.rehearsal.RehearsalPromiseClient.prototype.login =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/rehearsal.Rehearsal/Login',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_Login);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.rehearsal.AddRehearsalRequest,
- *   !proto.rehearsal.AddRehearsalResponse>}
+ *   !proto.rehearsal.RehearsalEntry>}
  */
 const methodDescriptor_Rehearsal_AddRehearsal = new grpc.web.MethodDescriptor(
   '/rehearsal.Rehearsal/AddRehearsal',
   grpc.web.MethodType.UNARY,
   proto.rehearsal.AddRehearsalRequest,
-  proto.rehearsal.AddRehearsalResponse,
+  proto.rehearsal.RehearsalEntry,
   /**
    * @param {!proto.rehearsal.AddRehearsalRequest} request
    * @return {!Uint8Array}
@@ -84,7 +164,7 @@ const methodDescriptor_Rehearsal_AddRehearsal = new grpc.web.MethodDescriptor(
   function(request) {
     return request.serializeBinary();
   },
-  proto.rehearsal.AddRehearsalResponse.deserializeBinary
+  proto.rehearsal.RehearsalEntry.deserializeBinary
 );
 
 
@@ -92,10 +172,10 @@ const methodDescriptor_Rehearsal_AddRehearsal = new grpc.web.MethodDescriptor(
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.rehearsal.AddRehearsalRequest,
- *   !proto.rehearsal.AddRehearsalResponse>}
+ *   !proto.rehearsal.RehearsalEntry>}
  */
 const methodInfo_Rehearsal_AddRehearsal = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.rehearsal.AddRehearsalResponse,
+  proto.rehearsal.RehearsalEntry,
   /**
    * @param {!proto.rehearsal.AddRehearsalRequest} request
    * @return {!Uint8Array}
@@ -103,7 +183,7 @@ const methodInfo_Rehearsal_AddRehearsal = new grpc.web.AbstractClientBase.Method
   function(request) {
     return request.serializeBinary();
   },
-  proto.rehearsal.AddRehearsalResponse.deserializeBinary
+  proto.rehearsal.RehearsalEntry.deserializeBinary
 );
 
 
@@ -112,9 +192,9 @@ const methodInfo_Rehearsal_AddRehearsal = new grpc.web.AbstractClientBase.Method
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.rehearsal.AddRehearsalResponse)}
+ * @param {function(?grpc.web.Error, ?proto.rehearsal.RehearsalEntry)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.AddRehearsalResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.RehearsalEntry>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.rehearsal.RehearsalClient.prototype.addRehearsal =
@@ -133,7 +213,7 @@ proto.rehearsal.RehearsalClient.prototype.addRehearsal =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.rehearsal.AddRehearsalResponse>}
+ * @return {!Promise<!proto.rehearsal.RehearsalEntry>}
  *     A native promise that resolves to the response
  */
 proto.rehearsal.RehearsalPromiseClient.prototype.addRehearsal =
@@ -310,13 +390,13 @@ proto.rehearsal.RehearsalPromiseClient.prototype.listRehearsal =
  * @const
  * @type {!grpc.web.MethodDescriptor<
  *   !proto.rehearsal.AddContestRequest,
- *   !proto.rehearsal.AddContestResponse>}
+ *   !proto.rehearsal.ContestEntry>}
  */
 const methodDescriptor_Rehearsal_AddContest = new grpc.web.MethodDescriptor(
   '/rehearsal.Rehearsal/AddContest',
   grpc.web.MethodType.UNARY,
   proto.rehearsal.AddContestRequest,
-  proto.rehearsal.AddContestResponse,
+  proto.rehearsal.ContestEntry,
   /**
    * @param {!proto.rehearsal.AddContestRequest} request
    * @return {!Uint8Array}
@@ -324,7 +404,7 @@ const methodDescriptor_Rehearsal_AddContest = new grpc.web.MethodDescriptor(
   function(request) {
     return request.serializeBinary();
   },
-  proto.rehearsal.AddContestResponse.deserializeBinary
+  proto.rehearsal.ContestEntry.deserializeBinary
 );
 
 
@@ -332,10 +412,10 @@ const methodDescriptor_Rehearsal_AddContest = new grpc.web.MethodDescriptor(
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.rehearsal.AddContestRequest,
- *   !proto.rehearsal.AddContestResponse>}
+ *   !proto.rehearsal.ContestEntry>}
  */
 const methodInfo_Rehearsal_AddContest = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.rehearsal.AddContestResponse,
+  proto.rehearsal.ContestEntry,
   /**
    * @param {!proto.rehearsal.AddContestRequest} request
    * @return {!Uint8Array}
@@ -343,7 +423,7 @@ const methodInfo_Rehearsal_AddContest = new grpc.web.AbstractClientBase.MethodIn
   function(request) {
     return request.serializeBinary();
   },
-  proto.rehearsal.AddContestResponse.deserializeBinary
+  proto.rehearsal.ContestEntry.deserializeBinary
 );
 
 
@@ -352,9 +432,9 @@ const methodInfo_Rehearsal_AddContest = new grpc.web.AbstractClientBase.MethodIn
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.rehearsal.AddContestResponse)}
+ * @param {function(?grpc.web.Error, ?proto.rehearsal.ContestEntry)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.AddContestResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.ContestEntry>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.rehearsal.RehearsalClient.prototype.addContest =
@@ -373,7 +453,7 @@ proto.rehearsal.RehearsalClient.prototype.addContest =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.rehearsal.AddContestResponse>}
+ * @return {!Promise<!proto.rehearsal.ContestEntry>}
  *     A native promise that resolves to the response
  */
 proto.rehearsal.RehearsalPromiseClient.prototype.addContest =
@@ -463,86 +543,6 @@ proto.rehearsal.RehearsalPromiseClient.prototype.listContest =
       request,
       metadata || {},
       methodDescriptor_Rehearsal_ListContest);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.rehearsal.SearchContestRequest,
- *   !proto.rehearsal.ListContestReponse>}
- */
-const methodDescriptor_Rehearsal_SearchContest = new grpc.web.MethodDescriptor(
-  '/rehearsal.Rehearsal/SearchContest',
-  grpc.web.MethodType.UNARY,
-  proto.rehearsal.SearchContestRequest,
-  proto.rehearsal.ListContestReponse,
-  /**
-   * @param {!proto.rehearsal.SearchContestRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.rehearsal.ListContestReponse.deserializeBinary
-);
-
-
-/**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.rehearsal.SearchContestRequest,
- *   !proto.rehearsal.ListContestReponse>}
- */
-const methodInfo_Rehearsal_SearchContest = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.rehearsal.ListContestReponse,
-  /**
-   * @param {!proto.rehearsal.SearchContestRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.rehearsal.ListContestReponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.rehearsal.SearchContestRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.Error, ?proto.rehearsal.ListContestReponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.ListContestReponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.rehearsal.RehearsalClient.prototype.searchContest =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/rehearsal.Rehearsal/SearchContest',
-      request,
-      metadata || {},
-      methodDescriptor_Rehearsal_SearchContest,
-      callback);
-};
-
-
-/**
- * @param {!proto.rehearsal.SearchContestRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.rehearsal.ListContestReponse>}
- *     A native promise that resolves to the response
- */
-proto.rehearsal.RehearsalPromiseClient.prototype.searchContest =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/rehearsal.Rehearsal/SearchContest',
-      request,
-      metadata || {},
-      methodDescriptor_Rehearsal_SearchContest);
 };
 
 

@@ -1,8 +1,6 @@
 <contest>
   <actions title="contest"></actions>
 
-  <button click={ add }>TEST</button
-
   <addcontest></addcontest>
 
   <ul class="collection">
@@ -15,23 +13,27 @@
   </ul>
 
   <script>
-    add() {
+    var self = this;
 
-    }
-
-  	this.on("mount", function () {
-
+    this.event.on("contest:added", function (item) {
+      console.log("ENTRY", item);
+      self.contests.unshift(item);
+      self.update();
     });
 
-    var request = new this.requests.SearchContestRequest();
-    request.setSearch("test");
+  	this.on("mount", function () {
+      var request = new this.R.ListContestRequest();
+      request.setFilter("");
 
-    this.rehearsal.searchContest(request, null, (error, result) => {
-      if (error) console.log(error);
+      console.log("CONTESTS", request);
 
-      this.contests = result.toObject().contestsList;
-      this.update();
-      console.log("CONTESTS", this.contests);
+      this.backend.listContest(request, null, (error, result) => {
+        if (error) console.log(error);
+
+        this.contests = result.toObject().contestsList;
+        this.update();
+        console.log("CONTESTS", this.contests);
+      });
     });
   </script>
 
