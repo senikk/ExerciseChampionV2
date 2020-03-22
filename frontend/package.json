@@ -16,7 +16,7 @@
 		"babel-preset-es2015-rollup": "^3.0.0",
 		"connect": "^3.6.5",
 		"fetch-polyfill": "^0.8.2",
-		"moment": "^2.18.1",
+		"moment": "^2.19.3",
 		"rehearsal": "file:rehearsal",
 		"riot": "^3.13.2",
 		"rollup": "^2.0.6",
