@@ -3,7 +3,9 @@ const sequelize = require('sequelize')
 const {Rehearsal, User} = require('../database/models/index')
 
 function ListResult(input, cb) {
-    console.log("LIST", input);
+    let req = input.request;
+    
+    console.log("LISTRESULT", req);
   
                 /*
               switch (this.period) {
@@ -30,7 +32,7 @@ function ListResult(input, cb) {
 
     Rehearsal.findAll({
     where: [
-        { contestid: 1 },
+        { contestid: req.contestid },
         sequelize.literal('extract(YEAR FROM "Rehearsal"."createdAt") = 2020')
     ]
     //    createdAt: {

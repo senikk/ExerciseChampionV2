@@ -1,5 +1,8 @@
 <addrehearsal>
   <form>
+    <div class="input-field">
+      <selectcontest ref="contest"></selectcontest>
+    </div>
   	<div class="input-field">
   	  <textarea ref="description" class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
     </div>
@@ -23,18 +26,14 @@
       this.refs.minutes.value = "1";
     }
 
-    logout(e) {
-      this.auth.logout();
-    }
-
     add(e) {
-      var request = new this.R.AddRehearsalRequest();
-      request.setContestid(1);
+      let request = new this.R.AddRehearsalRequest();
+      request.setContestid(this.refs.contest.refs.contest.value);
       request.setMinutes(parseInt(this.refs.minutes.value));
       request.setDescription(this.refs.description.value);
 
       this.backend.addRehearsal(request, null, (error, result) => {
-        if (error) console.log("ERROR", error);
+        if (error) { M.toast({html: error.message}); return; }
 
         self.event.trigger("rehearsal:added", result.toObject());
       });

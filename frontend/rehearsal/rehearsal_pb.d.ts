@@ -29,6 +29,9 @@ export class LoginResponse extends jspb.Message {
   getJwt(): string;
   setJwt(value: string): void;
 
+  getName(): string;
+  setName(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): LoginResponse.AsObject;
   static toObject(includeInstance: boolean, msg: LoginResponse): LoginResponse.AsObject;
@@ -41,6 +44,33 @@ export namespace LoginResponse {
   export type AsObject = {
     userid: number,
     jwt: string,
+    name: string,
+  }
+}
+
+export class SignupRequest extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
+
+  getEmail(): string;
+  setEmail(value: string): void;
+
+  getPassword(): string;
+  setPassword(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SignupRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: SignupRequest): SignupRequest.AsObject;
+  static serializeBinaryToWriter(message: SignupRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SignupRequest;
+  static deserializeBinaryFromReader(message: SignupRequest, reader: jspb.BinaryReader): SignupRequest;
+}
+
+export namespace SignupRequest {
+  export type AsObject = {
+    name: string,
+    email: string,
+    password: string,
   }
 }
 
@@ -217,6 +247,9 @@ export class AddContestRequest extends jspb.Message {
   getRules(): string;
   setRules(value: string): void;
 
+  getPublic(): boolean;
+  setPublic(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): AddContestRequest.AsObject;
   static toObject(includeInstance: boolean, msg: AddContestRequest): AddContestRequest.AsObject;
@@ -229,6 +262,7 @@ export namespace AddContestRequest {
   export type AsObject = {
     name: string,
     rules: string,
+    pb_public: boolean,
   }
 }
 
@@ -267,6 +301,12 @@ export class ContestEntry extends jspb.Message {
   hasUser(): boolean;
   clearUser(): void;
 
+  getJoined(): boolean;
+  setJoined(value: boolean): void;
+
+  getPublic(): boolean;
+  setPublic(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ContestEntry.AsObject;
   static toObject(includeInstance: boolean, msg: ContestEntry): ContestEntry.AsObject;
@@ -281,6 +321,8 @@ export namespace ContestEntry {
     name: string,
     rules: string,
     user?: User.AsObject,
+    joined: boolean,
+    pb_public: boolean,
   }
 }
 
@@ -290,6 +332,12 @@ export class ListContestRequest extends jspb.Message {
 
   getLimit(): number;
   setLimit(value: number): void;
+
+  getPublic(): boolean;
+  setPublic(value: boolean): void;
+
+  getJoined(): boolean;
+  setJoined(value: boolean): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ListContestRequest.AsObject;
@@ -303,6 +351,8 @@ export namespace ListContestRequest {
   export type AsObject = {
     filter: string,
     limit: number,
+    pb_public: boolean,
+    joined: boolean,
   }
 }
 
@@ -490,6 +540,62 @@ export namespace ResultResponse {
     thisyear: number,
     thismonth: number,
     thisweek: number,
+  }
+}
+
+export class ProfileRequest extends jspb.Message {
+  getUserid(): number;
+  setUserid(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ProfileRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ProfileRequest): ProfileRequest.AsObject;
+  static serializeBinaryToWriter(message: ProfileRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ProfileRequest;
+  static deserializeBinaryFromReader(message: ProfileRequest, reader: jspb.BinaryReader): ProfileRequest;
+}
+
+export namespace ProfileRequest {
+  export type AsObject = {
+    userid: number,
+  }
+}
+
+export class ProfileResponse extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
+
+  getJoined(): string;
+  setJoined(value: string): void;
+
+  getPositionthisweek(): number;
+  setPositionthisweek(value: number): void;
+
+  getMinutesthisweek(): number;
+  setMinutesthisweek(value: number): void;
+
+  getMinutesthismonth(): number;
+  setMinutesthismonth(value: number): void;
+
+  getMinutesthisyear(): number;
+  setMinutesthisyear(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ProfileResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ProfileResponse): ProfileResponse.AsObject;
+  static serializeBinaryToWriter(message: ProfileResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ProfileResponse;
+  static deserializeBinaryFromReader(message: ProfileResponse, reader: jspb.BinaryReader): ProfileResponse;
+}
+
+export namespace ProfileResponse {
+  export type AsObject = {
+    name: string,
+    joined: string,
+    positionthisweek: number,
+    minutesthisweek: number,
+    minutesthismonth: number,
+    minutesthisyear: number,
   }
 }
 

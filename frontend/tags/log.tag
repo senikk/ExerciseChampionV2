@@ -24,6 +24,8 @@
       var request = new this.R.ListRehearsalRequest();
       request.setUserid(1);
       this.backend.listRehearsal(request, null, (error, result) => {
+        if (error) { M.toast({html: error.message}); return; }
+
         this.logs = result.toObject().rehearsalsList;
 
         console.log("LOGS", this.logs);

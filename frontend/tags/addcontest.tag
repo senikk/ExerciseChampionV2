@@ -13,6 +13,14 @@
           <label for="rules">Contest rules</label>
         </div>
       </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <label>
+            <input ref="public" type="checkbox" class="filled-in" />
+            <span>Public</span>
+          </label>
+        </div>
+      </div>
       <button onclick={ add } class="btn waves-effect waves-light">
         <i class="material-icons right">send</i> Add
       </button>
@@ -23,12 +31,13 @@
     var self = this;
 
     add(e) {
-      var request = new this.R.AddContestRequest();
+      let request = new this.R.AddContestRequest();
       request.setName(this.refs.name.value);
       request.setRules(this.refs.rules.value);
+      request.setPublic(this.refs.public.checked);
 
       this.backend.addContest(request, null, (error, result) => {
-        if (error) console.log("ERROR", error);
+        if (error) { M.toast({html: error.message}); return; }
 
         self.event.trigger("contest:added", result.toObject());
       });

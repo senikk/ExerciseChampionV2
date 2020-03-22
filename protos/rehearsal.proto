@@ -10,11 +10,13 @@ message LoginRequest {
 message LoginResponse {
     int32 userid = 1;
     string jwt = 2;
+    string name = 3;
 }
 
 message SignupRequest {
-    string email = 1;
-    string password = 2;
+    string name = 1;
+    string email = 2;
+    string password = 3;
 }
 
 // Rehearsal
@@ -58,6 +60,7 @@ message RemoveRehearsalResponse {}
 message AddContestRequest {
     string name = 1;
     string rules = 2;
+    bool public = 3;
 }
 
 message AddContestResponse {
@@ -69,11 +72,15 @@ message ContestEntry {
     string name = 2;
     string rules = 3;
     User user = 4;
+    bool joined = 5;
+    bool public = 6;
 }
 
 message ListContestRequest {
     string filter = 1;
     int32 limit = 2;
+    bool public = 3;
+    bool joined = 4;
 }
 
 message ListContestReponse {
@@ -123,6 +130,21 @@ message ResultResponse {
     int32 thisweek = 3;
 }
 
+// Profile
+
+message ProfileRequest {
+    int32 userid = 1;
+}
+
+message ProfileResponse {
+    string name = 1;
+    string joined = 2;
+    int32 positionthisweek = 3;
+    int32 minutesthisweek = 4;
+    int32 minutesthismonth = 5;
+    int32 minutesthisyear = 6;
+}
+
 service Rehearsal {
     // Login
     rpc Login(LoginRequest) returns (LoginResponse) {};
@@ -142,4 +164,7 @@ service Rehearsal {
     // Results
     rpc ListResult(ListResultRequest) returns (ListResultReponse) {};
     rpc YourResult(ResultRequest) returns (ResultResponse) {};
+
+    // Profile
+    rpc GetProfile(ProfileRequest) returns (ProfileResponse) {};
 }

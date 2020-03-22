@@ -13,6 +13,7 @@ export default {
       namedExports: {
         'node_modules/rehearsal/rehearsal_grpc_web_pb.js': ['RehearsalClient'],
         'node_modules/rehearsal/rehearsal_pb.js': [  
+          'LoginRequest',
           'AddContestRequest',
           'AddContestResponse',
           'AddRehearsalRequest',
@@ -29,7 +30,10 @@ export default {
           'RemoveRehearsalResponse',
           'ResultRequest',
           'ResultResponse',
-          'SearchContestRequest'],
+          'SearchContestRequest',
+          'SignupRequest',
+          'ProfileRequest',
+          'ProfileResponse'],
         'grpc-web/index.js': ['AbstractClientBase', 'GrpcWebClientBase']
       }
     }),

@@ -3,10 +3,8 @@
 
 	<div class="row">
 		<div class="input-field col s6">
-		    <select>
-		      <option value="1" data-icon="images/tenorhorn.jpg" class="circle">Master class</option>
-		      <option value="2" data-icon="images/tenorhorn.jpg" class="circle">Cofee & tea band</option>
-		      <option value="3" selected data-icon="images/tenorhorn.jpg" class="circle">School bands</option>
+		    <select ref="contest">
+		      <option each={ contests } value={ id }>{ name }</option>
 		    </select>
 		    <label>Contest</label>
 		</div>
@@ -54,28 +52,54 @@
 			this.loadResults();
 		}
 
+		changeContest(e) {
+			console.log("CHANGE CONTEST", e.target.value);
+			this.loadResults();
+		}
+
 		loadResults() {
 			var request = new this.R.ListResultRequest();
+			request.setContestid(this.refs.contest.value);
 			request.setPeriod(this.period);
 
 			this.backend.listResult(request, null, (error, result) => {
-				console.log("RES", result.toObject().resultsList);
+				if (error) { M.toast({html: error.message}); return; }
+
 				this.results = result.toObject().resultsList;
 				this.update();
 			});
 		}
 
+		loadContests() {
+			var request = new this.R.ListContestRequest();
+			request.setPublic(true);
+			request.setJoined(true);
+			request.setLimit(100);
+
+			this.backend.listContest(request, this.auth.jwt(), (error, result) => {
+		        if (error) { M.toast({html: error.message}); return; }
+
+				this.contests = result.toObject().contestsList;
+				this.update();
+				$('select').formSelect();
+			});
+		}
+
 		this.on('mount', function() {
 			var self = this;
-			this.contest = 'cj7xsdirerrmz0129ojwu7dtu';
+
 			this.loadResults();
+			this.loadContests();
 
 			$(document).ready(function() {
 				$(self.refs.period).on('change', (e) => {
 					self.changePeriod(e);
 				});
+				$(self.refs.contest).on('change', (e) => {
+					self.changeContest(e);
+				});
 
-				$('select').material_select();
+				$('select').formSelect();
 			});
 		});
 

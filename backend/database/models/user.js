@@ -7,7 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     lastseen: DataTypes.DATE
   }, {});
   User.associate = function(models) {
-    // associations can be defined here
+    User.belongsToMany(models.Contest, {
+      through: models.UserContest,
+      foreignKey: 'userid',
+      as: 'joinedContests'
+    });
   };
   return User;
 };

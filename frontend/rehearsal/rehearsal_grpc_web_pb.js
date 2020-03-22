@@ -149,6 +149,86 @@ proto.rehearsal.RehearsalPromiseClient.prototype.login =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.rehearsal.SignupRequest,
+ *   !proto.rehearsal.LoginResponse>}
+ */
+const methodDescriptor_Rehearsal_Signup = new grpc.web.MethodDescriptor(
+  '/rehearsal.Rehearsal/Signup',
+  grpc.web.MethodType.UNARY,
+  proto.rehearsal.SignupRequest,
+  proto.rehearsal.LoginResponse,
+  /**
+   * @param {!proto.rehearsal.SignupRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.LoginResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.rehearsal.SignupRequest,
+ *   !proto.rehearsal.LoginResponse>}
+ */
+const methodInfo_Rehearsal_Signup = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.rehearsal.LoginResponse,
+  /**
+   * @param {!proto.rehearsal.SignupRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.LoginResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.rehearsal.SignupRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.rehearsal.LoginResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.LoginResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.rehearsal.RehearsalClient.prototype.signup =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/rehearsal.Rehearsal/Signup',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_Signup,
+      callback);
+};
+
+
+/**
+ * @param {!proto.rehearsal.SignupRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.rehearsal.LoginResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.rehearsal.RehearsalPromiseClient.prototype.signup =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/rehearsal.Rehearsal/Signup',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_Signup);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.rehearsal.AddRehearsalRequest,
  *   !proto.rehearsal.RehearsalEntry>}
  */
@@ -863,6 +943,86 @@ proto.rehearsal.RehearsalPromiseClient.prototype.yourResult =
       request,
       metadata || {},
       methodDescriptor_Rehearsal_YourResult);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.rehearsal.ProfileRequest,
+ *   !proto.rehearsal.ProfileResponse>}
+ */
+const methodDescriptor_Rehearsal_GetProfile = new grpc.web.MethodDescriptor(
+  '/rehearsal.Rehearsal/GetProfile',
+  grpc.web.MethodType.UNARY,
+  proto.rehearsal.ProfileRequest,
+  proto.rehearsal.ProfileResponse,
+  /**
+   * @param {!proto.rehearsal.ProfileRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.ProfileResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.rehearsal.ProfileRequest,
+ *   !proto.rehearsal.ProfileResponse>}
+ */
+const methodInfo_Rehearsal_GetProfile = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.rehearsal.ProfileResponse,
+  /**
+   * @param {!proto.rehearsal.ProfileRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.ProfileResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.rehearsal.ProfileRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.rehearsal.ProfileResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.ProfileResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.rehearsal.RehearsalClient.prototype.getProfile =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/rehearsal.Rehearsal/GetProfile',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_GetProfile,
+      callback);
+};
+
+
+/**
+ * @param {!proto.rehearsal.ProfileRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.rehearsal.ProfileResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.rehearsal.RehearsalPromiseClient.prototype.getProfile =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/rehearsal.Rehearsal/GetProfile',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_GetProfile);
 };
 
 

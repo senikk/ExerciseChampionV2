@@ -3,14 +3,15 @@
 
 	<ul class="collection with-header">
     	<li class="collection-header">
-    		<h4>Hege Alette Eilertsen</h4>
-    		<i>Joined 6.6.2015</i>
+    		<h4>{ profile.name } {this.opts.userid}</h4>
+    		<i>Joined { hDate(profile.joined) }</i>
     	</li>
-    	<li class="collection-item">Year 2016 <span class="right">3000 minutes</span></li>
-    	<li class="collection-item">Week 2 <span class="right">1000 minutes</span></li>
-    	<li class="collection-item">Week 1 <span class="right">2000 minutes</span></li>
+    	<li class="collection-item">This year <span class="right">{ profile.minutesthisyear } minutes</span></li>
+    	<li class="collection-item">This month <span class="right">{ profile.minutesthismonth } minutes</span></li>
+    	<li class="collection-item">This week <span class="right">{ profile.minutesthisweek } minutes</span></li>
  	</ul>
 
+	<!--
  	<ul class="collection with-header">
  		<li class="collection-header green darken-1">Contests</li>
     	<li class="collection-item">
@@ -25,7 +26,27 @@
 			<div class="chip">Bb Cornet</div>
     	</li>
  	</ul>
+	-->
 
 	<script>
- </script>
+		this.profile = {};
+
+		this.on("route", userid => {
+			console.log("getting userid", userid);
+			var request = new this.R.ProfileRequest();
+      		request.setUserid(userid);
+
+		    this.backend.getProfile(request, this.auth.jwt(), (error, result) => {
+        		if (error) { M.toast({html: error.message}); return; }
+
+        		console.log(result.toObject());
+				this.profile = result.toObject();
+				this.update();
+      		});
+		});
+
+	    this.on("mount", function () {			
+		    
+		});
+ 	</script>
 </profile>

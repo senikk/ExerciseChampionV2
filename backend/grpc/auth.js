@@ -1,5 +1,6 @@
 'use strict';
 const jwt = require('jsonwebtoken');
+const moment = require('moment')
 
 function IsAuthorized(input, cb) {
     return new Promise((resolve, reject) => {
@@ -9,7 +10,8 @@ function IsAuthorized(input, cb) {
                 cb({message: 'Unauthorized'})
                 reject()
             } else {
-                resolve()
+                let user = jwt.decode(input.metadata.get("jwt")[0])
+                resolve(user)
             }    
         }
         catch
@@ -20,6 +22,21 @@ function IsAuthorized(input, cb) {
     });
 }
 
+function GetJwtMeta(user) {
+    let expires = moment().add({days: 7}).unix();
+    let token = jwt.sign({
+        exp: expires,
+        userid: user.id
+    }, process.env.JWTSECRET);
+
+    return {
+        name: user.name,
+        userid: user.id,
+        jwt: token
+    }
+}
+
 module.exports = {
-    IsAuthorized
+    IsAuthorized,
+    GetJwtMeta
 }

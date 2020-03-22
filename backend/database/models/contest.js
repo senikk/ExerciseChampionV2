@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    rules: DataTypes.STRING
+    rules: DataTypes.STRING,
+    public: DataTypes.BOOLEAN
   }, {});
   Contest.associate = function(models) {
     Contest.belongsTo(models.User, {
@@ -18,8 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     });
     Contest.hasMany(models.Rehearsal, {
       foreignKey: 'contestid',
-      as: 'rehearsals'
+      as: 'rehearsals'  
     });
+    Contest.belongsToMany(models.User, {
+      through: models.UserContest,
+      foreignKey: 'contestid',
+      as: 'joinedUsers'
+    })
   };
   return Contest;
 };

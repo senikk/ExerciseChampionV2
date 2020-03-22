@@ -30,7 +30,7 @@ function AddRehearsal(input, cb) {
 }
 
 function ListRehearsal(input, cb) {
-    var req = input.request;
+    let req = input.request;
 
     Rehearsal.findAll({
         where: { contestid: 1 },

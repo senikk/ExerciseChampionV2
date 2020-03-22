@@ -6,10 +6,12 @@ const moment = require('moment')
 const sequelize = require('sequelize')
 const {Op} = require('sequelize')
 const {db, Contest, Rehearsal, User} = require('./database/models/index')
+const {Signup} = require('./grpc/signup')
 const {Login} = require('./grpc/login')
 const {AddRehearsal, ListRehearsal} = require('./grpc/rehearsal')
-const {AddContest, ListContest} = require('./grpc/contest')
+const {AddContest, ListContest, JoinContest} = require('./grpc/contest')
 const {ListResult} = require('./grpc/result')
+const {GetProfile} = require('./grpc/profile')
 
 //const contest = Contest.create({
 //  name: 'NM Brass 2021'
@@ -61,12 +63,15 @@ const packageDefinition = protoLoader.loadSync(['rehearsal.proto'], {
 const contestProto = grpc.loadPackageDefinition(packageDefinition).rehearsal
 const server = new grpc.Server()
 server.addService(contestProto.Rehearsal.service, {
+  Signup: Signup,
   Login: Login,
   AddContest: AddContest,
   ListContest: ListContest,
   AddRehearsal: AddRehearsal,
   ListRehearsal: ListRehearsal,
-  ListResult: ListResult
+  ListResult: ListResult,
+  JoinContest: JoinContest,
+  GetProfile: GetProfile
 });
 server.bind('localhost:9090', grpc.ServerCredentials.createInsecure())
 server.start();

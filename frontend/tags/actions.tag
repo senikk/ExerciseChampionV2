@@ -2,8 +2,7 @@
 	 <div class="row">
       	<div class="col s4">
 			<blockquote>
-				Exercise 
-    			{ opts.title }<br>2th 3000mins
+				Exercise { opts.title }<br>{ this.auth.user.name } you are <i>2th this week with 3000mins</i>
     		</blockquote>
       	</div>
       	<div class="col s8 right-align" style="padding-top: 10px;">

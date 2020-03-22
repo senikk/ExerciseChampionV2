@@ -5,17 +5,23 @@ import * as R from 'rehearsal/rehearsal_pb';
 var Auth = function () {
   var self = riot.observable(this);
 
-  self.user = localStorage.getItem('user');
+  self.user = JSON.parse(localStorage.getItem('user'));
+
+  self.jwt = () => {
+    return self.user ? { jwt: self.user.jwt } : null;
+  }
 
   self.login = (user) => {
-    localStorage.setItem('user', user);
+    localStorage.setItem('user', JSON.stringify(user));
     self.user = user;
+
     self.trigger('login', user);
   }
 
   self.logout = () => {
     localStorage.removeItem('user');
     self.user = undefined;
+    self.meta = undefined;
     self.trigger('logout');
   }
 }

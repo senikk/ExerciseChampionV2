@@ -21,8 +21,6 @@
  	</div>
 
  	<script>
- 		//this.search.value = "2016";
-
 		this.on("mount", function () {
 		});
  	</script>

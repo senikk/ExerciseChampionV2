@@ -14,11 +14,14 @@ import {
   ListResultRequest,
   LoginRequest,
   LoginResponse,
+  ProfileRequest,
+  ProfileResponse,
   RehearsalEntry,
   RemoveRehearsalRequest,
   RemoveRehearsalResponse,
   ResultRequest,
-  ResultResponse} from './rehearsal_pb';
+  ResultResponse,
+  SignupRequest} from './rehearsal_pb';
 
 export class RehearsalClient {
   constructor (hostname: string,
@@ -27,6 +30,13 @@ export class RehearsalClient {
 
   login(
     request: LoginRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: LoginResponse) => void
+  ): grpcWeb.ClientReadableStream<LoginResponse>;
+
+  signup(
+    request: SignupRequest,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
                response: LoginResponse) => void
@@ -95,6 +105,13 @@ export class RehearsalClient {
                response: ResultResponse) => void
   ): grpcWeb.ClientReadableStream<ResultResponse>;
 
+  getProfile(
+    request: ProfileRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: ProfileResponse) => void
+  ): grpcWeb.ClientReadableStream<ProfileResponse>;
+
 }
 
 export class RehearsalPromiseClient {
@@ -104,6 +121,11 @@ export class RehearsalPromiseClient {
 
   login(
     request: LoginRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<LoginResponse>;
+
+  signup(
+    request: SignupRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<LoginResponse>;
 
@@ -151,6 +173,11 @@ export class RehearsalPromiseClient {
     request: ResultRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<ResultResponse>;
+
+  getProfile(
+    request: ProfileRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<ProfileResponse>;
 
 }
 

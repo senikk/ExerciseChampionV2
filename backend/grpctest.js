@@ -39,6 +39,7 @@ backend.AddRehearsal({
 })
 */
 
+/*
 backend.Login({
   email: 'terje@senikk.com',
   password: '1234'
@@ -54,6 +55,26 @@ backend.Login({
     console.log("D", data)
   })
 });
+*/
+
+/*
+backend.Login({
+  email: 'terje@senikk.com',
+  password: '1234'
+}, (error, result) => {
+  console.log(result);
+
+  var meta = new grpc.Metadata()
+  meta.add('jwt', result.jwt)
+
+  backend.JoinContest({
+    contestid: 1
+  }, meta, (error, data) => {
+    console.log("E", error)
+    console.log("D", data)
+  })
+});
+*/
 
 /*
 backend.ListRehearsal({
