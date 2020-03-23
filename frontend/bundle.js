@@ -6965,7 +6965,7 @@
       return moment(date).format('DD.MM.YYYY HH:mm');
     },
     auth: new Auth(),
-    backend: new rehearsal_grpc_web_pb_1("http://localhost:8080"),
+    backend: new rehearsal_grpc_web_pb_1("http://10.0.0.94:8080"),
     R: R
   };
 

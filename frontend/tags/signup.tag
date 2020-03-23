@@ -7,9 +7,16 @@
 	 <button onclick={ signup }  class="btn waves-effect waves-light">
 		<i class="material-icons right">send</i> Register
 	 </button>
+   <button onclick={ login } class="btn waves-effect waves-light">
+    <i class="material-icons right">login</i> Log in
+   </button>
   </form>
 
   <script>
+    login() {
+      route('login')
+    }
+
     signup() {
       if (!this.refs.password.value || !this.refs.password2.value || 
           this.refs.password.value != this.refs.password2.value) {

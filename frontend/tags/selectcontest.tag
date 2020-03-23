@@ -9,6 +9,8 @@
     </div>
 
     <script>
+		var self = this;
+
 		changeContest(e) {
 			console.log("CHANGE CONTEST INSIDE", e.target.value);
 			this.contest = e.target.value;

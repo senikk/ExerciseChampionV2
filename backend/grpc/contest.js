@@ -70,8 +70,12 @@ function ListContest(input, cb) {
                 cb(null, {
                     contests: data
                 })
-            })
-        });
+            }).catch(() => {
+                cb({message: 'Did not find matched contests'})
+            });
+        }).catch(() => {
+            cb({message: 'Missing user'})
+        })
     })
 }
 

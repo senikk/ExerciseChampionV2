@@ -32,7 +32,7 @@ var Helper = {
     return moment(date).format('DD.MM.YYYY HH:mm');
   },
   auth: new Auth(),
-  backend: new RehearsalClient("http://localhost:8080"),
+  backend: new RehearsalClient("http://10.0.0.94:8080"),
   R: R
 };
 

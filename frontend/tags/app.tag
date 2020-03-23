@@ -1,13 +1,13 @@
 <app>
 	<router>
-		<route path="/signup"><signup></signup></route>
-		<route path="/login"><login></login></route>
-    	<route path="/log"><log></log></route>
-		<route path="/search"><search></search></route>
-		<route path="/contest"><contest></contest></route>
-		<route path="/result"><result></result></route>
-		<route path="/metronome"><metronome></metronome></route>
-		<route path="/profile/*"><profile></profile></route>
+		<route path="signup"><signup></signup></route>
+		<route path="login"><login></login></route>
+    	<route path="log"><log></log></route>
+		<route path="search"><search></search></route>
+		<route path="contest"><contest></contest></route>
+		<route path="result"><result></result></route>
+		<route path="metronome"><metronome></metronome></route>
+		<route path="profile/*"><profile></profile></route>
   	</router>
 
 	<script>	

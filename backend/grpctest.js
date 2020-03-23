@@ -85,3 +85,20 @@ backend.ListRehearsal({
   console.log(data);
 })
 */
+
+backend.Login({
+  email: 'terje@senikk.com',
+  password: '1234'
+}, (error, result) => {
+  console.log(result);
+
+  var meta = new grpc.Metadata()
+  meta.add('jwt', result.jwt)
+
+  backend.GetProfile({
+    userid: result.userid
+  }, meta, (error, data) => {
+    console.log("E", error)
+    console.log("D", data)
+  })
+});

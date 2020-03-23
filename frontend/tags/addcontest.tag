@@ -36,7 +36,7 @@
       request.setRules(this.refs.rules.value);
       request.setPublic(this.refs.public.checked);
 
-      this.backend.addContest(request, null, (error, result) => {
+      this.backend.addContest(request, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
         self.event.trigger("contest:added", result.toObject());

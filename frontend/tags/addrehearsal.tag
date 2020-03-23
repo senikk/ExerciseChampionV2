@@ -32,7 +32,7 @@
       request.setMinutes(parseInt(this.refs.minutes.value));
       request.setDescription(this.refs.description.value);
 
-      this.backend.addRehearsal(request, null, (error, result) => {
+      this.backend.addRehearsal(request, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
         self.event.trigger("rehearsal:added", result.toObject());
