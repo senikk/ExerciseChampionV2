@@ -24,12 +24,12 @@
           return;
       }
 
-      var request = new this.R.SignupRequest();
-      request.setName(this.refs.name.value);
-      request.setEmail(this.refs.email.value);
-      request.setPassword(this.refs.password.value);
+      var r = new this.R.SignupRequest();
+      r.setName(this.refs.name.value);
+      r.setEmail(this.refs.email.value);
+      r.setPassword(this.refs.password.value);
 
-      this.backend.signup(request, null, (error, result) => {
+      this.backend.signup(r, null, (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
         this.auth.login(result.toObject());

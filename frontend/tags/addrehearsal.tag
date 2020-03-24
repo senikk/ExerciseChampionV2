@@ -1,7 +1,7 @@
 <addrehearsal>
   <form>
     <div class="input-field">
-      <selectcontest ref="contest"></selectcontest>
+      <selectcontest ref="contest" label="Contest" chosen={ contest } onchange={ changeContest }></selectcontest>
     </div>
   	<div class="input-field">
   	  <textarea ref="description" class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
@@ -20,6 +20,12 @@
   <script>
     var self = this;
     this.timer = { icon: "play_circle_outline", text: "START" };
+    this.contest = localStorage.getItem("addrehearsal-contestid") || 1;
+
+    changeContest(contest) {
+      this.contest = contest;
+      localStorage.setItem("addrehearsal-contestid", this.contest);
+    }
 
     toggletimer(e) {
       this.timer = { icon: "pause_circle_outline", text: "PAUSE", color: "orange" };
@@ -27,12 +33,12 @@
     }
 
     add(e) {
-      let request = new this.R.AddRehearsalRequest();
-      request.setContestid(this.refs.contest.refs.contest.value);
-      request.setMinutes(parseInt(this.refs.minutes.value));
-      request.setDescription(this.refs.description.value);
+      let r = new this.R.AddRehearsalRequest();
+      r.setContestid(this.refs.contest.refs.contestId.value);
+      r.setMinutes(parseInt(this.refs.minutes.value));
+      r.setDescription(this.refs.description.value);
 
-      this.backend.addRehearsal(request, this.auth.jwt(), (error, result) => {
+      this.backend.addRehearsal(r, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
         self.event.trigger("rehearsal:added", result.toObject());

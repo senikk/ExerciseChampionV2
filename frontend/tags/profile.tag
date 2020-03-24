@@ -6,9 +6,9 @@
     		<h4>{ profile.name } {this.opts.userid}</h4>
     		<i>Joined { hDate(profile.joined) }</i>
     	</li>
-    	<li class="collection-item">This year <span class="right">{ profile.minutesthisyear } minutes</span></li>
+    	<li class="collection-item">This week <span class="right">({ profile.positionthisweek }th) { profile.minutesthisweek } minutes</span></li>
     	<li class="collection-item">This month <span class="right">{ profile.minutesthismonth } minutes</span></li>
-    	<li class="collection-item">This week <span class="right">{ profile.minutesthisweek } minutes</span></li>
+    	<li class="collection-item">This year <span class="right">{ profile.minutesthisyear } minutes</span></li>
  	</ul>
 
 	<!--
@@ -32,14 +32,12 @@
 		this.profile = {};
 
 		this.on("route", userid => {
-			console.log("getting userid", userid);
-			var request = new this.R.ProfileRequest();
-      		request.setUserid(userid);
+			var r = new this.R.ProfileRequest();
+      		r.setUserid(userid);
 
-		    this.backend.getProfile(request, this.auth.jwt(), (error, result) => {
+		    this.backend.getProfile(r, this.auth.jwt(), (error, result) => {
         		if (error) { M.toast({html: error.message}); return; }
 
-        		console.log(result.toObject());
 				this.profile = result.toObject();
 				this.update();
       		});

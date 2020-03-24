@@ -2,23 +2,12 @@
 	<actions title="result"></actions>
 
 	<div class="row">
-		<div class="input-field col s6">
-		    <select ref="contest">
-		      <option each={ contests } value={ id }>{ name }</option>
-		    </select>
-		    <label>Contest</label>
+		<div class="col s6">
+			<selectcontest ref="contest" chosen={ contestId } change={ changeContestId }></selectcontest>
 		</div>
 
-	  	<div class="input-field col s6">
-		    <select ref="period">
-		      <option value={this.R.ListResultRequest.Period.THISYEAR} selected={this.period == this.R.ListResultRequest.Period.THISYEAR}>this year</option>
-		      <option value={this.R.ListResultRequest.Period.THISMONTH} selected={this.period == this.R.ListResultRequest.Period.THISMONTH}>this month</option>
-		      <option value={this.R.ListResultRequest.Period.THISWEEK} selected={this.period == this.R.ListResultRequest.Period.THISWEEK}>this week</option>
-		      <option value={this.R.ListResultRequest.Period.LASTWEEK} selected={this.period == this.R.ListResultRequest.Period.LASTWEEK}>previous week</option>
-		      <option value={this.R.ListResultRequest.Period.LASTMONTH} selected={this.period == this.R.ListResultRequest.Period.LASTMONTH}>last month</option>
-		      <option value={this.R.ListResultRequest.Period.LASTYEAR} selected={this.period == this.R.ListResultRequest.Period.LASTYEAR}>last year</option>
-		    </select>
-		    <label>Period of time</label>
+	  	<div class="col s6">
+			<selectperiod ref="period" chosen={ period } change={ changePeriod }></selectperiod>
 	  	</div>
   	</div>
   </div>
@@ -27,7 +16,7 @@
 	<table class="striped">
 		<thead>
 		  <tr>
-		      <th data-field="position">#</th>
+		      <th data-field="position">Pos</th>
 		      <th data-field="user.name">Name</th>
 		      <th data-field="minutes" class="right-align">Minutes</th>
 		  </tr>
@@ -43,26 +32,27 @@
 	</table>
 
 	<script>
-		var period = this.R.ListResultRequest.Period.THISYEAR;
+		this.period = localStorage.getItem("result-period") || this.R.ListResultRequest.Period.THISYEAR;
+		this.contestId = localStorage.getItem("result-contestid") || 1;
 
-		changePeriod(e) {
-			console.log("PERIOD CHANGED", e.target.value);
-			this.period = e.target.value;
-			// set this.period
+		changePeriod(period) {
+			this.period = period;
+			localStorage.setItem("result-period", this.period);
 			this.loadResults();
 		}
 
-		changeContest(e) {
-			console.log("CHANGE CONTEST", e.target.value);
+		changeContestId(contestId) {
+			this.contestId = contestId;
+			localStorage.setItem("result-contestid", contestId);
 			this.loadResults();
 		}
 
 		loadResults() {
-			var request = new this.R.ListResultRequest();
-			request.setContestid(this.refs.contest.value);
-			request.setPeriod(this.period);
+			var r = new this.R.ListResultRequest();
+			r.setContestid(this.contestId);
+			r.setPeriod(this.period);
 
-			this.backend.listResult(request, null, (error, result) => {
+			this.backend.listResult(r, this.auth.jwt(), (error, result) => {
 				if (error) { M.toast({html: error.message}); return; }
 
 				this.results = result.toObject().resultsList;
@@ -70,33 +60,14 @@
 			});
 		}
 
-		loadContests() {
-			var request = new this.R.ListContestRequest();
-			request.setPublic(true);
-			request.setJoined(true);
-			request.setLimit(100);
-
-			this.backend.listContest(request, this.auth.jwt(), (error, result) => {
-		        if (error) { M.toast({html: error.message}); return; }
-
-				this.contests = result.toObject().contestsList;
-				this.update();
-				$('select').formSelect();
-			});
-		}
-
 		this.on('mount', function() {
 			var self = this;
 
 			this.loadResults();
-			this.loadContests();
 
 			$(document).ready(function() {
 				$(self.refs.period).on('change', (e) => {
 					self.changePeriod(e);
-				});
-				$(self.refs.contest).on('change', (e) => {
-					self.changeContest(e);
 				});
 
 				$('select').formSelect();

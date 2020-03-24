@@ -1,28 +1,27 @@
 <selectcontest>
-	<div class="row">
-		<div class="input-field col s6">
-		    <select ref="contest">
-		      <option each={ contests } value={ id }>{ name }</option>
-		    </select>
-		    <label>Contest</label>
-		</div>
-    </div>
+	<div class="input-field">
+		<select ref="contest">
+			<option each={ contests } value={ id } selected="{ id == opts.chosen ? 'selected' : '' }">{ name }</option>
+		</select>
+		<label if={opts.label}>{ opts.label }</label>
+	</div>
 
     <script>
 		var self = this;
-
+		
 		changeContest(e) {
-			console.log("CHANGE CONTEST INSIDE", e.target.value);
-			this.contest = e.target.value;
+			if (this.opts.change) {
+				this.opts.change(e.target.value);
+			}
 		}
 
     	loadContests() {
-			var request = new this.R.ListContestRequest();
-            request.setPublic(true);
-            request.setJoined(true);
-            request.setLimit(100);
+			var r = new this.R.ListContestRequest();
+            r.setPublic(true);
+            r.setJoined(true);
+            r.setLimit(100);
 
-			this.backend.listContest(request, this.auth.jwt(), (error, result) => {
+			this.backend.listContest(r, this.auth.jwt(), (error, result) => {
 				if (error) { M.toast({html: error.message}); return; }
 
 				this.contests = result.toObject().contestsList;

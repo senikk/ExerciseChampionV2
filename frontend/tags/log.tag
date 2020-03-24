@@ -22,9 +22,10 @@
     });
 
     this.on("mount", function () {
-      var request = new this.R.ListRehearsalRequest();
-      request.setUserid(this.auth.user.id);
-      this.backend.listRehearsal(request, null, (error, result) => {
+      var r = new this.R.ListRehearsalRequest();
+      r.setUserid(this.auth.user.id);
+      
+      this.backend.listRehearsal(r, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
         this.logs = result.toObject().rehearsalsList;

@@ -31,12 +31,12 @@
     var self = this;
 
     add(e) {
-      let request = new this.R.AddContestRequest();
-      request.setName(this.refs.name.value);
-      request.setRules(this.refs.rules.value);
-      request.setPublic(this.refs.public.checked);
+      let r = new this.R.AddContestRequest();
+      r.setName(this.refs.name.value);
+      r.setRules(this.refs.rules.value);
+      r.setPublic(this.refs.public.checked);
 
-      this.backend.addContest(request, this.auth.jwt(), (error, result) => {
+      this.backend.addContest(r, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
         self.event.trigger("contest:added", result.toObject());

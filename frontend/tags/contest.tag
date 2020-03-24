@@ -13,14 +13,14 @@
     </li>
   </ul>
 
-  <!-- Modal Structure -->
-  <div ref="addContestModal" id="addContestModal" class="modal">
+  <!-- Add contest modal -->
+  <div ref="addContestModal" class="modal">
     <div class="modal-content">
       <h4>Join contest</h4>
       <p>{contest.rules}</p>
     </div>
     <div class="modal-footer">
-      <a href="#!" onclick={ joinContest } class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      <a href="#!" onclick={ joinContest } class="modal-close waves-effect waves-green btn-flat">Ok</a>
       <a href="#!" class="modal-close waves-effect btn-flat">Cancel</a>
     </div>
   </div>
@@ -30,21 +30,20 @@
     this.contest = {};
 
     joinContest() {
-      var request = new this.R.JoinContestRequest();
-      request.setContestid(this.contest.id);
+      var r = new this.R.JoinContestRequest();
+      r.setContestid(this.contest.id);
 
-      this.backend.joinContest(request, this.auth.jwt(), (error, result) => {
-        if (error) console.log(error);
+      this.backend.joinContest(r, this.auth.jwt(), (error, result) => {
+        if (error) { M.toast({html: error.message}); return; }
 
-        console.log("ADDED CONTEST", result);
+        M.toast({html: 'Joined contest'});
       });
     }
 
     joinModal(e) {
       this.contest = this.contests.find(c => c.id == e.target.dataset.message)
 
-      var element = document.querySelector('#addContestModal');
-      var instance = M.Modal.getInstance(element);
+      var instance = M.Modal.getInstance(this.refs.addContestModal);
       instance.open();
     }
 
@@ -57,11 +56,11 @@
       var elems = document.querySelectorAll('.modal');
       var instances = M.Modal.init(elems);
 
-      var request = new this.R.ListContestRequest();
-      request.setFilter("");
-      request.setJoined(true);
+      var r = new this.R.ListContestRequest();
+      r.setFilter("");
+      r.setJoined(true);
 
-      this.backend.listContest(request, this.auth.jwt(), (error, result) => {
+      this.backend.listContest(r, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
         this.contests = result.toObject().contestsList;
