@@ -150,6 +150,11 @@ export class RehearsalEntry extends jspb.Message {
   hasUser(): boolean;
   clearUser(): void;
 
+  getContest(): Contest | undefined;
+  setContest(value?: Contest): void;
+  hasContest(): boolean;
+  clearContest(): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): RehearsalEntry.AsObject;
   static toObject(includeInstance: boolean, msg: RehearsalEntry): RehearsalEntry.AsObject;
@@ -167,6 +172,7 @@ export namespace RehearsalEntry {
     description: string,
     createdat: string,
     user?: User.AsObject,
+    contest?: Contest.AsObject,
   }
 }
 
@@ -183,6 +189,24 @@ export class User extends jspb.Message {
 }
 
 export namespace User {
+  export type AsObject = {
+    name: string,
+  }
+}
+
+export class Contest extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Contest.AsObject;
+  static toObject(includeInstance: boolean, msg: Contest): Contest.AsObject;
+  static serializeBinaryToWriter(message: Contest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Contest;
+  static deserializeBinaryFromReader(message: Contest, reader: jspb.BinaryReader): Contest;
+}
+
+export namespace Contest {
   export type AsObject = {
     name: string,
   }

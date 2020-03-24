@@ -9,6 +9,7 @@
 		  	<!--
  	 		<a class="btn-floating btn-large grey" href="#/search" title="Contest search"><i class="material-icons">search</i></a>
 			-->
+			<a class="btn-floating btn-large green" href="#/timeline" title="Timeline"><i class="material-icons">chat</i></a>
 	      	<a class="btn-floating btn-large green" href="#/contest" title="Add new contest"><i class="material-icons">games</i></a>
 	      	<a class="btn-floating btn-large green" href="#/result" title="Results"><i class="material-icons">insert_chart</i></a>
 	      	<a class="btn-floating btn-large orange" onclick={ logoutModal } href="#!" title="Log out"><i class="material-icons">close</i></a>
@@ -46,8 +47,6 @@
 
 		logoutModal(e) {
 			var instance = M.Modal.getInstance(this.refs.logoutModal);
-			console.log("REF", this.refs.logoutModal);
-			console.log("INS", instance);
 			instance.open();
 		}
 

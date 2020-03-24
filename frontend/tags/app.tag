@@ -8,6 +8,7 @@
 		<route path="result"><result></result></route>
 		<route path="metronome"><metronome></metronome></route>
 		<route path="profile/*"><profile></profile></route>
+		<route path="timeline"><timeline></timeline></route>
   	</router>
 
 	<script>	
