@@ -1,6 +1,8 @@
 'use strict';
-const {Rehearsal, User} = require('../database/models/index')
+const {Rehearsal, User, Contest} = require('../database/models/index')
 const {IsAuthorized} = require('./auth')
+
+let users = []
 
 function AddRehearsal(input, cb) {
     IsAuthorized(input, cb).then((auth) => {
@@ -22,10 +24,15 @@ function AddRehearsal(input, cb) {
                     model: User,
                     as: 'user',
                     attributes: ['name']
+                },{
+                    model: Contest,
+                    as: 'contest',
+                    attributes: ['name']
                 }]
             })
             .then(data => data.get({plain: true}))
             .then(data => {
+                StreamRehearsalToUsers(data);
                 cb(null, data);
             })
         })    
@@ -36,19 +43,29 @@ function ListRehearsal(input, cb) {
     IsAuthorized(input, cb).then((auth) => {
         let req = input.request;
 
+        var where = {}
+        if (req.contestid > 0) {
+            where.contestid = req.contestid
+        }
+
+        console.log("LIST REHEARSAL WHERE", where)
+
         Rehearsal.findAll({
-            where: { contestid: req.contestid },
+            where: where,
             order: [['createdAt', 'DESC']],
             include: [{
                 model: User,
                 as: 'user',
+                attributes: ['name']
+            },{
+                model: Contest,
+                as: 'contest',
                 attributes: ['name']
             }],
             limit: req.limit,
             raw: true,
             nest: true
         }).then(data => {
-            console.log("result", data);
             cb(null, {
                 rehearsals: data
             })
@@ -56,7 +73,36 @@ function ListRehearsal(input, cb) {
     })
 }
 
+function RehearsalStream(input) {
+    console.log("===== ADDING USER =====");
+    users.push(input)
+    console.log("COUNT", users.length);
+}
+
+function StreamRehearsalToUsers(rehearsal) {
+    console.log("===== STREAM TO USERS =====");
+    console.log("> STREAM COUNT", users.length);
+    console.log("> DATA", rehearsal);
+    users.forEach(user => {
+        user.write(rehearsal);
+        /*
+        user.write({
+            id: rehearsal.id,
+            description: rehearsal.description,
+            minutes: rehearsal.minutes,
+            user: {
+                name: rehearsal.user.name
+            },
+            contest: {
+                name: rehearsal.contest.name
+            }
+        });
+        */
+    });
+}
+
 module.exports = {
     AddRehearsal,
-    ListRehearsal
+    ListRehearsal,
+    RehearsalStream
 }

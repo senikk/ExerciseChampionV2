@@ -63,6 +63,11 @@ export class RehearsalClient {
                response: ListRehearsalResponse) => void
   ): grpcWeb.ClientReadableStream<ListRehearsalResponse>;
 
+  rehearsalStream(
+    request: ListRehearsalRequest,
+    metadata?: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<RehearsalEntry>;
+
   addContest(
     request: AddContestRequest,
     metadata: grpcWeb.Metadata | undefined,
@@ -143,6 +148,11 @@ export class RehearsalPromiseClient {
     request: ListRehearsalRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<ListRehearsalResponse>;
+
+  rehearsalStream(
+    request: ListRehearsalRequest,
+    metadata?: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<RehearsalEntry>;
 
   addContest(
     request: AddContestRequest,

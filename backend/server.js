@@ -8,7 +8,7 @@ const {Op} = require('sequelize')
 const {db, Contest, Rehearsal, User} = require('./database/models/index')
 const {Signup} = require('./grpc/signup')
 const {Login} = require('./grpc/login')
-const {AddRehearsal, ListRehearsal} = require('./grpc/rehearsal')
+const {AddRehearsal, ListRehearsal, RehearsalStream} = require('./grpc/rehearsal')
 const {AddContest, ListContest, JoinContest} = require('./grpc/contest')
 const {ListResult} = require('./grpc/result')
 const {GetProfile} = require('./grpc/profile')
@@ -71,7 +71,8 @@ server.addService(contestProto.Rehearsal.service, {
   ListRehearsal: ListRehearsal,
   ListResult: ListResult,
   JoinContest: JoinContest,
-  GetProfile: GetProfile
+  GetProfile: GetProfile,
+  RehearsalStream: RehearsalStream
 });
 server.bind('localhost:9090', grpc.ServerCredentials.createInsecure())
 server.start();

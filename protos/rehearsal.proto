@@ -40,9 +40,14 @@ message RehearsalEntry {
     string description = 5;
     string createdAt = 6;
     User user = 7;
+    Contest contest = 8;
 }
 
 message User {
+    string name = 1;
+}
+
+message Contest {
     string name = 1;
 }
 
@@ -154,6 +159,7 @@ service Rehearsal {
     rpc AddRehearsal(AddRehearsalRequest) returns (RehearsalEntry) {};
     rpc RemoveRehearsal(RemoveRehearsalRequest) returns (RemoveRehearsalResponse) {};
     rpc ListRehearsal(ListRehearsalRequest) returns (ListRehearsalResponse) {};
+    rpc RehearsalStream(ListRehearsalRequest) returns (stream RehearsalEntry) {};
 
     // Contest
     rpc AddContest(AddContestRequest) returns (ContestEntry) {};

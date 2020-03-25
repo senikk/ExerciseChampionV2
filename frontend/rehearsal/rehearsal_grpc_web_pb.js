@@ -469,6 +469,81 @@ proto.rehearsal.RehearsalPromiseClient.prototype.listRehearsal =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.rehearsal.ListRehearsalRequest,
+ *   !proto.rehearsal.RehearsalEntry>}
+ */
+const methodDescriptor_Rehearsal_RehearsalStream = new grpc.web.MethodDescriptor(
+  '/rehearsal.Rehearsal/RehearsalStream',
+  grpc.web.MethodType.SERVER_STREAMING,
+  proto.rehearsal.ListRehearsalRequest,
+  proto.rehearsal.RehearsalEntry,
+  /**
+   * @param {!proto.rehearsal.ListRehearsalRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.RehearsalEntry.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.rehearsal.ListRehearsalRequest,
+ *   !proto.rehearsal.RehearsalEntry>}
+ */
+const methodInfo_Rehearsal_RehearsalStream = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.rehearsal.RehearsalEntry,
+  /**
+   * @param {!proto.rehearsal.ListRehearsalRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.RehearsalEntry.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.rehearsal.ListRehearsalRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.RehearsalEntry>}
+ *     The XHR Node Readable Stream
+ */
+proto.rehearsal.RehearsalClient.prototype.rehearsalStream =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/rehearsal.Rehearsal/RehearsalStream',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_RehearsalStream);
+};
+
+
+/**
+ * @param {!proto.rehearsal.ListRehearsalRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.RehearsalEntry>}
+ *     The XHR Node Readable Stream
+ */
+proto.rehearsal.RehearsalPromiseClient.prototype.rehearsalStream =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/rehearsal.Rehearsal/RehearsalStream',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_RehearsalStream);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.rehearsal.AddContestRequest,
  *   !proto.rehearsal.ContestEntry>}
  */
