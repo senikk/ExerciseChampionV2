@@ -26,12 +26,17 @@
 
 				this.contests = result.toObject().contestsList;
 				this.update();
+
+//				let select = M.Modal.getInstance(this.refs.contest);
+//				select.formSelect();
 				$('select').formSelect();
 			});
 		}
 
         this.on('mount', function() {
-            this.loadContests();
+        	M.FormSelect.init(this.refs.contest);
+
+			this.loadContests();
 
             $(document).ready(function() {
 				$(self.refs.contest).on('change', (e) => {

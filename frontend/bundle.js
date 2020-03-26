@@ -7222,6 +7222,8 @@
       return self.user ? { jwt: self.user.jwt } : null;
     };
 
+    self.userid = self.user ? self.user.userid : null;
+
     self.login = (user) => {
       localStorage.setItem('user', JSON.stringify(user));
       self.user = user;
@@ -7240,7 +7242,7 @@
   var Helper = {
     event: riot.observable(),
     hDate: function (date) {
-      return moment(date).format('DD.MM.YYYY HH:mm');
+      return moment(date).format('DD.MM.YYYY');
     },
     auth: new Auth(),
     backend: new rehearsal_grpc_web_pb_1("http://10.0.0.94:8080"),

@@ -86,9 +86,10 @@ backend.ListRehearsal({
 })
 */
 
+/*
 backend.Login({
-  email: 'terje@senikk.com',
-  password: '1234'
+  email: 'test@senikk.com',
+  password: '123456'
 }, (error, result) => {
   console.log(result);
 
@@ -102,3 +103,21 @@ backend.Login({
     console.log("D", data)
   })
 });
+*/
+
+backend.Login({
+  email: 'test@senikk.com',
+  password: '123456'
+}, (error, result) => {
+  var meta = new grpc.Metadata()
+  meta.add('jwt', result.jwt)
+
+  let channel = backend.RehearsalStream({}, meta);
+  channel.on("data", (rehearsal) => {
+      console.log("== GOT REHEARSAL FROM SERVER", rehearsal);
+  });
+  channel.on("error", (error) => {
+      console.log(error);
+  });  
+} );
+

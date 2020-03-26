@@ -1,10 +1,10 @@
 <signup>
-  <form>
+  <form onsubmit={ signup }>
 	 <input ref="name" placeholder="name">
 	 <input ref="email" placeholder="email">
      <input ref="password" type="password" placeholder="password (minimum 6 character)">
      <input ref="password2" type="password" placeholder="retype password">
-	 <button onclick={ signup }  class="btn waves-effect waves-light">
+	 <button class="btn waves-effect waves-light">
 		<i class="material-icons right">send</i> Register
 	 </button>
    <button onclick={ login } class="btn waves-effect waves-light">

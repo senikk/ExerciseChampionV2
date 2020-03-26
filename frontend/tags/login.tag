@@ -2,7 +2,7 @@
   <form onsubmit={ login }>
 	 <input ref="email" placeholder="email">
    <input ref="password" type="password" placeholder="password">
-	 <button onclick={ login }  class="btn waves-effect waves-light">
+	 <button class="btn waves-effect waves-light">
 		<i class="material-icons right">send</i> Log in
 	 </button>
    <button onclick={ signup } class="btn waves-effect waves-light">

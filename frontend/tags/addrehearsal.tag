@@ -37,12 +37,13 @@
       r.setContestid(this.contestId);
       r.setMinutes(parseInt(this.refs.minutes.value));
       r.setDescription(this.refs.description.value);
-      console.log("RE", r);
 
       this.backend.addRehearsal(r, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
         self.event.trigger("rehearsal:added", result.toObject());
+        this.refs.minutes.value = '';
+        this.refs.description.value = '';
       });
     }
    </script>

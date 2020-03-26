@@ -15,25 +15,19 @@
     </ul>
 
     <script>
+        this.event.on('rehearsal:entry', (rehearsal) => {
+            console.log("==== GOT NOTIFIED");
+            this.rehearsals.splice(0, 1, rehearsal);
+            this.update();
+        });
+
         var r = new this.R.ListRehearsalRequest();
         r.setLimit(50);
-
         this.backend.listRehearsal(r, this.auth.jwt(), (error, result) => {
             if (error) { M.toast({html: error.message}); return; }
 
             this.rehearsals = result.toObject().rehearsalsList;
             this.update();
         });
-
-        let channel = this.backend.rehearsalStream(r, this.auth.jwt());
-        channel.on("data", (rehearsal) => {
-            console.log("DATA FROM SERVER", rehearsal.toObject());
-            this.rehearsals.push(rehearsal.toObject());
-            this.update();
-        });
-        channel.on("error", (error) => {
-            console.log(error);
-        });
-
     </script>
 </timeline>

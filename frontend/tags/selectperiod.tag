@@ -21,6 +21,8 @@
 		}
 
         this.on('mount', function() {
+            M.FormSelect.init(this.refs.period);
+
             $(document).ready(function() {
 				$(self.refs.period).on('change', (e) => {
 					self.changePeriod(e);
