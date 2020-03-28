@@ -7,11 +7,12 @@
   	  <textarea ref="description" onkeyup={ edit } class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
     </div>
   	<input ref="minutes" onkeyup={ edit } placeholder="How many minutes? (required)">
-    <!--
-    <button onclick={ toggletimer } class="btn waves-effect waves-light { timer.color }">
-      <i class="material-icons right">{ timer.icon }</i> { timer.text }
+    <button onclick={ toggletimer } class="btn waves-effect waves-light { stopwatch.timer.color } { stopwatch.status == 'STARTED' ? 'pulse':'' }">
+      <i class="material-icons right">{ stopwatch.timer.icon }</i> { stopwatch.seconds == 0 ? stopwatch.timer.text : '' } { stopwatch.seconds > 0 ? moment.utc(stopwatch.seconds*1000).format('HH:mm:ss'):'' }
     </button>
-    -->
+    <button onclick={ cleartimer } if={ stopwatch.seconds > 0 && stopwatch.status == 'STOPPED' } class="btn waves-effect waves-light red">
+      <i class="material-icons right">hourglass_empty</i> CLEAR
+    </button>
   	<button disabled={ !description || minutes <= 0 } onclick={ add } class="btn waves-effect waves-light">
   		<i class="material-icons right">send</i> Log it
   	</button>
@@ -19,7 +20,6 @@
 
   <script>
     var self = this;
-    //this.timer = { icon: "play_circle_outline", text: "START" };
     this.contestId = localStorage.getItem("addrehearsal-contestid") || 1;
 
     edit() {
@@ -27,20 +27,28 @@
       this.minutes = parseInt(this.refs.minutes.value) || 0;
     }
 
-    isDisabled() {
-      console.log("DISABLED");
-      return !this.refs.description.value //&& !!this.refs.minutes.value && parseInt(this.refs.minutes.value) == NaN && parseInt(this.refs.minutes.value) <= 0
-    }
-
     changeContestId(contestId) {
       this.contestId = contestId;
       localStorage.setItem("addrehearsal-contestid", contestId);
     }
 
-    toggletimer(e) {
-      this.timer = { icon: "pause_circle_outline", text: "PAUSE", color: "orange" };
-      this.refs.minutes.value = "1";
+    cleartimer(e) {
+      self.stopwatch.trigger('clear');
     }
+
+    toggletimer(e) {
+      self.stopwatch.trigger('toggle');      
+    }
+
+    self.stopwatch.on('seconds', (seconds) => {
+      this.update();
+    });
+
+    self.stopwatch.on('minutes', (minutes) => {
+      console.log("== GOT MIN", minutes);
+      self.minutes = minutes;
+      self.refs.minutes.value = minutes;
+    });
 
     add(e) {
       let r = new this.R.AddRehearsalRequest();
@@ -54,6 +62,8 @@
         self.event.trigger("rehearsal:added", result.toObject());
         this.refs.minutes.value = '';
         this.refs.description.value = '';
+        self.stopwatch.trigger('clear');
+        self.update();
       });
     }
    </script>

@@ -29,13 +29,8 @@
   	</ul>
 
 	<div class="fixed-action-btn" style="bottom: 10px; right: 10px;">
-		<!--
-		<a class="btn-floating btn-large orange ">
-			<i class="material-icons">pause_circle_outline</i>
-		</a>
-		-->
-		<a class="btn-floating btn-large" href="#/log">
-	  		<i class="large material-icons">mode_edit</i>
+		<a class="btn-floating btn-large { stopwatch.status == 'STOPPED' ? 'green':'pulse orange'}" href="#/log">
+			<i class="large material-icons">mode_edit</i>
 		</a>
 	</div>
 
@@ -53,7 +48,7 @@
 	<script>
 		var self = this;
 		this.profile = {};
-
+		
 		logoutModal(e) {
 			var instance = M.Modal.getInstance(this.refs.logoutModal);	
 			instance.open();
@@ -81,6 +76,10 @@
 
 		this.event.on("rehearsal:added", () => {
 			loadProfile();
+		});
+
+		this.stopwatch.on('timer', () => {
+			this.update();
 		});
 
 		this.on('mount', () => {
