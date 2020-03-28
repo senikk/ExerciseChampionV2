@@ -1,5 +1,5 @@
 'use strict';
-const {Contest, User} = require('../database/models/index')
+const {Contest, User, UserContest} = require('../database/models/index')
 const {IsAuthorized} = require('./auth')
 
 function AddContest(input, cb) {
@@ -32,7 +32,7 @@ function ListContest(input, cb) {
         let req = input.request
 
         req.limit = req.limit || 10;
-        console.log("ListContest", req);
+        console.log("== ListContest", req);
     
         var options = {
             order: [['createdAt', 'DESC']],
@@ -59,11 +59,15 @@ function ListContest(input, cb) {
                 attributes: ['id']
             }
         }).then(data => data.get({plain: true})).then(user => {
+            console.log(">> JOINED", user.joinedContests);
             Contest.findAll(options).then(data => {
                 data.map(entry => entry.joined = user.joinedContests.some(c => c.id == entry.id))
 
                 if (req.joined) {
-                    data.filter(entry => !entry.joined)
+                    data.filter(entry => entry.joined)
+                }
+                if (req.public) {
+                    data.filter(entry => entry.public)
                 }
 
                 console.log("MATCHED CONTESTS", data.length);
@@ -80,12 +84,13 @@ function ListContest(input, cb) {
 }
 
 function JoinContest(input, cb) {
-    console.log("JOINCONTEST", input);
+    console.log("=== JOINCONTEST", input);
     IsAuthorized(input, cb).then((auth) => {
         let req = input.request
 
         User.findByPk(auth.userid).then((user) => {
             user.addContest([req.contestid])
+            cb()
         })
     })
 }

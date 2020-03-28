@@ -19,6 +19,15 @@
       	</div>
     </div>
 
+	<!-- Dropdown for more actions -->
+	<ul id='dropdown' class='dropdown-content'>
+		<li><a href="#/profile/{auth.user.userid}">Profile</a></li>
+		<li><a href="#/contest/add">Add contest</a></li>
+		<li class="divider" tabindex="-1"></li>
+		<!-- <li><a href="#/metronome" title="Metronome">Metronome</a> -->
+		<li><a onclick={ logoutModal } href="#!" title="Log out">Log out</i></a></li>
+  	</ul>
+
 	<div class="fixed-action-btn" style="bottom: 10px; right: 10px;">
 		<!--
 		<a class="btn-floating btn-large orange ">
@@ -40,14 +49,6 @@
 			<a href="#!" class="modal-close waves-effect btn-flat">Cancel</a>
 		</div>
 	</div>
-
-	<!-- Dropdown for more actions -->
-	<ul id='dropdown' class='dropdown-content'>
-		<li><a href="#/profile/{auth.user.userid}">Profile</a></li>
-		<li class="divider" tabindex="-1"></li>
-		<!-- <li><a href="#/metronome" title="Metronome">Metronome</a> -->
-		<li><a onclick={ logoutModal } href="#!" title="Log out">Log out</i></a></li>
-  	</ul>
 
 	<script>
 		var self = this;

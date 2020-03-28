@@ -1,18 +1,18 @@
 <addrehearsal>
   <form>
     <div class="input-field">
-      <selectcontest ref="contest" label="Contest" chosen={ contestId } change={ changeContestId }></selectcontest>
+      <selectcontest ref="contest" label="Contest" joined="true" chosen={ contestId } change={ changeContestId }></selectcontest>
     </div>
   	<div class="input-field">
-  	  <textarea ref="description" class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
+  	  <textarea ref="description" onkeyup={ edit } class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
     </div>
-  	<input ref="minutes" placeholder="How many minutes? (required)">
+  	<input ref="minutes" onkeyup={ edit } placeholder="How many minutes? (required)">
     <!--
     <button onclick={ toggletimer } class="btn waves-effect waves-light { timer.color }">
       <i class="material-icons right">{ timer.icon }</i> { timer.text }
     </button>
     -->
-  	<button onclick={ add } class="btn waves-effect waves-light">
+  	<button disabled={ !description || minutes <= 0 } onclick={ add } class="btn waves-effect waves-light">
   		<i class="material-icons right">send</i> Log it
   	</button>
   </form>
@@ -21,6 +21,16 @@
     var self = this;
     //this.timer = { icon: "play_circle_outline", text: "START" };
     this.contestId = localStorage.getItem("addrehearsal-contestid") || 1;
+
+    edit() {
+      this.description = this.refs.description.value;
+      this.minutes = parseInt(this.refs.minutes.value) || 0;
+    }
+
+    isDisabled() {
+      console.log("DISABLED");
+      return !this.refs.description.value //&& !!this.refs.minutes.value && parseInt(this.refs.minutes.value) == NaN && parseInt(this.refs.minutes.value) <= 0
+    }
 
     changeContestId(contestId) {
       this.contestId = contestId;

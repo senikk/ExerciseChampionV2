@@ -1,4 +1,6 @@
 <addcontest>
+  <actions title="add contest"></actions>
+
   <div class="row">
     <form class="col s12">
       <div class="row">
@@ -17,7 +19,7 @@
         <div class="input-field col s12">
           <label>
             <input ref="public" type="checkbox" class="filled-in" />
-            <span>Public</span>
+            <span>Public contest availabe for everyone</span>
           </label>
         </div>
       </div>

@@ -1,7 +1,5 @@
 <contest>
-  <actions title="contest"></actions>
-
-  <addcontest></addcontest>
+  <actions title="contests"></actions>
 
   <ul class="collection">
     <li class="collection-header"><h5>Available contests</h5></li>
@@ -16,8 +14,8 @@
   <!-- Add contest modal -->
   <div ref="addContestModal" class="modal">
     <div class="modal-content">
-      <h4>Join contest</h4>
-      <p>{contest.rules}</p>
+      <h4>Join contest "{contest.name}"</h4>
+      <p if={ contest.rules }>Rules:<br>{contest.rules}</p>
     </div>
     <div class="modal-footer">
       <a href="#!" onclick={ joinContest } class="modal-close waves-effect waves-green btn-flat">Ok</a>
@@ -36,7 +34,9 @@
       this.backend.joinContest(r, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
-        M.toast({html: 'Joined contest'});
+        M.toast({html: 'Joined contest ' + this.contest.name});
+        this.contest.joined = true;
+        this.update();
       });
     }
 
@@ -53,12 +53,10 @@
     });
 
   	this.on("mount", function () {
-      var elems = document.querySelectorAll('.modal');
-      var instances = M.Modal.init(elems);
+      M.Modal.init(this.refs.addContestModal);
 
       var r = new this.R.ListContestRequest();
-      r.setFilter("");
-      r.setJoined(true);
+      r.setPublic(true);
 
       this.backend.listContest(r, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }

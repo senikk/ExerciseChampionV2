@@ -9,6 +9,7 @@
 		<route path="metronome"><metronome></metronome></route>
 		<route path="profile/*"><profile></profile></route>
 		<route path="timeline"><timeline></timeline></route>
+		<route path="contest/add"><addcontest></addcontest></route>
   	</router>
 
 	<script>
@@ -40,5 +41,9 @@
         channel.on("error", (error) => {
             console.log(error);
         });
+
+		this.on('mount', () => {
+			console.log(`==== USER ${this.auth.userid}====`);
+		})
 	</script>
 </app>
