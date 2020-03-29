@@ -1,4 +1,6 @@
 <login>
+  <actions></actions>
+
   <form onsubmit={ login }>
 	 <input ref="email" placeholder={ i18n.t('email') }>
    <input ref="password" type="password" placeholder={ i18n.t('password') }>

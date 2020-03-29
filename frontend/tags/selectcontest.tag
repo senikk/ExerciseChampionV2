@@ -21,8 +21,6 @@
             r.setJoined(this.opts.joined);
             r.setLimit(20);
 
-			console.log("== LoadContests", r);
-
 			this.backend.listContest(r, this.auth.jwt(), (error, result) => {
 				if (error) { M.toast({html: error.message}); return; }
 

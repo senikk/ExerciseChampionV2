@@ -6887,7 +6887,8 @@
 	        profile: 'Profil',
 	        addcontest: 'Ny konkurranse',
 	        logout: 'Logg ut',
-	        metronome: 'Metronom'
+	        metronome: 'Metronom',
+	        contests: 'Konkurranser'
 	      },
 	      login: {
 	        login: 'Logg inn',
@@ -6916,7 +6917,16 @@
 	        position: 'Posisjon'
 	      },
 	      contests: {
-	        available: 'Tilgjengelig konkurranser'
+	        available: 'Tilgjengelig konkurranser',
+	        joined: 'Nå medlem av "%{name}"'
+	      },
+	      period: {
+	        thisyear: 'nåværende år %{year}',
+	        thismonth: 'nåværende måned',
+	        thisweek: 'nåværende uke %{week}',
+	        lastyear: 'forrige år %{year}',
+	        lastmonth: 'forrige måned',
+	        lastweek: 'forrige uke %{week}'
 	      },
 	      clear: 'TØM',
 	      start: 'START',
@@ -6924,7 +6934,7 @@
 	      minutes: '%{minutes} minutter',
 	      position: '%{position}. plass',
 	      contest: 'Konkurranse',
-	      thisweek: 'denne uka',
+	      thisweek: '(uke %{week})',
 	      email: 'e-post',
 	      password: 'passord',
 	      name: 'navn',
@@ -6962,6 +6972,7 @@
 	        addcontest: 'New contest',
 	        logout: 'Log out',
 	        metronome: 'Metronome',
+	        contests: 'Contests'
 	      },
 	      login: {
 	        login: 'Log in',
@@ -6990,15 +7001,24 @@
 	        add: 'Add'
 	      },
 	      contests: {
-	        available: 'Available contest'
+	        available: 'Available contest',
+	        joined: 'Joined contest "%{name}"'
+	      },
+	      period: {
+	        thisyear: 'this year %{year}',
+	        thismonth: 'this month',
+	        thisweek: 'this week %{week}',
+	        lastyear: 'last year %{year}',
+	        lastmonth: 'last month',
+	        lastweek: 'last week %{week}'
 	      },
 	      clear: 'CLEAR',
 	      start: 'START',
 	      pause: 'PAUSE',
-	      minutes: '%{minutes} minute |||| %{minutes} minutes',
+	      minutes: '%{minutes} minutes',
 	      position: '%{position}th',
 	      contest: 'Contest',
-	      thisweek: 'this week',
+	      thisweek: '(week %{week})',
 	      email: 'email',
 	      password: 'password',
 	      name: 'name',
@@ -7011,13 +7031,21 @@
 	    var self = riot.observable(this);
 	    var polygot = new Polyglot();
 
+	    self.languages = [
+	        { text: 'ENGLISH', code: 'en' },
+	        { text: 'NORWEGIAN', code: 'no'}
+	    ];
+
 	    self.language = (language) => {
 	        polygot.extend(translations[language]);
+	        self.current = self.languages.find(l => l.code == language);
+	        localStorage.setItem('language', language);
+	        console.log("== CHANGED LANGUAGE", language);
 	    };
 	    
 	    self.t = (...args) => polygot.t(...args);
 	    
-	    self.language('en'); 
+	    self.language(localStorage.getItem('language') || 'en'); 
 	}
 
 	var StopWatch = function () {

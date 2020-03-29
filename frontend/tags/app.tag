@@ -14,7 +14,6 @@
 
 	<script>
 		let self = this;
-		this.i18n.language('no');
 
 		this.auth.on('login', function (user) {
 			route('log','Excerise Champion');
@@ -44,7 +43,7 @@
         });
 
 		this.on('mount', () => {
-			console.log(`==== USER ${this.auth.userid}====`);
+			console.log(`==== USER ${this.auth.userid} ====`);
 		})
 	</script>
 </app>

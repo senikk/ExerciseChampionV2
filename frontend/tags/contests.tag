@@ -34,7 +34,7 @@
       this.backend.joinContest(r, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
-        M.toast({html: 'Joined contest ' + this.contest.name});
+        M.toast({html: this.i18n.t('contests.joined', {name: this.contest.name})});
         this.contest.joined = true;
         this.update();
       });
