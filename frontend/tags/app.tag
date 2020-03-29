@@ -4,7 +4,7 @@
 		<route path="login"><login></login></route>
     	<route path="log"><log></log></route>
 		<route path="search"><search></search></route>
-		<route path="contest"><contest></contest></route>
+		<route path="contests"><contests></contests></route>
 		<route path="result"><result></result></route>
 		<route path="metronome"><metronome></metronome></route>
 		<route path="profile/*"><profile></profile></route>
@@ -14,6 +14,7 @@
 
 	<script>
 		let self = this;
+		this.i18n.language('no');
 
 		this.auth.on('login', function (user) {
 			route('log','Excerise Champion');

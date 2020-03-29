@@ -1,5 +1,5 @@
 <result>
-	<actions title="result"></actions>
+	<actions title="title.result"></actions>
 
 	<div class="row">
 		<div class="col s6">
@@ -16,9 +16,9 @@
 	<table class="striped">
 		<thead>
 		  <tr>
-		      <th data-field="position">Pos</th>
-		      <th data-field="user.name">Name</th>
-		      <th data-field="minutes" class="right-align">Minutes</th>
+		      <th data-field="position">{ i18n.t('result.position') }</th>
+		      <th data-field="user.name">{ i18n.t('result.name') }</th>
+		      <th data-field="minutes" class="right-align">{ i18n.t('result.minutes') }</th>
 		  </tr>
 		</thead>
 

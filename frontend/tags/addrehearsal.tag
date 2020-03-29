@@ -1,20 +1,20 @@
 <addrehearsal>
   <form>
     <div class="input-field">
-      <selectcontest ref="contest" label="Contest" joined="true" chosen={ contestId } change={ changeContestId }></selectcontest>
+      <selectcontest ref="contest" label="contest" joined="true" chosen={ contestId } change={ changeContestId }></selectcontest>
     </div>
   	<div class="input-field">
-  	  <textarea ref="description" onkeyup={ edit } class="materialize-textarea" placeholder="What exercises did you do (required)"></textarea>
+  	  <textarea ref="description" onkeyup={ edit } class="materialize-textarea" placeholder={ i18n.t('addrehearsal.exercisesdidyoudo') }></textarea>
     </div>
-  	<input ref="minutes" onkeyup={ edit } placeholder="How many minutes? (required)">
+  	<input ref="minutes" onkeyup={ edit } placeholder={ i18n.t('addrehearsal.howmanyminutes') }>
     <button onclick={ toggletimer } class="btn waves-effect waves-light { stopwatch.timer.color } { stopwatch.status == 'STARTED' ? 'pulse':'' }">
-      <i class="material-icons right">{ stopwatch.timer.icon }</i> { stopwatch.seconds == 0 ? stopwatch.timer.text : '' } { stopwatch.seconds > 0 ? moment.utc(stopwatch.seconds*1000).format('HH:mm:ss'):'' }
+      <i class="material-icons right">{ stopwatch.timer.icon }</i> { stopwatch.seconds == 0 ? i18n.t(stopwatch.timer.text) : '' } { stopwatch.seconds > 0 ? moment.utc(stopwatch.seconds*1000).format('HH:mm:ss'):'' }
     </button>
     <button onclick={ cleartimer } if={ stopwatch.seconds > 0 && stopwatch.status == 'STOPPED' } class="btn waves-effect waves-light red">
-      <i class="material-icons right">hourglass_empty</i> CLEAR
+      <i class="material-icons right">hourglass_empty</i> {i18n.t('clear')}
     </button>
   	<button disabled={ !description || minutes <= 0 } onclick={ add } class="btn waves-effect waves-light">
-  		<i class="material-icons right">send</i> Log it
+  		<i class="material-icons right">send</i> {i18n.t('addrehearsal.logit')}
   	</button>
   </form>
 

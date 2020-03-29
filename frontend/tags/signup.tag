@@ -1,14 +1,14 @@
 <signup>
   <form onsubmit={ signup }>
-	 <input ref="name" placeholder="name">
-	 <input ref="email" placeholder="email">
-     <input ref="password" type="password" placeholder="password (minimum 6 character)">
-     <input ref="password2" type="password" placeholder="retype password">
+	 <input ref="name" placeholder={ i18n.t('name') }>
+	 <input ref="email" placeholder={ i18n.t('email') }>
+     <input ref="password" type="password" placeholder={ i18n.t('signup.password') }>
+     <input ref="password2" type="password" placeholder={ i18n.t('signup.retype') }>
 	 <button class="btn waves-effect waves-light">
-		<i class="material-icons right">send</i> Register
+		<i class="material-icons right">send</i> { i18n.t('signup.signup') }
 	 </button>
    <button onclick={ login } class="btn waves-effect waves-light">
-    <i class="material-icons right">login</i> Log in
+    <i class="material-icons right">login</i> { i18n.t('login.login') }
    </button>
   </form>
 
@@ -20,7 +20,7 @@
     signup() {
       if (!this.refs.password.value || !this.refs.password2.value || 
           this.refs.password.value != this.refs.password2.value) {
-          M.toast({html: 'Retyped password is not equal to password'});
+          M.toast({html: i18n.t('signup.retypednotmatch') });
           return;
       }
 

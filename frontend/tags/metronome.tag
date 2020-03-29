@@ -1,5 +1,5 @@
 <metronome>
-  <actions title="metronome"></actions>
+  <actions title="title.metronome"></actions>
 
   <div class="row">
   		<label>tempo</label><br>

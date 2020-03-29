@@ -1,10 +1,10 @@
 <log>
-  <actions title="log"></actions>
+  <actions title="title.log"></actions>
   <addrehearsal></addrehearsal>
 
   <ul class="collection">
     <li each={ logs } class="collection-item">
-      <span class="title">{ user.name } - { minutes } minutes</span>
+      <span class="title">{ user.name } - { i18n.t('minutes', {minutes}) }</span>
       <p>{ description }</p>
       <small>{ hDate(createdAt) }</small>
     </li>
@@ -15,7 +15,6 @@
 
     // listen for self added item
     this.event.on("rehearsal:added", function (item) {
-      console.log("ADDED", item);
       if (!self.logs) self.logs = [];
       self.logs.unshift(item);
       self.update();

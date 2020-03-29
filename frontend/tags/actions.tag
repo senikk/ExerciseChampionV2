@@ -1,31 +1,38 @@
 <actions>
-	 <div class="row">
+	<style>
+		.dropdown-content {
+			top: -40px;
+			width: 200px !important;
+		}
+	</style>
+
+	<div class="row">
       	<div class="col s4">
 			<blockquote if={profile.minutesthisweek > 0}>
-				Exercise { opts.title }<br>{ this.auth.user.name } you are <i>{profile.positionthisweek}th this week<br>{profile.minutesthisweek}minutes</i>
+				Exercise { i18n.t(opts.title) }<br>{ this.auth.user.name } {i18n.t('you are')} <i>{i18n.t('position',{position: profile.positionthisweek})} { i18n.t('thisweek') }<br>{i18n.t('minutes', {minutes: profile.minutesthisweek})}</i>
     		</blockquote>
 			<blockquote if={profile.minutesthisweek == 0}>
-				Exercise { opts.title }<br>{ this.auth.user.name }<br>no registration this week</i>
+				Exercise { i18n.t(opts.title) }<br>{ this.auth.user.name }<br>{ i18n.t('no registration this week') }</i>
 			</blockquote>
       	</div>
       	<div class="col s8 right-align" style="padding-top: 10px;">
 		  	<!--
  	 		<a class="btn-floating btn-large grey" href="#/search" title="Contest search"><i class="material-icons">search</i></a>
 			-->
-			<a class="btn-floating btn-large green" href="#/timeline" title="Timeline"><i class="material-icons">chat</i></a>
-	      	<a class="btn-floating btn-large green" href="#/contest" title="Add new contest"><i class="material-icons">games</i></a>
-	      	<a class="btn-floating btn-large green" href="#/result" title="Results"><i class="material-icons">insert_chart</i></a>
-			<a class="btn-floating btn-large grey dropdown-trigger" ref="dropdown" data-target="dropdown" href="#!" title="More.."><i class="material-icons">arrow_drop_down</i></a>
+			<a class="btn-floating btn-large green" href="#/timeline" title={ i18n.t('menu.timeline') }><i class="material-icons">chat</i></a>
+	      	<a class="btn-floating btn-large green" href="#/contests" title={ i18n.t('menu.contests') }><i class="material-icons">games</i></a>
+	      	<a class="btn-floating btn-large green" href="#/result" title={ i18n.t('menu.results') }><i class="material-icons">insert_chart</i></a>
+			<a class="btn-floating btn-large grey dropdown-trigger" ref="dropdown" data-target="dropdown" href="#!" title={ i18n.t('menu.more') }><i class="material-icons">arrow_drop_down</i></a>
       	</div>
     </div>
 
 	<!-- Dropdown for more actions -->
 	<ul id='dropdown' class='dropdown-content'>
-		<li><a href="#/profile/{auth.user.userid}">Profile</a></li>
-		<li><a href="#/contest/add">Add contest</a></li>
+		<li><a href="#/profile/{auth.user.userid}">{ i18n.t('dropdown.profile') }</a></li>
+		<li><a href="#/contest/add">{ i18n.t('dropdown.addcontest') }</a></li>
 		<li class="divider" tabindex="-1"></li>
-		<!-- <li><a href="#/metronome" title="Metronome">Metronome</a> -->
-		<li><a onclick={ logoutModal } href="#!" title="Log out">Log out</i></a></li>
+		<!-- <li><a href="#/metronome" title="Metronome">{ i18n.t('dropdown.metronome') }</a> -->
+		<li><a onclick={ logoutModal } href="#!" title="Log out">{ i18n.t('dropdown.logout') }</i></a></li>
   	</ul>
 
 	<div class="fixed-action-btn" style="bottom: 10px; right: 10px;">
@@ -37,11 +44,11 @@
 	<!-- Add contest modal -->
 	<div ref="logoutModal" class="modal">
 		<div class="modal-content">
-			<h4>Really log out?</h4>
+			<h4>{ i18n.t('modal.logout.question') }</h4>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" onclick={ logout } class="modal-close waves-effect waves-green btn-flat">Yes</a>
-			<a href="#!" class="modal-close waves-effect btn-flat">Cancel</a>
+			<a href="#!" onclick={ logout } class="modal-close waves-effect waves-green btn-flat">{ i18n.t('modal.yes') }</a>
+			<a href="#!" class="modal-close waves-effect btn-flat">{ i18n.t('modal.no') }</a>
 		</div>
 	</div>
 

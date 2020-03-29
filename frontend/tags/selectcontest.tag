@@ -3,7 +3,7 @@
 		<select ref="contest">
 			<option each={ contests } value={ id } selected="{ id == opts.chosen ? 'selected' : '' }">{ name }</option>
 		</select>
-		<label if={opts.label}>{ opts.label }</label>
+		<label if={opts.label}>{ i18n.t(opts.label) }</label>
 	</div>
 
     <script>

@@ -1,13 +1,13 @@
-import 'fetch-polyfill';
 import {RehearsalClient} from 'rehearsal';
+import Translation from './translation';
 import * as R from 'rehearsal/rehearsal_pb';
 
 var StopWatch = function () {
   var self = riot.observable(this);
 
   let clock = null;
-  let STOPPED = { icon: 'play_circle_outline', text: 'START', color: 'green' };
-  let STARTED = { icon: 'pause_circle_outline', text: 'PAUSE', color: 'orange'};
+  let STOPPED = { icon: 'play_circle_outline', text: 'start', color: 'green' };
+  let STARTED = { icon: 'pause_circle_outline', text: 'pause', color: 'orange'};
 
   self.seconds = localStorage.getItem('timer-seconds') || 0;
   self.status = localStorage.getItem('timer-status') || 'STOPPED';
@@ -84,6 +84,7 @@ var Helper = {
   stopwatch: new StopWatch(),
   backend: new RehearsalClient("http://10.0.0.94:8080"),
   R: R,
+  i18n: new Translation()
 };
 
 riot.mixin(Helper);

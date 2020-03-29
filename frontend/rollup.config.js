@@ -11,6 +11,7 @@ export default {
     commonjs({
       include: 'node_modules/**',
       namedExports: {
+        'translations.js': ['Translation'],
         'node_modules/rehearsal/rehearsal_grpc_web_pb.js': ['RehearsalClient'],
         'node_modules/rehearsal/rehearsal_pb.js': [  
           'LoginRequest',

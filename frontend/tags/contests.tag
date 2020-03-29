@@ -1,8 +1,8 @@
-<contest>
-  <actions title="contests"></actions>
+<contests>
+  <actions title="title.contests"></actions>
 
   <ul class="collection">
-    <li class="collection-header"><h5>Available contests</h5></li>
+    <li class="collection-header"><h5>{ i18n.t('contests.available') }</h5></li>
     <li each={ contests } class="collection-item avatar">
 	    <i if={!joined} onclick={ joinModal } data-message={id} class="material-icons circle">add</i>
       <i if={joined} class="material-icons circle green">remove</i>
@@ -14,12 +14,12 @@
   <!-- Add contest modal -->
   <div ref="addContestModal" class="modal">
     <div class="modal-content">
-      <h4>Join contest "{contest.name}"</h4>
-      <p if={ contest.rules }>Rules:<br>{contest.rules}</p>
+      <h4>{ i18n.t('modal.addcontest.question', {name: contest.name}) }</h4>
+      <p if={ contest.rules }>{ i18n.t('modal.addcontest.rules') }<br>{contest.rules}</p>
     </div>
     <div class="modal-footer">
-      <a href="#!" onclick={ joinContest } class="modal-close waves-effect waves-green btn-flat">Ok</a>
-      <a href="#!" class="modal-close waves-effect btn-flat">Cancel</a>
+      <a href="#!" onclick={ joinContest } class="modal-close waves-effect waves-green btn-flat">{ i18n.t('modal.yes') }</a>
+      <a href="#!" class="modal-close waves-effect btn-flat">{ i18n.t('modal.no') }</a>
     </div>
   </div>
 
@@ -67,4 +67,4 @@
     });
   </script>
 
-</contest>
+</contests>

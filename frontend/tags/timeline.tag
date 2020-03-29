@@ -1,11 +1,11 @@
 <timeline>
-    <actions title="timeline"></actions>
+    <actions title="title.timeline"></actions>
 
     <ul class="collection">
         <li each={ rehearsals } class="collection-item">
             <span class="title">{ user.name } - { contest.name }</span>
             <div class="secondary-content">
-                <span class="badge">{ minutes } minutes</span>
+                <span class="badge">{ i18n.t('minutes', {minutes: minutes}) }</span>
             </div>
             <div>
                 <span>{ description }</span><br>

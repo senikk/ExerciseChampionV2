@@ -1,12 +1,12 @@
 <login>
   <form onsubmit={ login }>
-	 <input ref="email" placeholder="email">
-   <input ref="password" type="password" placeholder="password">
+	 <input ref="email" placeholder={ i18n.t('email') }>
+   <input ref="password" type="password" placeholder={ i18n.t('password') }>
 	 <button class="btn waves-effect waves-light">
-		<i class="material-icons right">send</i> Log in
+		<i class="material-icons right">send</i> { i18n.t('login.login') }
 	 </button>
    <button onclick={ signup } class="btn waves-effect waves-light">
-    <i class="material-icons right">sign</i> Sign up
+    <i class="material-icons right">sign</i> { i18n.t('login.signup') }
    </button>
   </form>
 

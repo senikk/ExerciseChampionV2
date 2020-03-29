@@ -1,5 +1,5 @@
 <search>
-	<actions title="search"></actions>
+	<actions title="title.search"></actions>
 
 	<div class="row">
 		<form>
