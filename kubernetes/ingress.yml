@@ -9,7 +9,7 @@ metadata:
     name: grpcproxyingress
 spec:
     rules:
-    - host: ec-senikk.cloud.okteto.net
+    - host: exercise-senikk.cloud.okteto.net
       http:
         paths:
         - path: /(.*)
