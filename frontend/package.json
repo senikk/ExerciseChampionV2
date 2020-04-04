@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "rollup -c rollup.config.js",
-		"start": "node server.js",
+		"start": "NODE_ENV=production node server.js",
 		"local": "node -r dotenv/config server.js",
 		"watch:riot": "riot -w ./tags ./tags/all.js",
 		"protoc": "protoc -I ../backend/protos rehearsal.proto --js_out=import_style=commonjs:rehearsal --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:rehearsal && cp rehearsal/* node_modules/rehearsal/"
