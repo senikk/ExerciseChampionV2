@@ -1,4 +1,4 @@
 node_modules
 .DS_Store
 .env
-kubernetes/secret.yml
+kubernetes/*/secret.yml

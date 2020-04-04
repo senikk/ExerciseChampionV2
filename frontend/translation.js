@@ -40,7 +40,7 @@ let translations = {
       },
       signup: {
         signup: 'Registrer',
-        retypenotmatch: 'Gjentatt passord stemmer ikke overens',
+        missingpassword: 'Mangler passord',
         retype: 'gjenta passord',
         password: 'passord (minimum 6 tegn)'
       },
@@ -52,7 +52,7 @@ let translations = {
       addcontest: {
         name: 'Konkurranse navn',
         rules: 'Konkurranse regler',
-        public: 'Offentlie konkurranser er tilgjengelige for alle',
+        public: 'Offentlig, konkurranse tilgjengelige for alle uten invitasjon',
         add: 'Legg til'
       },
       result: {
@@ -124,7 +124,7 @@ let translations = {
       },
       signup: {
         signup: 'Sign up',
-        retypenotmatch: 'Repeated password does not match',
+        retypenotmatch: 'Missing password',
         retype: 'retype password',
         passord: 'password (minimum 6 character)'
       },
@@ -141,7 +141,7 @@ let translations = {
       addcontest: {
         name: 'Contest name',
         rules: 'Contest rules',
-        public: 'Public contest availabe for everyone',
+        public: 'Public, contest available without invite for everyone ',
         add: 'Add'
       },
       contests: {

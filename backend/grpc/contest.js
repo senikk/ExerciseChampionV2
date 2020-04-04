@@ -84,12 +84,11 @@ function ListContest(input, cb) {
 }
 
 function JoinContest(input, cb) {
-    console.log("=== JOINCONTEST", input);
     IsAuthorized(input, cb).then((auth) => {
         let req = input.request
 
         User.findByPk(auth.userid).then((user) => {
-            user.addContest([req.contestid])
+            user.addJoinedContest([req.contestid])
             cb()
         })
     })

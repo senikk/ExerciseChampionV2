@@ -7,7 +7,7 @@
 	 <button class="btn waves-effect waves-light">
 		<i class="material-icons right">send</i> { i18n.t('login.login') }
 	 </button>
-   <button onclick={ signup } class="btn waves-effect waves-light">
+   <button onclick={ signup } class="btn waves-effect waves-light orange">
     <i class="material-icons right">sign</i> { i18n.t('login.signup') }
    </button>
   </form>

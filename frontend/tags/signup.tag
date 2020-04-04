@@ -2,12 +2,11 @@
   <form onsubmit={ signup }>
 	 <input ref="name" placeholder={ i18n.t('name') }>
 	 <input ref="email" placeholder={ i18n.t('email') }>
-     <input ref="password" type="password" placeholder={ i18n.t('signup.password') }>
-     <input ref="password2" type="password" placeholder={ i18n.t('signup.retype') }>
+     <input ref="password" type="password" placeholder={ i18n.t('password') }>
 	 <button class="btn waves-effect waves-light">
 		<i class="material-icons right">send</i> { i18n.t('signup.signup') }
 	 </button>
-   <button onclick={ login } class="btn waves-effect waves-light">
+   <button onclick={ login } class="btn waves-effect waves-light orange">
     <i class="material-icons right">login</i> { i18n.t('login.login') }
    </button>
   </form>
@@ -18,9 +17,8 @@
     }
 
     signup() {
-      if (!this.refs.password.value || !this.refs.password2.value || 
-          this.refs.password.value != this.refs.password2.value) {
-          M.toast({html: i18n.t('signup.retypednotmatch') });
+      if (!this.refs.password.value) {
+          M.toast({html: i18n.t('signup.missingpassword') });
           return;
       }
 

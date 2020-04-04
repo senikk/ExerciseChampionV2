@@ -2,39 +2,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-    name: frontend
+    name: backend
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: frontend
+            app: backend
     template:
         metadata:
             labels:
-                app: frontend
+                app: backend
         spec:
             containers: 
             - 
-                image: docker.io/senikk/ec-frontend:0.4
-                name: frontend
+                image: docker.io/senikk/ec-backend:0.7
+                name: backend
                 envFrom:
                     - secretRef:
                         name: ec-env
                 ports:
                 - 
-                    name: https
-                    containerPort: 8081
+                    containerPort: 9090
+                    name: grpc
 --- 
 apiVersion: v1
 kind: Service
 metadata: 
-    name: frontend
+    name: backend
+    annotations:
+        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
 spec:
     ports:
     - 
-        port: 443
-        targetPort: 8081
-        protocol: TCP
-        name: https
+        port: 9090
+        targetPort: 9090
+        name: grpc
     selector:
-        app: frontend
+        app: backend

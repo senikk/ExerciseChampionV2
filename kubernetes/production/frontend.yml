@@ -1,0 +1,40 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: frontend
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: frontend
+    template:
+        metadata:
+            labels:
+                app: frontend
+        spec:
+            containers: 
+            - 
+                image: docker.io/senikk/ec-frontend:0.5
+                name: frontend
+                envFrom:
+                    - secretRef:
+                        name: ec-env
+                ports:
+                - 
+                    name: https
+                    containerPort: 8081
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+    name: frontend
+spec:
+    ports:
+    - 
+        port: 443
+        targetPort: 8081
+        protocol: TCP
+        name: https
+    selector:
+        app: frontend
