@@ -7048,6 +7048,8 @@
 	    self.language(localStorage.getItem('language') || 'en'); 
 	}
 
+	const GRPCBACKEND = {"env":{"GRPCSERVICE":"/grpc"}}.env.GRPCSERVICE;
+
 	var StopWatch = function () {
 	  var self = riot.observable(this);
 	  let STOPPED = { icon: 'play_circle_outline', text: 'start', color: 'green' };
@@ -7126,10 +7128,12 @@
 	  },
 	  auth: new Auth(),
 	  stopwatch: new StopWatch(),
-	  backend: new rehearsal_grpc_web_pb_1("http://10.0.0.94:8080"),
+	  backend: new rehearsal_grpc_web_pb_1(GRPCBACKEND),
 	  R: R,
 	  i18n: new Translation()
 	};
+
+	console.log("CONNECTED TO " + GRPCBACKEND);
 
 	riot.mixin(Helper);
 	riot.mount('*');

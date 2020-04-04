@@ -1,55 +1,14 @@
 const path = require('path')
-const PROTO_PATH = path.join(__dirname, '../protos/')
+const PROTO_PATH = path.join(__dirname, 'protos')
 const grpc = require('grpc')
 const protoLoader = require('@grpc/proto-loader')
-const moment = require('moment')
-const sequelize = require('sequelize')
-const {Op} = require('sequelize')
-const {db, Contest, Rehearsal, User} = require('./database/models/index')
 const {Signup} = require('./grpc/signup')
 const {Login} = require('./grpc/login')
 const {AddRehearsal, ListRehearsal, RehearsalStream} = require('./grpc/rehearsal')
 const {AddContest, ListContest, JoinContest} = require('./grpc/contest')
 const {ListResult} = require('./grpc/result')
 const {GetProfile} = require('./grpc/profile')
-
-//const contest = Contest.create({
-//  name: 'NM Brass 2021'
-//});
-
-/*
-User.create({
-  name: 'Terje Pedersen',
-  email: 'terje@senikk.com'
-});
-User.create({
-  name: 'Hege Alette Eilertsen',
-  email: 'hegeae@gmail.com'
-});
-
-Rehearsal.create({
-  userid: 1,
-  contestid: 1,
-  minutes: 10,
-  description: 'Første test'
-});
-Rehearsal.create({
-  userid: 1,
-  contestid: 1,
-  minutes: 5,
-  description: 'Andre test'
-});
-Rehearsal.create({
-  userid: 2,
-  contestid: 1,
-  minutes: 20,
-  description: 'Slår deg'
-});
-*/
-
-//Contest.findByPk(1).then(contest => {
-//  console.log(contest);
-//});
+const PORT = 9090;
 
 const packageDefinition = protoLoader.loadSync(['rehearsal.proto'], {
     keepCase: true,
@@ -74,5 +33,7 @@ server.addService(contestProto.Rehearsal.service, {
   GetProfile: GetProfile,
   RehearsalStream: RehearsalStream
 });
-server.bind('localhost:9090', grpc.ServerCredentials.createInsecure())
+
+console.log("STARTING ON PORT " + PORT);
+server.bind(`0.0.0.0:${PORT}`, grpc.ServerCredentials.createInsecure())
 server.start();

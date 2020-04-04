@@ -1,5 +1,8 @@
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default {
   input: 'app.js',
@@ -8,6 +11,13 @@ export default {
     file: 'bundle.js'
   },
   plugins: [
+    replace({
+      process: JSON.stringify({
+        env: {
+          GRPCSERVICE: process.env.GRPCSERVICE
+        }
+      })
+    }),
     commonjs({
       include: 'node_modules/**',
       namedExports: {

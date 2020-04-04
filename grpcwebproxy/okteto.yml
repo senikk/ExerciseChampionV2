@@ -1,0 +1,6 @@
+name: grpcproxy
+image: okteto/desk:latest
+command:
+- bash
+forward:
+    - 8080:8080

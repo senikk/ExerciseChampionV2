@@ -1,0 +1,176 @@
+syntax = "proto3";
+package rehearsal;
+
+// Login
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    int32 userid = 1;
+    string jwt = 2;
+    string name = 3;
+}
+
+message SignupRequest {
+    string name = 1;
+    string email = 2;
+    string password = 3;
+}
+
+// Rehearsal
+message AddRehearsalRequest {
+    int32 contestid = 1;
+    int32 minutes = 2;
+    string description = 3;
+}
+
+message ListRehearsalRequest {
+    int32 userid = 1; 
+    int32 contestid = 2;
+    int32 limit = 3;
+}
+
+message RehearsalEntry {
+    int32 id = 1;
+    int32 userid = 2;
+    int32 contestid = 3;
+    int32 minutes = 4;
+    string description = 5;
+    string createdAt = 6;
+    User user = 7;
+    Contest contest = 8;
+}
+
+message User {
+    string name = 1;
+}
+
+message Contest {
+    string name = 1;
+}
+
+message ListRehearsalResponse {
+    repeated RehearsalEntry rehearsals = 1;
+}
+
+message RemoveRehearsalRequest {
+    int32 rehearselid = 1;
+}
+
+message RemoveRehearsalResponse {}
+
+// Contest
+message AddContestRequest {
+    string name = 1;
+    string rules = 2;
+    bool public = 3;
+}
+
+message AddContestResponse {
+    ContestEntry contest = 1;
+}
+
+message ContestEntry {
+    int32 id = 1;
+    string name = 2;
+    string rules = 3;
+    User user = 4;
+    bool joined = 5;
+    bool public = 6;
+}
+
+message ListContestRequest {
+    string filter = 1;
+    int32 limit = 2;
+    bool public = 3;
+    bool joined = 4;
+}
+
+message ListContestReponse {
+    repeated ContestEntry contests = 1;
+}
+
+message JoinContestRequest {
+    int32 contestid = 2;
+}
+
+message JoinContestResponse {}
+
+// Results
+message ListResultRequest {
+    int32 contestid = 1;
+    enum Period {
+        THISYEAR = 0;
+        THISMONTH = 1;
+        THISWEEK = 2;
+        LASTYEAR = 3;
+        LASTMONTH = 4;
+        LASTWEEK = 5;
+    };
+    Period period = 2;
+    int32 limit = 3;
+}
+
+message Result {
+    int32 contestid = 1;
+    int32 userid = 2;
+    int32 position = 3;
+    string minutes = 4;
+    User user = 5;
+}
+
+message ListResultReponse {
+    repeated Result results = 1;
+}
+
+message ResultRequest {
+    int32 userid = 1;
+}
+
+message ResultResponse {
+    int32 thisyear = 1;
+    int32 thismonth = 2;
+    int32 thisweek = 3;
+}
+
+// Profile
+
+message ProfileRequest {
+    int32 userid = 1;
+}
+
+message ProfileResponse {
+    string name = 1;
+    string joined = 2;
+    int32 positionthisweek = 3;
+    int32 minutesthisweek = 4;
+    int32 minutesthismonth = 5;
+    int32 minutesthisyear = 6;
+}
+
+service Rehearsal {
+    // Login
+    rpc Login(LoginRequest) returns (LoginResponse) {};
+    rpc Signup(SignupRequest) returns (LoginResponse) {};
+
+    // Rehearsal
+    rpc AddRehearsal(AddRehearsalRequest) returns (RehearsalEntry) {};
+    rpc RemoveRehearsal(RemoveRehearsalRequest) returns (RemoveRehearsalResponse) {};
+    rpc ListRehearsal(ListRehearsalRequest) returns (ListRehearsalResponse) {};
+    rpc RehearsalStream(ListRehearsalRequest) returns (stream RehearsalEntry) {};
+
+    // Contest
+    rpc AddContest(AddContestRequest) returns (ContestEntry) {};
+    rpc ListContest(ListContestRequest) returns (ListContestReponse) {};
+    rpc JoinContest(JoinContestRequest) returns (JoinContestResponse) {};
+    rpc LeaveContest(JoinContestRequest) returns (JoinContestResponse) {};
+
+    // Results
+    rpc ListResult(ListResultRequest) returns (ListResultReponse) {};
+    rpc YourResult(ResultRequest) returns (ResultResponse) {};
+
+    // Profile
+    rpc GetProfile(ProfileRequest) returns (ProfileResponse) {};
+}

@@ -1,0 +1,7 @@
+name: grpctest
+image: okteto/node:10
+command:
+- bash
+workdir: /usr/src/app
+forward:
+    - 9090:9090

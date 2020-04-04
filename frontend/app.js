@@ -2,6 +2,8 @@ import {RehearsalClient} from 'rehearsal';
 import Translation from './translation';
 import * as R from 'rehearsal/rehearsal_pb';
 
+const GRPCBACKEND = process.env.GRPCSERVICE;
+
 var StopWatch = function () {
   var self = riot.observable(this);
 
@@ -82,10 +84,12 @@ var Helper = {
   },
   auth: new Auth(),
   stopwatch: new StopWatch(),
-  backend: new RehearsalClient("http://10.0.0.94:8080"),
+  backend: new RehearsalClient(GRPCBACKEND),
   R: R,
   i18n: new Translation()
 };
+
+console.log("CONNECTED TO " + GRPCBACKEND);
 
 riot.mixin(Helper);
 riot.mount('*');

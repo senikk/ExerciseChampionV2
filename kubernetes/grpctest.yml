@@ -1,0 +1,41 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: grpctest
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: grpctest
+    template:
+        metadata:
+            labels:
+                app: grpctest
+        spec:
+            containers: 
+            - 
+                image: docker.io/senikk/ec-backend:0.2
+                name: grpctest
+                envFrom:
+                    - secretRef:
+                        name: ec-env
+                ports:
+                - 
+                    containerPort: 9090
+                    name: grpc
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+    name: grpctest
+    annotations:
+        dev.okteto.com/generate-host: "true"
+        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+spec:
+    ports:
+    -
+        port: 9090
+        targetPort: 9090
+    selector:
+        k8s-app: grpctest

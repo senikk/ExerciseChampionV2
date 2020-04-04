@@ -6,8 +6,11 @@
   "author": "Terje Pedersen",
   "license": "MIT",
   "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "local": "node -r dotenv/config server.js",
     "proxy": "grpcwebproxy.exe --use_websockets --backend_addr=localhost:9090 --run_tls_server=false --allow_all_origins",
-    "test": "node grpctest.js"
+    "test": "node grpctest.js",
+    "migrate": "NODE_ENV=production sequelize db:migrate"
   },
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",

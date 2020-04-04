@@ -15,7 +15,7 @@ function Login(input, cb) {
     })
     .then(entity => {
         let user = entity.get({plain: true});
-        
+
         let isMatch = bcrypt.compareSync(req.password, user.hash)
         if (isMatch) {
             entity.update({lastseen: moment()})

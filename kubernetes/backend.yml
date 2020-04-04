@@ -1,0 +1,41 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: backend
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: backend
+    template:
+        metadata:
+            labels:
+                app: backend
+        spec:
+            containers: 
+            - 
+                image: docker.io/senikk/ec-backend:0.2
+                name: backend
+                envFrom:
+                    - secretRef:
+                        name: ec-env
+                ports:
+                - 
+                    containerPort: 9090
+                    name: grpc
+--- 
+    apiVersion: v1
+    kind: Service
+    metadata: 
+        name: backend
+        annotations:
+            nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+    spec:
+        ports:
+        - 
+            port: 9090
+            targetPort: 9090
+            name: grpc
+        selector:
+            app: backend

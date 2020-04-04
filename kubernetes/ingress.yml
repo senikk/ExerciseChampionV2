@@ -1,0 +1,22 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    annotations:
+        kubernetes.io/ingress.class: "nginx"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+    name: grpcproxyingress
+spec:
+    rules:
+    - host: ec-senikk.cloud.okteto.net
+      http:
+        paths:
+        - path: /(.*)
+          backend:
+            serviceName: frontend
+            servicePort: 443
+        - path: /grpc/(.*)
+          backend:
+            serviceName: grpcproxy
+            servicePort: 443

@@ -1,0 +1,35 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: grpcproxy
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: grpcproxy
+    template:
+        metadata:
+            labels:
+                app: grpcproxy
+        spec:
+            containers: 
+            - 
+                image: docker.io/senikk/ec-grpcwebproxy:0.2
+                name: grpcproxy
+                ports:
+                - 
+                    containerPort: 8080
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+    name: grpcproxy
+spec:
+    ports:
+    -
+        port: 443
+        targetPort: 8080
+        protocol: TCP
+    selector:
+        app: grpcproxy

@@ -1,0 +1,7 @@
+name: frontend
+image: okteto/node:10
+command:
+- bash
+workdir: /usr/src/app
+forward:
+    - 8080:8080

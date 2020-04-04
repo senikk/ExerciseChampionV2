@@ -1,9 +1,9 @@
 const path = require('path')
-const PROTO_PATH = path.join(__dirname, '../protos/')
+const PROTO_PATH = path.join(__dirname, 'protos/')
 const grpc = require('grpc')
 const protoLoader = require('@grpc/proto-loader')
 
-const packageDefinition = protoLoader.loadSync('../protos/rehearsal.proto', {
+const packageDefinition = protoLoader.loadSync('rehearsal.proto', {
     keepCase: true,
     longs: String,
     enums: String,
@@ -88,8 +88,8 @@ backend.ListRehearsal({
 
 /*
 backend.Login({
-  email: 'test@senikk.com',
-  password: '123456'
+  email: 'terje@senikk.com',
+  password: '1234'
 }, (error, result) => {
   console.log(result);
 
@@ -105,9 +105,10 @@ backend.Login({
 });
 */
 
+/*
 backend.Login({
-  email: 'test@senikk.com',
-  password: '123456'
+  email: 'terje@senikk.com',
+  password: '1234'
 }, (error, result) => {
   var meta = new grpc.Metadata()
   meta.add('jwt', result.jwt)
@@ -120,4 +121,4 @@ backend.Login({
       console.log(error);
   });  
 } );
-
+*/

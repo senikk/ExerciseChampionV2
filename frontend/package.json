@@ -1,26 +1,29 @@
 {
-	"name": "ExerciseChampion",
+	"name": "exercisechampion2",
 	"version": "2.0.0",
+	"license": "MIT",
 	"scripts": {
 		"build": "rollup -c rollup.config.js",
 		"start": "node server.js",
+		"local": "node -r dotenv/config server.js",
 		"watch:riot": "riot -w ./tags ./tags/all.js",
-		"protoc": "protoc -I ../protos rehearsal.proto --js_out=import_style=commonjs:rehearsal --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:rehearsal && cp rehearsal/* node_modules/rehearsal/"
+		"protoc": "protoc -I ../backend/protos rehearsal.proto --js_out=import_style=commonjs:rehearsal --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:rehearsal && cp rehearsal/* node_modules/rehearsal/"
 	},
 	"dependencies": {
-		"@babel/core": "^7.8.7",
 		"@riotjs/compiler": "^4.7.0",
 		"@riotjs/route": "^5.3.1",
-		"@rollup/plugin-commonjs": "^11.0.2",
-		"@rollup/plugin-node-resolve": "^7.1.1",
-		"babel-preset-es2015-rollup": "^3.0.0",
 		"connect": "^3.6.5",
 		"moment": "^2.18.1",
 		"node-polyglot": "^2.4.0",
 		"rehearsal": "file:rehearsal",
 		"riot": "^3.13.2",
-		"rollup": "^2.0.6",
-		"rollup-plugin-babel": "^4.4.0",
 		"serve-static": "^1.13.0"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^11.0.2",
+		"@rollup/plugin-node-resolve": "^7.1.1",
+		"@rollup/plugin-replace": "^2.3.1",
+		"dotenv": "^8.2.0",
+		"rollup": "^2.2.0"
 	}
 }
