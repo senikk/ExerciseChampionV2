@@ -33,10 +33,14 @@
     }
 
     cleartimer(e) {
+      e.preventDefault();
       self.stopwatch.trigger('clear');
+      this.minutes = 0;
+      this.refs.minutes.value = null;
     }
 
     toggletimer(e) {
+      e.preventDefault();
       self.stopwatch.trigger('toggle');      
     }
 
@@ -45,12 +49,13 @@
     });
 
     self.stopwatch.on('minutes', (minutes) => {
-      console.log("== GOT MIN", minutes);
       self.minutes = minutes;
-      self.refs.minutes.value = minutes;
+      self.refs.minutes.value = minutes > 0 ? minutes : null;
     });
 
     add(e) {
+      e.preventDefault();
+
       let r = new this.R.AddRehearsalRequest();
       r.setContestid(this.contestId);
       r.setMinutes(parseInt(this.refs.minutes.value));

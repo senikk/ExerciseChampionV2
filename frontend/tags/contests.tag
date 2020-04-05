@@ -1,13 +1,17 @@
 <contests>
   <actions title="title.contests"></actions>
 
-  <ul class="collection">
+  <ul class="collection with-header">
     <li class="collection-header"><h5>{ i18n.t('contests.available') }</h5></li>
     <li each={ contests } class="collection-item avatar">
-	    <i if={!joined} onclick={ joinModal } data-message={id} class="material-icons circle">add</i>
+      <i if={!joined} onclick={ joinModal } data-message={id} class="material-icons circle">add</i>
       <i if={joined} class="material-icons circle green">remove</i>
-      <span class="title">{ name }</span><br>
-      <small>{ hDate(createdAt) }</small>
+      <p>
+        <span class="title">{ name }</span><br>
+        <small>{ hDate(createdAt) }</small>
+      </p>
+
+      <i onclick={ inviteContest } data-message={id} class="material-icons secondary-content waves-effect waves-light">share</i>
     </li>
   </ul>
 
@@ -23,9 +27,49 @@
     </div>
   </div>
 
+  <!-- Invite modal -->
+  <div ref="inviteContestModal" class="modal">
+    <div class="modal-content">
+      <h4>{ i18n.t('modal.invitecontest.question', {name: contest.name}) }</h4>
+      <p if={ contest.rules }>{ i18n.t('modal.addcontest.rules') }<br>{contest.rules}</p>
+      <input readonly ref="inviteurl" value={ contest.inviteurl } />
+      <p>
+        { i18n.t('modal.invitecontest.description')}
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-open waved-effect btn-flat" onclick={ copyToClipboard }>{ i18n.t('modal.invitecontest.copybutton')}</a>
+      <a href="#!" class="modal-close waves-effect btn-flat">{ i18n.t('modal.close') }</a>
+    </div>
+  </div>
+
   <script>
     var self = this;
     this.contest = {};
+
+    copyToClipboard() {
+      this.refs.inviteurl.select();
+      this.refs.inviteurl.setSelectionRange(0,200);
+      document.execCommand("copy");
+
+      M.toast({html: this.i18n.t('modal.invitecontest.copied')});
+    }
+
+    inviteContest(e) {
+      var r = new this.R.InviteRequest();
+      r.setEntitytype(this.R.EntityType.CONTEST);
+      r.setEntityid(e.target.dataset.message)
+
+      this.contest = this.contests.find(c => c.id == e.target.dataset.message);
+
+      this.backend.getInvite(r, this.auth.jwt(), (error, result) => {
+        self.contest.inviteurl = `${this.env.APPURL}/?#/invite/${btoa(result.getHash())}`;
+        self.update();
+
+        var instance = M.Modal.getInstance(self.refs.inviteContestModal);
+        instance.open();
+      });
+    }
 
     joinContest() {
       var r = new this.R.JoinContestRequest();
@@ -54,6 +98,7 @@
 
   	this.on("mount", function () {
       M.Modal.init(this.refs.addContestModal);
+      M.Modal.init(this.refs.inviteContestModal);
 
       var r = new this.R.ListContestRequest();
       r.setPublic(true);

@@ -8,6 +8,7 @@ const {AddRehearsal, ListRehearsal, RehearsalStream} = require('./grpc/rehearsal
 const {AddContest, ListContest, JoinContest} = require('./grpc/contest')
 const {ListResult} = require('./grpc/result')
 const {GetProfile} = require('./grpc/profile')
+const {GetInvite, AcceptInvite} = require('./grpc/invite')
 const PORT = 9090;
 
 const packageDefinition = protoLoader.loadSync(['rehearsal.proto'], {
@@ -31,7 +32,9 @@ server.addService(contestProto.Rehearsal.service, {
   ListResult: ListResult,
   JoinContest: JoinContest,
   GetProfile: GetProfile,
-  RehearsalStream: RehearsalStream
+  RehearsalStream: RehearsalStream,
+  GetInvite: GetInvite,
+  AcceptInvite: AcceptInvite
 });
 
 console.log("STARTING ON PORT " + PORT);

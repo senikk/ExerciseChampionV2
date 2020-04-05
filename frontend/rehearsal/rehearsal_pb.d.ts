@@ -623,3 +623,87 @@ export namespace ProfileResponse {
   }
 }
 
+export class InviteRequest extends jspb.Message {
+  getEntitytype(): EntityType;
+  setEntitytype(value: EntityType): void;
+
+  getEntityid(): number;
+  setEntityid(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): InviteRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: InviteRequest): InviteRequest.AsObject;
+  static serializeBinaryToWriter(message: InviteRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): InviteRequest;
+  static deserializeBinaryFromReader(message: InviteRequest, reader: jspb.BinaryReader): InviteRequest;
+}
+
+export namespace InviteRequest {
+  export type AsObject = {
+    entitytype: EntityType,
+    entityid: number,
+  }
+}
+
+export class InviteResponse extends jspb.Message {
+  getHash(): string;
+  setHash(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): InviteResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: InviteResponse): InviteResponse.AsObject;
+  static serializeBinaryToWriter(message: InviteResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): InviteResponse;
+  static deserializeBinaryFromReader(message: InviteResponse, reader: jspb.BinaryReader): InviteResponse;
+}
+
+export namespace InviteResponse {
+  export type AsObject = {
+    hash: string,
+  }
+}
+
+export class InviteAcceptRequest extends jspb.Message {
+  getHash(): string;
+  setHash(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): InviteAcceptRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: InviteAcceptRequest): InviteAcceptRequest.AsObject;
+  static serializeBinaryToWriter(message: InviteAcceptRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): InviteAcceptRequest;
+  static deserializeBinaryFromReader(message: InviteAcceptRequest, reader: jspb.BinaryReader): InviteAcceptRequest;
+}
+
+export namespace InviteAcceptRequest {
+  export type AsObject = {
+    hash: string,
+  }
+}
+
+export class InviteAcceptResponse extends jspb.Message {
+  getEntitytype(): EntityType;
+  setEntitytype(value: EntityType): void;
+
+  getEntityid(): number;
+  setEntityid(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): InviteAcceptResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: InviteAcceptResponse): InviteAcceptResponse.AsObject;
+  static serializeBinaryToWriter(message: InviteAcceptResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): InviteAcceptResponse;
+  static deserializeBinaryFromReader(message: InviteAcceptResponse, reader: jspb.BinaryReader): InviteAcceptResponse;
+}
+
+export namespace InviteAcceptResponse {
+  export type AsObject = {
+    entitytype: EntityType,
+    entityid: number,
+  }
+}
+
+export enum EntityType { 
+  EXERCISECHAMPION = 0,
+  CONTEST = 1,
+}

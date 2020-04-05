@@ -10,13 +10,31 @@
 		<route path="profile/*"><profile></profile></route>
 		<route path="timeline"><timeline></timeline></route>
 		<route path="contest/add"><addcontest></addcontest></route>
+		<route path="invite/*"><login></login></route>
   	</router>
 
 	<script>
 		let self = this;
 
 		this.auth.on('login', function (user) {
-			route('log','Excerise Champion');
+			// normal flow
+			if (!self.auth.getInvite()) 
+			{
+				route('log','Excerise Champion');
+			}
+			// invitation
+			else
+			{
+				var r = new self.R.InviteAcceptRequest();
+				r.setHash(atob(self.auth.getInvite()));
+
+				self.backend.acceptInvite(r, self.auth.jwt(), (error, result) => {
+					self.auth.clearInvite();
+					route('result','Excerise Champion');
+
+					M.toast({html: self.i18n.t('invitation.accepted')});
+				});
+			}
 		});
 
 		this.auth.on('logout', function () {
@@ -28,6 +46,18 @@
 		  	route(this.auth.user ? 'log' : 'login');
 		});
 
+		// Mange invite
+		route(function (target, hash) {
+			if (target == 'invite' && hash != null) {
+				self.auth.setInvite(hash);
+
+				if (self.auth.user) {
+					self.auth.login(self.auth.user);
+				}
+			}
+		});
+
+		// Live stream
         var r = new this.R.ListRehearsalRequest();
 		let channel = this.backend.rehearsalStream(r, this.auth.jwt());
         channel.on("data", (data) => {

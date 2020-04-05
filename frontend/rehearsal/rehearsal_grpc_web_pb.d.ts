@@ -4,6 +4,10 @@ import {
   AddContestRequest,
   AddRehearsalRequest,
   ContestEntry,
+  InviteAcceptRequest,
+  InviteAcceptResponse,
+  InviteRequest,
+  InviteResponse,
   JoinContestRequest,
   JoinContestResponse,
   ListContestReponse,
@@ -117,6 +121,20 @@ export class RehearsalClient {
                response: ProfileResponse) => void
   ): grpcWeb.ClientReadableStream<ProfileResponse>;
 
+  getInvite(
+    request: InviteRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: InviteResponse) => void
+  ): grpcWeb.ClientReadableStream<InviteResponse>;
+
+  acceptInvite(
+    request: InviteAcceptRequest,
+    metadata: grpcWeb.Metadata | undefined,
+    callback: (err: grpcWeb.Error,
+               response: InviteAcceptResponse) => void
+  ): grpcWeb.ClientReadableStream<InviteAcceptResponse>;
+
 }
 
 export class RehearsalPromiseClient {
@@ -188,6 +206,16 @@ export class RehearsalPromiseClient {
     request: ProfileRequest,
     metadata?: grpcWeb.Metadata
   ): Promise<ProfileResponse>;
+
+  getInvite(
+    request: InviteRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<InviteResponse>;
+
+  acceptInvite(
+    request: InviteAcceptRequest,
+    metadata?: grpcWeb.Metadata
+  ): Promise<InviteAcceptResponse>;
 
 }
 

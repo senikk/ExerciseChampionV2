@@ -18,6 +18,8 @@
     }
 
     login(e) {
+      e.preventDefault();
+
       var r = new this.R.LoginRequest();
       r.setEmail(this.refs.email.value);
       r.setPassword(this.refs.password.value);

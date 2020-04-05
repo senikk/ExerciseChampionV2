@@ -33,6 +33,8 @@
     var self = this;
 
     add(e) {
+      e.preventDefault();
+
       let r = new this.R.AddContestRequest();
       r.setName(this.refs.name.value);
       r.setRules(this.refs.rules.value);
@@ -42,6 +44,8 @@
         if (error) { M.toast({html: error.message}); return; }
 
         self.event.trigger("contest:added", result.toObject());
+        M.toast({html: self.i18n.t('addcontest.added')});
+        route('contests');
       });
     }
   </script>

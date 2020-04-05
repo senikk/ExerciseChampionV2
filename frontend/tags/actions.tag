@@ -4,6 +4,11 @@
 			top: -40px;
 			width: 200px !important;
 		}
+		.dropdown-content li.version {
+			font-size: 7pt;
+			padding-top: 10px;
+			padding-left: 14px;
+		}
 	</style>
 
 	<!-- logged in users -->
@@ -39,6 +44,8 @@
 			<li class="divider"></li>
 			<!-- <li><a href="#/metronome" title="Metronome">{ i18n.t('dropdown.metronome') }</a> -->
 			<li><a onclick={ logoutModal } href="#!" title="Log out">{ i18n.t('dropdown.logout') }</i></a></li>
+			<li class="divider"></li>
+			<li class="version">ec: v0.7 / v0.8 06.04.2020</li>
 		</ul>
 
 		<!-- Button at bottom -->

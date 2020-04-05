@@ -13,12 +13,19 @@ let translations = {
       modal: {
         yes: 'Ja',
         no: 'Nei',
+        close: 'Lukk',
         logout: {
             question: 'Virkelig logge ut?'
         },
         addcontest: {
             question: 'Bli med på konkurranse "%{name}"',
             rules: 'Regler:'
+        },
+        invitecontest: {
+            question: 'Inviter andre til "%{name}"',
+            copybutton: 'Kopier',
+            copied: 'Kopiert',
+            description: 'Kopier invitasjonslenken og del den med dine venner'
         }
       },
       menu: {
@@ -53,7 +60,8 @@ let translations = {
         name: 'Konkurranse navn',
         rules: 'Konkurranse regler',
         public: 'Offentlig, konkurranse tilgjengelige for alle uten invitasjon',
-        add: 'Legg til'
+        add: 'Legg til',
+        added: 'Konkurranse lagt til'
       },
       result: {
         minutes: 'Minutter',
@@ -71,6 +79,9 @@ let translations = {
         lastyear: 'forrige år %{year}',
         lastmonth: 'forrige måned',
         lastweek: 'forrige uke %{week}'
+      },
+      invitation: {
+        accepted: 'Invitiasjon godkjent'
       },
       clear: 'TØM',
       start: 'START',
@@ -97,12 +108,19 @@ let translations = {
       modal: {
         yes: 'Yes',
         no: 'Cancel',
+        close: 'Close',
         logout: {
             question: 'Really log out'
         }, 
         addcontest: {
-            question: 'Join contest "%{name}"',
-            rules: 'Rules:'
+          question: 'Join contest "%{name}"',
+          rules: 'Rules:'
+        },
+        invitecontest: {
+          question: 'Invite others to "%{name}"',
+          copybutton: 'Copy',
+          copied: 'Copied',
+          description: 'Copy the invitation link and give it to your friends'
         }
       },
       menu: {
@@ -142,7 +160,8 @@ let translations = {
         name: 'Contest name',
         rules: 'Contest rules',
         public: 'Public, contest available without invite for everyone ',
-        add: 'Add'
+        add: 'Add',
+        added: 'Contest added'
       },
       contests: {
         available: 'Available contest',
@@ -155,6 +174,9 @@ let translations = {
         lastyear: 'last year %{year}',
         lastmonth: 'last month',
         lastweek: 'last week %{week}'
+      },
+      invitation: {
+        accepted: 'Invitation accepted'
       },
       clear: 'CLEAR',
       start: 'START',

@@ -3,26 +3,28 @@ const {Contest, User, UserContest} = require('../database/models/index')
 const {IsAuthorized} = require('./auth')
 
 function AddContest(input, cb) {
-    var req = input.request
-    req.userid = 1
-    req.public = req.public || false
-
-    if (!req.name) {
-        cb({message: 'Contest name missing'})
-        return;
-    }
-
-    Contest.create(req).then((data) => {
-        Contest.findByPk(data.id, {
-            include: [{
-                model: User,
-                as: 'user',
-                attributes: ['name']
-            }]
-        })
-        .then(data => data.get({plain: true}))
-        .then(data => {
-            cb(null, data);
+    IsAuthorized(input, cb).then((auth) => {
+        var req = input.request
+        req.userid = 1
+        req.public = req.public || false
+    
+        if (!req.name) {
+            cb({message: 'Contest name missing'})
+            return;
+        }
+    
+        Contest.create(req).then((data) => {
+            Contest.findByPk(data.id, {
+                include: [{
+                    model: User,
+                    as: 'user',
+                    attributes: ['name']
+                }]
+            })
+            .then(data => data.get({plain: true}))
+            .then(data => {
+                cb(null, data);
+            })
         })
     })
 }
@@ -59,7 +61,6 @@ function ListContest(input, cb) {
                 attributes: ['id']
             }
         }).then(data => data.get({plain: true})).then(user => {
-            console.log(">> JOINED", user.joinedContests);
             Contest.findAll(options).then(data => {
                 data.map(entry => entry.joined = user.joinedContests.some(c => c.id == entry.id))
 
@@ -70,7 +71,6 @@ function ListContest(input, cb) {
                     data.filter(entry => entry.public)
                 }
 
-                console.log("MATCHED CONTESTS", data.length);
                 cb(null, {
                     contests: data
                 })

@@ -26,9 +26,5 @@
 				this.update();
       		});
 		});
-
-	    this.on("mount", function () {			
-		    
-		});
  	</script>
 </profile>

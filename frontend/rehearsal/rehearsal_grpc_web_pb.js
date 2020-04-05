@@ -1101,5 +1101,165 @@ proto.rehearsal.RehearsalPromiseClient.prototype.getProfile =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.rehearsal.InviteRequest,
+ *   !proto.rehearsal.InviteResponse>}
+ */
+const methodDescriptor_Rehearsal_GetInvite = new grpc.web.MethodDescriptor(
+  '/rehearsal.Rehearsal/GetInvite',
+  grpc.web.MethodType.UNARY,
+  proto.rehearsal.InviteRequest,
+  proto.rehearsal.InviteResponse,
+  /**
+   * @param {!proto.rehearsal.InviteRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.InviteResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.rehearsal.InviteRequest,
+ *   !proto.rehearsal.InviteResponse>}
+ */
+const methodInfo_Rehearsal_GetInvite = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.rehearsal.InviteResponse,
+  /**
+   * @param {!proto.rehearsal.InviteRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.InviteResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.rehearsal.InviteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.rehearsal.InviteResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.InviteResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.rehearsal.RehearsalClient.prototype.getInvite =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/rehearsal.Rehearsal/GetInvite',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_GetInvite,
+      callback);
+};
+
+
+/**
+ * @param {!proto.rehearsal.InviteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.rehearsal.InviteResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.rehearsal.RehearsalPromiseClient.prototype.getInvite =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/rehearsal.Rehearsal/GetInvite',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_GetInvite);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.rehearsal.InviteAcceptRequest,
+ *   !proto.rehearsal.InviteAcceptResponse>}
+ */
+const methodDescriptor_Rehearsal_AcceptInvite = new grpc.web.MethodDescriptor(
+  '/rehearsal.Rehearsal/AcceptInvite',
+  grpc.web.MethodType.UNARY,
+  proto.rehearsal.InviteAcceptRequest,
+  proto.rehearsal.InviteAcceptResponse,
+  /**
+   * @param {!proto.rehearsal.InviteAcceptRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.InviteAcceptResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.rehearsal.InviteAcceptRequest,
+ *   !proto.rehearsal.InviteAcceptResponse>}
+ */
+const methodInfo_Rehearsal_AcceptInvite = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.rehearsal.InviteAcceptResponse,
+  /**
+   * @param {!proto.rehearsal.InviteAcceptRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.rehearsal.InviteAcceptResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.rehearsal.InviteAcceptRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.rehearsal.InviteAcceptResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.rehearsal.InviteAcceptResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.rehearsal.RehearsalClient.prototype.acceptInvite =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/rehearsal.Rehearsal/AcceptInvite',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_AcceptInvite,
+      callback);
+};
+
+
+/**
+ * @param {!proto.rehearsal.InviteAcceptRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.rehearsal.InviteAcceptResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.rehearsal.RehearsalPromiseClient.prototype.acceptInvite =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/rehearsal.Rehearsal/AcceptInvite',
+      request,
+      metadata || {},
+      methodDescriptor_Rehearsal_AcceptInvite);
+};
+
+
 module.exports = proto.rehearsal;
 

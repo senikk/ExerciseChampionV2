@@ -150,6 +150,31 @@ message ProfileResponse {
     int32 minutesthisyear = 6;
 }
 
+// Invite
+
+enum EntityType {
+    EXERCISECHAMPION = 0;
+    CONTEST = 1;
+}
+
+message InviteRequest {
+    EntityType entitytype = 1;
+    int32 entityid = 2;
+}
+
+message InviteResponse {
+    string hash = 1;
+}
+
+message InviteAcceptRequest{
+    string hash = 1;
+}
+
+message InviteAcceptResponse {
+    EntityType entitytype = 2;
+    int32 entityid = 3;
+}
+
 service Rehearsal {
     // Login
     rpc Login(LoginRequest) returns (LoginResponse) {};
@@ -173,4 +198,8 @@ service Rehearsal {
 
     // Profile
     rpc GetProfile(ProfileRequest) returns (ProfileResponse) {};
+
+    // Invite
+    rpc GetInvite(InviteRequest) returns (InviteResponse) {};
+    rpc AcceptInvite(InviteAcceptRequest) returns (InviteAcceptResponse) {};
 }

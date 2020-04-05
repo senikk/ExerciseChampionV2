@@ -16,7 +16,9 @@
       route('login')
     }
 
-    signup() {
+    signup(e) {
+      e.preventDefault();
+
       if (!this.refs.password.value) {
           M.toast({html: i18n.t('signup.missingpassword') });
           return;

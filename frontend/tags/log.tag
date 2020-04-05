@@ -21,14 +21,14 @@
     });
 
     this.on("mount", function () {
-      var r = new this.R.ListRehearsalRequest();
-      r.setUserid(this.auth.user.id);
+      var r = new self.R.ListRehearsalRequest();
+      r.setUserid(self.auth.user.id);
       
-      this.backend.listRehearsal(r, this.auth.jwt(), (error, result) => {
+      self.backend.listRehearsal(r, this.auth.jwt(), (error, result) => {
         if (error) { M.toast({html: error.message}); return; }
 
-        this.logs = result.toObject().rehearsalsList;
-        this.update();
+        self.logs = result.toObject().rehearsalsList;
+        self.update();
       });
 		});
   </script>

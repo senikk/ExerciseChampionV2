@@ -43,6 +43,7 @@ var StopWatch = function () {
     } else {
       clearInterval(this.clock);
       self.status = 'STOPPED';
+      self.trigger('minutes', Math.round(self.seconds / 60));
     }
 
     localStorage.setItem('timer-status', self.status);
@@ -75,6 +76,18 @@ var Auth = function () {
     self.meta = undefined;
     self.trigger('logout');
   }
+
+  self.getInvite = () => {
+    return localStorage.getItem('invite');
+  }
+
+  self.setInvite = (hash) => {
+    localStorage.setItem('invite', hash);
+  }
+
+  self.clearInvite = () => {
+    localStorage.removeItem('invite');
+  }
 }
 
 var Helper = {
@@ -86,7 +99,8 @@ var Helper = {
   stopwatch: new StopWatch(),
   backend: new RehearsalClient(GRPCBACKEND),
   R: R,
-  i18n: new Translation()
+  i18n: new Translation(),
+  env: process.env
 };
 
 console.log("CONNECTED TO " + GRPCBACKEND);

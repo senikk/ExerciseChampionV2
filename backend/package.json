@@ -1,16 +1,19 @@
 {
   "name": "backend",
-  "version": "1.0.0",
+  "version": "0.8",
   "description": "GRPC backend for rehearsel logging",
   "main": "server.js",
   "author": "Terje Pedersen",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production sequelize db:migrate && NODE_ENV=production node server.js",
     "local": "node -r dotenv/config server.js",
     "proxy": "grpcwebproxy.exe --use_websockets --backend_addr=localhost:9090 --run_tls_server=false --allow_all_origins",
     "test": "node grpctest.js",
-    "migrate": "NODE_ENV=production sequelize db:migrate"
+    "migrate": "NODE_ENV=production sequelize db:migrate",
+    "docker:build": "docker build -t ec-backend:%npm_package_version% .",
+    "docker:tag": "docker tag ec-backend:%npm_package_version% senikk/ec-backend:%npm_package_version%",
+    "docker:push": "docker push senikk/ec-backend:%npm_package_version%"
   },
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",

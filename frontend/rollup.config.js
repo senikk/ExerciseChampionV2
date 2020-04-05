@@ -14,7 +14,8 @@ export default {
     replace({
       process: JSON.stringify({
         env: {
-          GRPCSERVICE: process.env.GRPCSERVICE
+          GRPCSERVICE: process.env.GRPCSERVICE,
+          APPURL: process.env.APPURL
         }
       })
     }),
@@ -44,7 +45,12 @@ export default {
           'SearchContestRequest',
           'SignupRequest',
           'ProfileRequest',
-          'ProfileResponse'],
+          'ProfileResponse',
+          'InviteRequest',
+          'InviteResponse',
+          'InviteAcceptRequest',
+          'InviteAcceptResponse',
+          'EntityType'],
         'grpc-web/index.js': ['AbstractClientBase', 'GrpcWebClientBase']
       }
     }),
