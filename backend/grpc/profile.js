@@ -15,7 +15,7 @@ function GetProfile(input, cb) {
             let user = entity.get({plain: true})
             let year = moment().year()
             let month = moment().month() + 1
-            let week = moment().week() - 1
+            let week = moment().week()
     
             db.sequelize.query(`
                 with sums as (select sum(minutes) as minutes, extract(YEAR from "createdAt") as year, extract(MONTH from "createdAt") as month, extract(WEEK from "createdAt") as week from "Rehearsals" where userid = ${user.id} and extract(YEAR from "createdAt") = ${year} group by year, month, week)

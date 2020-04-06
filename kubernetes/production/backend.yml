@@ -15,7 +15,7 @@ spec:
         spec:
             containers: 
             - 
-                image: docker.io/senikk/ec-backend:0.8
+                image: docker.io/senikk/ec-backend:0.9
                 name: backend
                 envFrom:
                     - secretRef:

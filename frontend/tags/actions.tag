@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col s4">
 				<blockquote if={profile.minutesthisweek > 0}>
-					<b>{ i18n.t(opts.title) }</b><br>{ this.auth.user.name } <i>{i18n.t('position',{position: profile.positionthisweek})} { i18n.t('thisweek', {week: moment().week()-1}) }<br>{i18n.t('minutes', {minutes: profile.minutesthisweek})}</i>
+					<b>{ i18n.t(opts.title) }</b><br>{ this.auth.user.name } <i>{i18n.t('position',{position: profile.positionthisweek})} { i18n.t('thisweek', {week: moment().week()}) }<br>{i18n.t('minutes', {minutes: profile.minutesthisweek})}</i>
 				</blockquote>
 				<blockquote if={profile.minutesthisweek == 0}>
 					<b>{ i18n.t(opts.title) }</b><br>{ this.auth.user.name }<br>{ i18n.t('no registration this week') }</i>
@@ -45,7 +45,7 @@
 			<!-- <li><a href="#/metronome" title="Metronome">{ i18n.t('dropdown.metronome') }</a> -->
 			<li><a onclick={ logoutModal } href="#!" title="Log out">{ i18n.t('dropdown.logout') }</i></a></li>
 			<li class="divider"></li>
-			<li class="version">ec: v0.7 / v0.8 06.04.2020</li>
+			<li class="version">ec: v0.8 / v0.9 06.04.2020</li>
 		</ul>
 
 		<!-- Button at bottom -->

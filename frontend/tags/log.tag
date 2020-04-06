@@ -4,9 +4,9 @@
 
   <ul class="collection">
     <li each={ logs } class="collection-item">
-      <span class="title">{ user.name } - { i18n.t('minutes', {minutes}) }</span>
+      <span class="title">{ user.name } - { i18n.t('minutes', {minutes: minutes}) }</span>
       <p>{ description }</p>
-      <small>{ hDate(createdAt) }</small>
+      <small>{ hDate(createdat) }</small>
     </li>
   </ul>
 
