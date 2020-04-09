@@ -3,7 +3,7 @@
 
 	<div class="row">
 		<div class="col s6">
-			<selectcontest ref="contest" chosen={ contestId } change={ changeContestId }></selectcontest>
+			<selectcontest ref="contest" chosen={ contestId } change={ changeContestId } all="true"></selectcontest>
 		</div>
 
 	  	<div class="col s6">
@@ -69,10 +69,7 @@
 				$(self.refs.period).on('change', (e) => {
 					self.changePeriod(e);
 				});
-
-				$('select').formSelect();
 			});
 		});
-
     </script>
 </result>

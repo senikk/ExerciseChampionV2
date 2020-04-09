@@ -2,13 +2,13 @@
   <actions title="title.contests"></actions>
 
   <ul class="collection with-header">
-    <li class="collection-header"><h5>{ i18n.t('contests.available') }</h5></li>
     <li each={ contests } class="collection-item avatar">
       <i if={!joined} onclick={ joinModal } data-message={id} class="material-icons circle">add</i>
       <i if={joined} class="material-icons circle green">remove</i>
       <p>
         <span class="title">{ name }</span><br>
-        <small>{ hDate(createdAt) }</small>
+        <small>{ i18n.t('contests.participants', { participants: participants}) }</small><br>
+        <small>{ hDate(createdat) } { i18n.t('by') } { user.name }</small>
       </p>
 
       <i onclick={ inviteContest } data-message={id} class="material-icons secondary-content waves-effect waves-light">share</i>

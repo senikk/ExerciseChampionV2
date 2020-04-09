@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "0.9",
+  "version": "0.10",
   "description": "GRPC backend for rehearsel logging",
   "main": "server.js",
   "author": "Terje Pedersen",

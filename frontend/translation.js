@@ -70,7 +70,8 @@ let translations = {
       },
       contests: {
         available: 'Tilgjengelig konkurranser',
-        joined: 'Nå medlem av "%{name}"'
+        joined: 'Nå medlem av "%{name}"',
+        participants: '%{participants} medlemmer',
       },
       period: {
         thisyear: 'nåværende år %{year}',
@@ -93,6 +94,7 @@ let translations = {
       email: 'e-post',
       password: 'passord',
       name: 'navn',
+      by: 'av',
       'you are': `du er på`,
       'no registration this week': 'ingen registreringer denne uka',
     },
@@ -165,7 +167,8 @@ let translations = {
       },
       contests: {
         available: 'Available contest',
-        joined: 'Joined contest "%{name}"'
+        joined: 'Joined contest "%{name}"',
+        participants: '%{participants} members',
       },
       period: {
         thisyear: 'this year %{year}',
@@ -188,6 +191,7 @@ let translations = {
       email: 'email',
       password: 'password',
       name: 'name',
+      by: 'by',
       'you are': `you are`,
       'no registration this week': 'no registration this week',
     }

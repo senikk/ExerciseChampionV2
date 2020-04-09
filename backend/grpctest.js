@@ -17,18 +17,6 @@ const rehearsalProto = grpc.loadPackageDefinition(packageDefinition).rehearsal
 const backend = new rehearsalProto.Rehearsal('localhost:9090', grpc.credentials.createInsecure())
 
 /*
-backend.SearchContest({
-    search: 'NM'
-}, function(error, result) {
-  if (error) console.log(error);
-
-  result.contests.forEach(contest => {
-    console.log(contest.name);
-  });
-})
-*/
-
-/*
 backend.AddRehearsal({
   contestid: 1,
   minutes: 10,

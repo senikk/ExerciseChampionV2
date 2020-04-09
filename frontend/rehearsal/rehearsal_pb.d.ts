@@ -331,6 +331,9 @@ export class ContestEntry extends jspb.Message {
   getPublic(): boolean;
   setPublic(value: boolean): void;
 
+  getParticipants(): number;
+  setParticipants(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ContestEntry.AsObject;
   static toObject(includeInstance: boolean, msg: ContestEntry): ContestEntry.AsObject;
@@ -347,6 +350,7 @@ export namespace ContestEntry {
     user?: User.AsObject,
     joined: boolean,
     pb_public: boolean,
+    participants: number,
   }
 }
 

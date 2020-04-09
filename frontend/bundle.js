@@ -3551,7 +3551,8 @@
 	    rules: googleProtobuf.Message.getFieldWithDefault(msg, 3, ""),
 	    user: (f = msg.getUser()) && proto.rehearsal.User.toObject(includeInstance, f),
 	    joined: googleProtobuf.Message.getBooleanFieldWithDefault(msg, 5, false),
-	    pb_public: googleProtobuf.Message.getBooleanFieldWithDefault(msg, 6, false)
+	    pb_public: googleProtobuf.Message.getBooleanFieldWithDefault(msg, 6, false),
+	    participants: googleProtobuf.Message.getFieldWithDefault(msg, 7, 0)
 	  };
 
 	  if (includeInstance) {
@@ -3612,6 +3613,10 @@
 	    case 6:
 	      var value = /** @type {boolean} */ (reader.readBool());
 	      msg.setPublic(value);
+	      break;
+	    case 7:
+	      var value = /** @type {number} */ (reader.readInt32());
+	      msg.setParticipants(value);
 	      break;
 	    default:
 	      reader.skipField();
@@ -3682,6 +3687,13 @@
 	  if (f) {
 	    writer.writeBool(
 	      6,
+	      f
+	    );
+	  }
+	  f = message.getParticipants();
+	  if (f !== 0) {
+	    writer.writeInt32(
+	      7,
 	      f
 	    );
 	  }
@@ -3812,6 +3824,24 @@
 	 */
 	proto.rehearsal.ContestEntry.prototype.setPublic = function(value) {
 	  return googleProtobuf.Message.setProto3BooleanField(this, 6, value);
+	};
+
+
+	/**
+	 * optional int32 participants = 7;
+	 * @return {number}
+	 */
+	proto.rehearsal.ContestEntry.prototype.getParticipants = function() {
+	  return /** @type {number} */ (googleProtobuf.Message.getFieldWithDefault(this, 7, 0));
+	};
+
+
+	/**
+	 * @param {number} value
+	 * @return {!proto.rehearsal.ContestEntry} returns this
+	 */
+	proto.rehearsal.ContestEntry.prototype.setParticipants = function(value) {
+	  return googleProtobuf.Message.setProto3IntField(this, 7, value);
 	};
 
 
@@ -7773,7 +7803,8 @@
 	      },
 	      contests: {
 	        available: 'Tilgjengelig konkurranser',
-	        joined: 'Nå medlem av "%{name}"'
+	        joined: 'Nå medlem av "%{name}"',
+	        participants: '%{participants} medlemmer',
 	      },
 	      period: {
 	        thisyear: 'nåværende år %{year}',
@@ -7796,6 +7827,7 @@
 	      email: 'e-post',
 	      password: 'passord',
 	      name: 'navn',
+	      by: 'av',
 	      'you are': `du er på`,
 	      'no registration this week': 'ingen registreringer denne uka',
 	    },
@@ -7868,7 +7900,8 @@
 	      },
 	      contests: {
 	        available: 'Available contest',
-	        joined: 'Joined contest "%{name}"'
+	        joined: 'Joined contest "%{name}"',
+	        participants: '%{participants} members',
 	      },
 	      period: {
 	        thisyear: 'this year %{year}',
@@ -7891,6 +7924,7 @@
 	      email: 'email',
 	      password: 'password',
 	      name: 'name',
+	      by: 'by',
 	      'you are': `you are`,
 	      'no registration this week': 'no registration this week',
 	    }
@@ -8013,7 +8047,13 @@
 	  backend: new rehearsal_grpc_web_pb_1(GRPCBACKEND),
 	  R: R,
 	  i18n: new Translation(),
-	  env: {"env":{"GRPCSERVICE":"/grpc","APPURL":"https://exercise-senikk.cloud.okteto.net"}}.env
+	  env: {"env":{"GRPCSERVICE":"/grpc","APPURL":"https://exercise-senikk.cloud.okteto.net"}}.env,
+	  state: {
+	    addrehearsal: {
+	      description: "",
+	      minutes: null
+	    }
+	  }
 	};
 
 	console.log("CONNECTED TO " + GRPCBACKEND);

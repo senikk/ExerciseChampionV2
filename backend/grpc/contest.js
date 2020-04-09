@@ -1,6 +1,7 @@
 'use strict';
 const {Contest, User, UserContest} = require('../database/models/index')
 const {IsAuthorized} = require('./auth')
+const sequelize = require('sequelize')
 
 function AddContest(input, cb) {
     IsAuthorized(input, cb).then((auth) => {
@@ -43,6 +44,9 @@ function ListContest(input, cb) {
                 as: 'user',
                 attributes: ['name']
             }],
+            attributes: [
+                'Contest.*',
+                [sequelize.literal('(SELECT COUNT(userid)::integer FROM "UserContests" WHERE contestid = "Contest".id)'), 'participants']],
             limit: req.limit,
             raw: true,
             nest: true

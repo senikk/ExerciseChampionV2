@@ -2983,7 +2983,8 @@ proto.rehearsal.ContestEntry.toObject = function(includeInstance, msg) {
     rules: jspb.Message.getFieldWithDefault(msg, 3, ""),
     user: (f = msg.getUser()) && proto.rehearsal.User.toObject(includeInstance, f),
     joined: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    pb_public: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
+    pb_public: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+    participants: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -3044,6 +3045,10 @@ proto.rehearsal.ContestEntry.deserializeBinaryFromReader = function(msg, reader)
     case 6:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setPublic(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setParticipants(value);
       break;
     default:
       reader.skipField();
@@ -3114,6 +3119,13 @@ proto.rehearsal.ContestEntry.serializeBinaryToWriter = function(message, writer)
   if (f) {
     writer.writeBool(
       6,
+      f
+    );
+  }
+  f = message.getParticipants();
+  if (f !== 0) {
+    writer.writeInt32(
+      7,
       f
     );
   }
@@ -3244,6 +3256,24 @@ proto.rehearsal.ContestEntry.prototype.getPublic = function() {
  */
 proto.rehearsal.ContestEntry.prototype.setPublic = function(value) {
   return jspb.Message.setProto3BooleanField(this, 6, value);
+};
+
+
+/**
+ * optional int32 participants = 7;
+ * @return {number}
+ */
+proto.rehearsal.ContestEntry.prototype.getParticipants = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.rehearsal.ContestEntry} returns this
+ */
+proto.rehearsal.ContestEntry.prototype.setParticipants = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 

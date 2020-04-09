@@ -67,9 +67,23 @@
         self.event.trigger("rehearsal:added", result.toObject());
         this.refs.minutes.value = '';
         this.refs.description.value = '';
+        this.state.addrehearsal.description = '';
+        this.state.addrehearsal.minutes = null;
         self.stopwatch.trigger('clear');
         self.update();
       });
     }
+
+    self.on("mount", () => {
+      self.refs.description.value = self.state.addrehearsal.description;
+      self.refs.minutes.value = self.state.addrehearsal.minutes;
+    });
+
+    self.on("before-unmount", () => {
+      self.state.addrehearsal = {
+        description: self.refs.description.value,
+        minutes: self.refs.minutes.value
+      }
+    });
    </script>
 </addrehearsal>

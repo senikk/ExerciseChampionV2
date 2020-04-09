@@ -25,11 +25,15 @@
 				if (error) { M.toast({html: error.message}); return; }
 
 				this.contests = result.toObject().contestsList;
-				this.update();
+				if (this.opts.all) {
+					this.contests.unshift({
+						id: 0,
+						name: 'Excercise Champion'
+					});
+				}
 
-//				let select = M.Modal.getInstance(this.refs.contest);
-//				select.formSelect();
-				$('select').formSelect();
+				this.update();
+				M.FormSelect.init(this.refs.contest);
 			});
 		}
 

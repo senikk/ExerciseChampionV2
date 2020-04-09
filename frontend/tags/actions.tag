@@ -9,26 +9,31 @@
 			padding-top: 10px;
 			padding-left: 14px;
 		}
+		.actionbuttons {
+			padding-top: 10px;
+		}
 	</style>
 
 	<!-- logged in users -->
 	<virtual if={ auth.user }>
-		<div class="row">
-			<div class="col s4">
-				<blockquote if={profile.minutesthisweek > 0}>
-					<b>{ i18n.t(opts.title) }</b><br>{ this.auth.user.name } <i>{i18n.t('position',{position: profile.positionthisweek})} { i18n.t('thisweek', {week: moment().week()}) }<br>{i18n.t('minutes', {minutes: profile.minutesthisweek})}</i>
-				</blockquote>
-				<blockquote if={profile.minutesthisweek == 0}>
-					<b>{ i18n.t(opts.title) }</b><br>{ this.auth.user.name }<br>{ i18n.t('no registration this week') }</i>
-				</blockquote>
-			</div>
-			<div class="col s8 right-align" style="padding-top: 10px;">
+		<div class="row actionbuttons">
+			<div class="col s12 right-align" >
 				<!--
 				<a class="btn-floating btn-large grey" href="#/search" title="Contest search"><i class="material-icons">search</i></a>
 				-->
 				<a class="btn-floating btn-large green" href="#/timeline" title={ i18n.t('menu.timeline') }><i class="material-icons">chat</i></a>
 				<a class="btn-floating btn-large green" href="#/result" title={ i18n.t('menu.results') }><i class="material-icons">insert_chart</i></a>
 				<a class="btn-floating btn-large grey dropdown-trigger" ref="dropdown" data-target="dropdown" href="#!" title={ i18n.t('menu.more') }><i class="material-icons">arrow_drop_down</i></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<blockquote if={profile.minutesthisweek > 0}>
+					{ this.auth.user.name }<br><i>{i18n.t('position',{position: profile.positionthisweek})} { i18n.t('thisweek', {week: moment().week()}) } {i18n.t('minutes', {minutes: profile.minutesthisweek})}</i>
+				</blockquote>
+				<blockquote if={profile.minutesthisweek == 0}>
+					{ this.auth.user.name }<br>{ i18n.t('no registration this week') }</i>
+				</blockquote>
 			</div>
 		</div>
 		<!-- Dropdown for more actions -->
@@ -45,7 +50,7 @@
 			<!-- <li><a href="#/metronome" title="Metronome">{ i18n.t('dropdown.metronome') }</a> -->
 			<li><a onclick={ logoutModal } href="#!" title="Log out">{ i18n.t('dropdown.logout') }</i></a></li>
 			<li class="divider"></li>
-			<li class="version">ec: v0.8 / v0.9 06.04.2020</li>
+			<li class="version">ec: v0.9 / v0.10 09.04.2020</li>
 		</ul>
 
 		<!-- Button at bottom -->

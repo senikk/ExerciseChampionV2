@@ -43,24 +43,27 @@ function ListResult(input, cb) {
                 filter = sequelize.literal(`extract(YEAR FROM "Rehearsal"."createdAt") = ${year}`)
                 break;
         }
+
+        var contestfilter = {}
+        if (req.contestid > 0) { contestfilter = { contestid: req.contestid } }
     
         Rehearsal.findAll({
-        where: [
-            { contestid: req.contestid },
-            filter
-        ],
-        attributes: ['userid',
-                    [sequelize.fn('SUM', sequelize.col('minutes')), 'minutes']],
-        group: ['userid','user.id'],
-        order: [[sequelize.fn('SUM', sequelize.col('minutes')), 'DESC']],
-        include: [{
-            model: User,
-            as: 'user',
-            attributes: ['name']
-        }],
-        limit: 10,
-        raw: true,
-        nest: true
+            where: [
+                contestfilter,
+                filter
+            ],
+            attributes: ['userid',
+                        [sequelize.fn('SUM', sequelize.col('minutes')), 'minutes']],
+            group: ['userid','user.id'],
+            order: [[sequelize.fn('SUM', sequelize.col('minutes')), 'DESC']],
+            include: [{
+                model: User,
+                as: 'user',
+                attributes: ['name']
+            }],
+            limit: req.limit || 20,
+            raw: true,
+            nest: true
         }).then(data => {
             var position = 1;
             cb(null, { results: data.map(r => {

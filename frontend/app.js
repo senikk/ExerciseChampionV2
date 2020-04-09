@@ -100,7 +100,13 @@ var Helper = {
   backend: new RehearsalClient(GRPCBACKEND),
   R: R,
   i18n: new Translation(),
-  env: process.env
+  env: process.env,
+  state: {
+    addrehearsal: {
+      description: "",
+      minutes: null
+    }
+  }
 };
 
 console.log("CONNECTED TO " + GRPCBACKEND);

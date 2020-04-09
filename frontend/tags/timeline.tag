@@ -27,7 +27,6 @@
             if (error) { M.toast({html: error.message}); return; }
 
             this.rehearsals = result.toObject().rehearsalsList;
-            console.log("=== RE", this.rehearsals);
             this.update();
         });
     </script>

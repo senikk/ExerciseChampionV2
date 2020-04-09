@@ -79,6 +79,7 @@ message ContestEntry {
     User user = 4;
     bool joined = 5;
     bool public = 6;
+    int32 participants = 7;
 }
 
 message ListContestRequest {

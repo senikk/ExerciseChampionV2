@@ -21,8 +21,19 @@ const backend = new rehearsalProto.Rehearsal('backend:9090', grpc.credentials.cr
 
 backend.Login({
   email: 'terje@senikk.com',
-  password: 'xxx'
+  password: '1234'
 }, (error, result) => {
   console.log("ERROR", error);
   console.log("RESULT", result);
 })
+
+
+/*
+backend.ListContest({
+  contest
+}, function(error, result) {
+if (error) console.log(error);
+
+console.log(result.contests);
+})
+*/
