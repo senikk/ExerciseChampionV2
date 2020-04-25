@@ -11,6 +11,7 @@
 		<route path="timeline"><timeline></timeline></route>
 		<route path="contest/add"><addcontest></addcontest></route>
 		<route path="invite/*"><login></login></route>
+		<route path="plan/add"><plan></plan></route>
   	</router>
 
 	<script>
@@ -43,7 +44,7 @@
 
 		this.on('mount', function() {
 			route.start(true);
-		  	route(this.auth.user ? 'log' : 'login');
+		  	route(this.auth.user ? 'plan/add' : 'login');
 		});
 
 		// Mange invite
@@ -75,5 +76,12 @@
 		this.on('mount', () => {
 			console.log(`==== USER ${this.auth.userid} ====`);
 		})
+
+		// Service Worker		
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker
+					.register('/sw.js')
+					.then(function() { console.log("Service Worker registered"); });
+		}
 	</script>
 </app>

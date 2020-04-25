@@ -2,9 +2,14 @@
 <html>
   <head>
     <title>Exercise Champion</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection">
+    <link rel="icon" href="icon/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection"/>
+    <link rel="manifest" href="manifest.json"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="theme-color" content="#526f86"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <style>
       body {
@@ -31,10 +36,13 @@
     <script type="riot/tag" src="tags/selectperiod.tag"></script>
     <script type="riot/tag" src="tags/signup.tag"></script>
     <script type="riot/tag" src="tags/timeline.tag"></script>
+    <script type="riot/tag" src="tags/addsession.tag"></script>
+    <script type="riot/tag" src="tags/plan.tag"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/riot@3.13.2/riot+compiler.min.js"></script>
     <script src="https://cdn.jsdelivr.net/riot-route/3.1.1/route+tag.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/polyglot.js/2.2.2/polyglot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="tags/all.js"></script>
 
     <!-- other -->

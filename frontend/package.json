@@ -15,6 +15,7 @@
 	"dependencies": {
 		"@riotjs/compiler": "^4.7.0",
 		"@riotjs/route": "^5.3.1",
+		"abcjs": "^5.12.0",
 		"connect": "^3.6.5",
 		"moment": "^2.18.1",
 		"node-polyglot": "^2.4.0",
