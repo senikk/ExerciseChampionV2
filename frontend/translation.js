@@ -8,7 +8,8 @@ let translations = {
         contests: 'konkurranser',
         result: 'resultater',
         profile: 'profil',
-        addcontest: 'ny konkurranse'
+        addcontest: 'ny konkurranse',
+        addsession: 'ny økt'
       },
       modal: {
         yes: 'Ja',
@@ -39,7 +40,9 @@ let translations = {
         addcontest: 'Ny konkurranse',
         logout: 'Logg ut',
         metronome: 'Metronom',
-        contests: 'Konkurranser'
+        contests: 'Konkurranser',
+        addsession: 'Ny økt',
+        addplan: 'Ny plan'
       },
       login: {
         login: 'Logg inn',
@@ -84,6 +87,27 @@ let translations = {
       invitation: {
         accepted: 'Invitiasjon godkjent'
       },
+      plan: {
+        plan: {
+          tab: 'Plan',
+          title: 'Rediger øvingsplan'
+        },
+        addsession: {
+          tab: 'Ny økt',
+          title: 'Lag ny økt'
+        },
+        searchsession: {
+          tab: 'Søk økt',
+          title: 'Søk eksisterende økt'
+        }
+      },
+      addsession: {
+        title: 'Ny økt',
+        howmanyminutes: 'Hvor mange minutter?',
+        description: 'Beskrivelse av økt',
+        send: 'Legg til'
+      },
+      install: 'INSTALLER',
       clear: 'TØM',
       start: 'START',
       pause: 'PAUSE',
@@ -105,7 +129,8 @@ let translations = {
         contests: 'contests',
         result: 'results',
         profile: 'profile',
-        addcontest: 'add contest'
+        addcontest: 'add contest',
+        addsession: 'add session'
       },
       modal: {
         yes: 'Yes',
@@ -136,7 +161,9 @@ let translations = {
         addcontest: 'New contest',
         logout: 'Log out',
         metronome: 'Metronome',
-        contests: 'Contests'
+        contests: 'Contests',
+        addsession: 'New session',
+        addplan: 'New plan'
       },
       login: {
         login: 'Log in',
@@ -181,6 +208,27 @@ let translations = {
       invitation: {
         accepted: 'Invitation accepted'
       },
+      plan: {
+        plan: {
+          tab: 'Plan',
+          title: 'Edit rehearsal plan'
+        },
+        addsession: {
+          tab: 'New session',
+          title: 'Add new session'
+        },
+        searchsession: {
+          tab: 'Search session',
+          title: 'Search for existing session to add'
+        }
+      },
+      addsession: {
+        title: 'Add session',
+        howmanyminutes: 'How many minutes?',
+        description: 'Session description',
+        send: 'Add'
+      },
+      install: 'INSTALL',
       clear: 'CLEAR',
       start: 'START',
       pause: 'PAUSE',

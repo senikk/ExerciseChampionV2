@@ -1,6 +1,7 @@
 import {RehearsalClient} from 'rehearsal';
 import Translation from './translation';
 import * as R from 'rehearsal/rehearsal_pb';
+import abcjs from "abcjs";
 
 const GRPCBACKEND = process.env.GRPCSERVICE;
 
@@ -100,6 +101,7 @@ var Helper = {
   backend: new RehearsalClient(GRPCBACKEND),
   R: R,
   i18n: new Translation(),
+  abcjs: abcjs,
   env: process.env,
   state: {
     addrehearsal: {

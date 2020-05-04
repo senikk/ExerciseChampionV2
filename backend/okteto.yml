@@ -1,7 +1,7 @@
 name: backend
-image: okteto/node:10
+image: docker.io/senikk/ec-backend:0.10 #okteto/node:10
 command:
-- bash
+  - bash
 workdir: /usr/src/app
 forward:
-    - 9090:9090
+  - 9090:9090

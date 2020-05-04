@@ -1,0 +1,23 @@
+{
+    "name": "Exercise Champion 2",
+    "short_name": "Exercise 2",
+    "description": "Rehearsal Champion for brass band and wind band players",
+    "theme_color": "#526f86",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "icons": [
+        {
+            "src":"/icon/android-chrome-192x192.png",
+            "sizes":"192x192",
+            "type":"image/png"
+        },
+        {
+            "src":"/icon/android-chrome-512x512.png",
+            "sizes":"512x512",
+            "type":"image/png"
+        }
+    ],
+    "orientation": "portrait",
+    "scope": "https://exercise-test-senikk.cloud.okteto.net/",
+    "start_url": "https://exercise-test-senikk.cloud.okteto.net/#/result"
+}
