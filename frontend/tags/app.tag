@@ -75,5 +75,12 @@
 		this.on('mount', () => {
 			console.log(`==== USER ${this.auth.userid} ====`);
 		})
+	
+		// Service Worker		
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker
+					.register('/sw.js')
+					.then(function() { console.log("Service Worker registered"); });
+		}
 	</script>
 </app>

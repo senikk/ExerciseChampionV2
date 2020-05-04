@@ -75,8 +75,8 @@
     }
 
     self.on("mount", () => {
-      self.refs.description.value = self.state.addrehearsal.description;
-      self.refs.minutes.value = self.state.addrehearsal.minutes;
+      self.refs.description.value = self.state.addrehearsal.description || '';
+      self.refs.minutes.value = self.state.addrehearsal.minutes || null;
     });
 
     self.on("before-unmount", () => {

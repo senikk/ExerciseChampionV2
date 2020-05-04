@@ -7817,6 +7817,7 @@
 	      invitation: {
 	        accepted: 'Invitiasjon godkjent'
 	      },
+	      install: 'INSTALLER',
 	      clear: 'TØM',
 	      start: 'START',
 	      pause: 'PAUSE',
@@ -7914,6 +7915,7 @@
 	      invitation: {
 	        accepted: 'Invitation accepted'
 	      },
+	      install: 'INSTALL',
 	      clear: 'CLEAR',
 	      start: 'START',
 	      pause: 'PAUSE',
@@ -7951,7 +7953,7 @@
 	    self.language(localStorage.getItem('language') || 'en'); 
 	}
 
-	const GRPCBACKEND = {"env":{"GRPCSERVICE":"/grpc","APPURL":"https://exercise-senikk.cloud.okteto.net"}}.env.GRPCSERVICE;
+	const GRPCBACKEND = {"env":{"GRPCSERVICE":"/grpc"}}.env.GRPCSERVICE;
 
 	var StopWatch = function () {
 	  var self = riot.observable(this);
@@ -8047,7 +8049,7 @@
 	  backend: new rehearsal_grpc_web_pb_1(GRPCBACKEND),
 	  R: R,
 	  i18n: new Translation(),
-	  env: {"env":{"GRPCSERVICE":"/grpc","APPURL":"https://exercise-senikk.cloud.okteto.net"}}.env,
+	  env: {"env":{"GRPCSERVICE":"/grpc"}}.env,
 	  state: {
 	    addrehearsal: {
 	      description: "",

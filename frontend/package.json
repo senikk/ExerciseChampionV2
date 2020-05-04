@@ -1,6 +1,6 @@
 {
 	"name": "exercisechampion2",
-	"version": "0.9",
+	"version": "0.11",
 	"license": "MIT",
 	"scripts": {
 		"build": "rollup -c rollup.config.js",

@@ -84,6 +84,7 @@ let translations = {
       invitation: {
         accepted: 'Invitiasjon godkjent'
       },
+      install: 'INSTALLER',
       clear: 'TØM',
       start: 'START',
       pause: 'PAUSE',
@@ -181,6 +182,7 @@ let translations = {
       invitation: {
         accepted: 'Invitation accepted'
       },
+      install: 'INSTALL',
       clear: 'CLEAR',
       start: 'START',
       pause: 'PAUSE',

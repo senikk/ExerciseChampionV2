@@ -17,7 +17,10 @@
 	<!-- logged in users -->
 	<virtual if={ auth.user }>
 		<div class="row actionbuttons">
-			<div class="col s12 right-align" >
+			<div class="col s2">
+				<button if={ !installed } class="waves-effect waves-light btn-small grey" onclick={ install }><i class="material-icons middle">home</i></button>
+			</div>
+			<div class="col s10 right-align" >
 				<!--
 				<a class="btn-floating btn-large grey" href="#/search" title="Contest search"><i class="material-icons">search</i></a>
 				-->
@@ -29,7 +32,7 @@
 		<div class="row">
 			<div class="col s12">
 				<blockquote if={profile.minutesthisweek > 0}>
-					{ this.auth.user.name }<br><i>{i18n.t('position',{position: profile.positionthisweek})} { i18n.t('thisweek', {week: moment().week()}) } {i18n.t('minutes', {minutes: profile.minutesthisweek})}</i>
+					{ this.auth.user.name }<br><i>{i18n.t('position',{position: profile.positionthisweek})} { i18n.t('thisweek', {week: moment().isoWeek()}) } {i18n.t('minutes', {minutes: profile.minutesthisweek})}</i>
 				</blockquote>
 				<blockquote if={profile.minutesthisweek == 0}>
 					{ this.auth.user.name }<br>{ i18n.t('no registration this week') }</i>
@@ -50,7 +53,7 @@
 			<!-- <li><a href="#/metronome" title="Metronome">{ i18n.t('dropdown.metronome') }</a> -->
 			<li><a onclick={ logoutModal } href="#!" title="Log out">{ i18n.t('dropdown.logout') }</i></a></li>
 			<li class="divider"></li>
-			<li class="version">ec: v0.9 / v0.10 09.04.2020</li>
+			<li class="version">ec: v0.11 / v0.11 26.04.2020</li>
 		</ul>
 
 		<!-- Button at bottom -->
@@ -92,6 +95,7 @@
 	<script>
 		var self = this;
 		this.profile = {};
+		this.installed = true;
 		
 		logoutModal(e) {
 			var instance = M.Modal.getInstance(this.refs.logoutModal);	
@@ -133,5 +137,23 @@
 			M.Modal.init(this.refs.logoutModal);
 			if (this.auth.user) loadProfile();
 		});
+
+		window.addEventListener('beforeinstallprompt', (event) => {
+			console.log("= INSTALL APP?");
+			self.installed = false;
+			event.preventDefault();
+			self.installPromptEvent = event;
+		});
+
+		install() {
+			console.log("== INSTALL");
+			self.installPromptEvent.prompt();
+			self.installPromptEvent.userChoice.then((result) => {
+				if (result.outcome === 'accepted') {
+					self.installed = true;
+					self.update();
+				}
+			});
+		}
 	</script>
 </actions>

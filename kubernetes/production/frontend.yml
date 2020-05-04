@@ -15,7 +15,7 @@ spec:
         spec:
             containers: 
             - 
-                image: docker.io/senikk/ec-frontend:0.9
+                image: docker.io/senikk/ec-frontend:0.11
                 name: frontend
                 envFrom:
                     - secretRef:

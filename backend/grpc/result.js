@@ -11,7 +11,7 @@ function ListResult(input, cb) {
         console.log("LISTRESULT", req);
         let year = moment().year()
         let month = moment().month() + 1
-        let week = moment().week()
+        let week = moment().isoWeek()
     
         console.log(`YEAR: ${year} MONTH: ${month} WEEK: ${week}`)
     
@@ -29,7 +29,7 @@ function ListResult(input, cb) {
             case 'LASTWEEK':
                 let lastweek = moment().add(-1, 'week')
                 year = lastweek.year()
-                week = lastweek.week()
+                week = lastweek.isoWeek()
                 filter = sequelize.literal(`extract(YEAR FROM "Rehearsal"."createdAt") = ${year} and extract(WEEK FROM "Rehearsal"."createdAt") = ${week}`)
                 break;
             case 'LASTMONTH':
